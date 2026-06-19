@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>意大利·瑞士 10日行程地图</title>
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<script src="https://cdn.bootcdn.net/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif; background:#0a0a0f; overflow:hidden; height:100vh; }
+#map { width:100vw; height:100vh; z-index:1; }
+
+#header {
+  position:fixed; top:0; left:0; right:0; z-index:1000;
+  padding:18px 28px;
+  background:linear-gradient(180deg,rgba(10,10,20,.88) 0%,transparent 100%);
+  pointer-events:none;
+}
+#header h1 { color:#fff; font-size:20px; font-weight:600; letter-spacing:2px; text-shadow:0 2px 12px rgba(0,0,0,.6); }
+#header p  { color:rgba(255,255,255,.55); font-size:13px; margin-top:3px; letter-spacing:1px; }
+
+/* ── 时间轴 ── */
+#timeline {
+  position:fixed; bottom:0; left:0; right:0; z-index:1000;
+  padding:16px 24px 20px;
+  background:linear-gradient(0deg,rgba(10,10,20,.92) 0%,transparent 100%);
+  display:flex; gap:8px; align-items:center;
+  overflow-x:auto; scrollbar-width:none;
+}
+#timeline::-webkit-scrollbar { display:none; }
+.day-btn {
+  flex-shrink:0; padding:8px 14px; border-radius:20px;
+  border:1.5px solid rgba(255,255,255,.2);
+  background:rgba(255,255,255,.07); color:rgba(255,255,255,.65);
+  font-size:12px; cursor:pointer; transition:all .25s ease;
+  backdrop-filter:blur(6px); white-space:nowrap;
+}
+.day-btn:hover { background:rgba(255,255,255,.15); border-color:rgba(255,255,255,.5); color:#fff; transform:translateY(-2px); }
+.day-btn.active { background:rgba(255,255,255,.22); border-color:#fff; color:#fff; font-weight:600; }
+.day-btn.italy  { border-color:rgba(0,200,150,.45); }
+.day-btn.italy:hover,.day-btn.italy.active { background:rgba(0,200,150,.2); border-color:#00c896; }
+.day-btn.swiss  { border-color:rgba(220,50,50,.45); }
+.day-btn.swiss:hover,.day-btn.swiss.active  { background:rgba(220,50,50,.2); border-color:#dc3232; }
+
+/* ── 右侧面板 ── */
+#panel {
+  position:fixed; top:0; right:0; width:420px; height:100vh; z-index:999;
+  background:rgba(11,11,21,.94); backdrop-filter:blur(22px);
+  border-left:1px solid rgba(255,255,255,.07);
+  transform:translateX(100%);
+  transition:transform .45s cubic-bezier(.16,1,.3,1);
+  display:flex; flex-direction:column; overflow:hidden;
+}
+#panel.open { transform:translateX(0); }
+
+#panel-close {
+  position:absolute; top:18px; left:-44px;
+  width:36px; height:36px; border-radius:50%;
+  background:rgba(11,11,21,.9); border:1px solid rgba(255,255,255,.15);
+  color:rgba(255,255,255,.7); font-size:15px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:all .2s; backdrop-filter:blur(6px);
+  opacity:0; pointer-events:none;
+}
+#panel.open #panel-close { opacity:1; pointer-events:all; }
+#panel-close:hover { background:rgba(255,255,255,.15); color:#fff; }
+
+#panel-header { padding:26px 24px 18px; border-bottom:1px solid rgba(255,255,255,.07); flex-shrink:0; }
+#panel-day-label { font-size:11px; letter-spacing:2px; text-transform:uppercase; margin-bottom:5px; }
+#panel-city  { font-size:24px; font-weight:700; color:#fff; margin-bottom:4px; }
+#panel-date  { font-size:12px; color:rgba(255,255,255,.4); }
+
+#panel-body {
+  flex:1; overflow-y:auto; padding:18px 22px 90px;
+  scrollbar-width:thin; scrollbar-color:rgba(255,255,255,.1) transparent;
+}
+#panel-body::-webkit-scrollbar { width:3px; }
+#panel-body::-webkit-scrollbar-thumb { background:rgba(255,255,255,.1); border-radius:2px; }
+
+/* ── 行程条目 ── */
+.sch-item {
+  display:flex; gap:12px; margin-bottom:0;
+  opacity:0; transform:translateX(16px);
+  animation:slideIn .35s ease forwards;
+}
+@keyframes slideIn { to { opacity:1; transform:translateX(0); } }
+
+.time-col { flex-shrink:0; width:48px; text-align:right; padding-top:3px; }
+.time-text { font-size:11px; color:rgba(255,255,255,.32); font-variant-numeric:tabular-nums; }
+
+.dot-col { flex-shrink:0; display:flex; flex-direction:column; align-items:center; }
+.dot { width:8px; height:8px; border-radius:50%; margin-top:5px; flex-shrink:0; transition:transform .2s; }
+.sch-item:hover .dot { transform:scale(1.4); }
+.dot-line { width:1.5px; flex:1; min-height:16px; margin-top:3px; }
+
+.content-col { flex:1; padding-top:2px; padding-bottom:4px; }
+.content-text { font-size:13.5px; color:rgba(255,255,255,.82); line-height:1.55; }
+.tag { display:inline-block; font-size:10px; padding:1px 6px; border-radius:4px; margin-left:5px; vertical-align:middle; font-weight:500; }
+.tag-ticket { background:rgba(255,200,0,.18); color:#ffc800; }
+.tag-warn   { background:rgba(255,100,0,.18); color:#ff8040; }
+.warn-sub   { font-size:11px; color:rgba(255,160,60,.8); margin-top:3px; }
+
+/* ── 交通方式指示条 ── */
+.transport-row {
+  display:flex; align-items:center; gap:10px;
+  margin:2px 0; padding:6px 10px;
+  margin-left:60px;
+  border-radius:8px;
+  background:rgba(255,255,255,.04);
+  border-left:2px solid;
+  opacity:0; animation:slideIn .3s ease forwards;
+}
+.transport-icon { font-size:13px; flex-shrink:0; }
+.transport-desc { font-size:11.5px; color:rgba(255,255,255,.5); line-height:1.4; }
+
+/* ── note ── */
+.note-box {
+  background:rgba(255,255,255,.04); border-radius:10px;
+  padding:12px 14px; margin-top:12px;
+  font-size:12px; color:rgba(255,255,255,.42);
+  line-height:1.65; border-left:2px solid rgba(255,255,255,.12);
+  opacity:0; animation:slideIn .35s ease forwards;
+}
+
+/* ── 图例 ── */
+#legend {
+  position:fixed; bottom:80px; left:16px; z-index:1000;
+  display:flex; flex-direction:column; gap:5px;
+}
+.legend-city { display:flex; align-items:center; gap:7px; font-size:11px; color:rgba(255,255,255,.5); }
+.legend-dot  { width:9px; height:9px; border-radius:50%; }
+#tile-toggle {
+  margin-top:8px; padding:6px 12px; border-radius:16px;
+  border:1.5px solid rgba(255,255,255,.2);
+  background:rgba(255,255,255,.08); color:rgba(255,255,255,.75);
+  font-size:12px; cursor:pointer; backdrop-filter:blur(6px);
+  transition:all .2s; width:100%;
+}
+#tile-toggle:hover { background:rgba(255,255,255,.18); color:#fff; border-color:rgba(255,255,255,.5); }
+
+#transport-legend {
+  position:fixed; bottom:80px; right:20px; z-index:1000;
+  background:rgba(10,10,20,.82); backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.08); border-radius:10px;
+  padding:10px 14px; display:none; flex-direction:column; gap:5px;
+}
+#transport-legend.visible { display:flex; }
+.tleg-item { display:flex; align-items:center; gap:8px; font-size:11px; color:rgba(255,255,255,.5); }
+.tleg-line { width:28px; height:3px; border-radius:2px; }
+
+/* ── 城市标记 ── */
+.marker-ring {
+  position:absolute; width:48px; height:48px; border-radius:50%;
+  border:2px solid currentColor; opacity:0;
+  animation:pulse 2.5s ease-out infinite;
+}
+.marker-ring:nth-child(2) { animation-delay:.8s; }
+@keyframes pulse { 0%{transform:scale(.5);opacity:.6} 100%{transform:scale(1.8);opacity:0} }
+.marker-dot {
+  position:relative; width:13px; height:13px; border-radius:50%;
+  border:2.5px solid rgba(255,255,255,.9); z-index:2;
+  box-shadow:0 0 10px currentColor,0 2px 8px rgba(0,0,0,.5);
+  transition:transform .2s;
+}
+.marker-dot:hover { transform:scale(1.5); }
+.marker-label {
+  position:absolute; bottom:-22px; left:50%; transform:translateX(-50%);
+  white-space:nowrap; font-size:11.5px; font-weight:600; color:#fff;
+  text-shadow:0 1px 6px rgba(0,0,0,.9); pointer-events:none;
+}
+
+/* ── 路线点标记 ── */
+.wp-marker {
+  width:22px; height:22px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:10px; font-weight:700; color:#fff;
+  border:2px solid rgba(255,255,255,.7);
+  box-shadow:0 2px 8px rgba(0,0,0,.5);
+  cursor:pointer; transition:transform .2s;
+}
+.wp-marker:hover { transform:scale(1.3); }
+.wp-label {
+  position:absolute; top:-20px; left:50%; transform:translateX(-50%);
+  white-space:nowrap; font-size:10px; color:rgba(255,255,255,.85);
+  text-shadow:0 1px 4px rgba(0,0,0,.9); pointer-events:none; font-weight:500;
+}
+
+/* tooltip */
+#tooltip {
+  position:fixed; z-index:2000;
+  background:rgba(10,10,20,.9); border:1px solid rgba(255,255,255,.14);
+  border-radius:10px; padding:9px 13px; color:#fff; font-size:13px;
+  pointer-events:none; opacity:0; transition:opacity .15s;
+  backdrop-filter:blur(10px); max-width:210px;
+}
+#tooltip.show { opacity:1; }
+
+/* leaflet */
+.leaflet-control-zoom { border:none!important; box-shadow:0 2px 12px rgba(0,0,0,.4)!important; }
+.leaflet-control-zoom a { background:rgba(12,12,22,.85)!important; color:rgba(255,255,255,.7)!important; border-color:rgba(255,255,255,.1)!important; backdrop-filter:blur(6px); }
+.leaflet-control-zoom a:hover { background:rgba(255,255,255,.15)!important; color:#fff!important; }
+.leaflet-control-attribution { background:rgba(0,0,0,.4)!important; color:rgba(255,255,255,.3)!important; font-size:10px!important; }
+.leaflet-control-attribution a { color:rgba(255,255,255,.4)!important; }
+
+/* ══ 移动端适配 ══ */
+#panel-handle {
+  display:none;
+  width:36px; height:4px; border-radius:2px;
+  background:rgba(255,255,255,.2);
+  margin:10px auto 0; flex-shrink:0;
+}
+
+@media (max-width: 768px) {
+  /* 标题栏 */
+  #header { padding:12px 16px 10px; }
+  #header h1 { font-size:15px; letter-spacing:1px; }
+  #header p  { font-size:11px; margin-top:2px; }
+
+  /* 面板 → 底部抽屉 */
+  #panel {
+    width:100%; height:72vh;
+    top:auto; bottom:0; left:0; right:0;
+    border-left:none;
+    border-top:1px solid rgba(255,255,255,.08);
+    border-radius:18px 18px 0 0;
+    transform:translateY(105%);
+    transition:transform .4s cubic-bezier(.16,1,.3,1);
+  }
+  #panel.open { transform:translateY(0); }
+
+  /* 拖拽手柄显示 */
+  #panel-handle { display:block; }
+
+  /* 关闭按钮移到面板内右上角 */
+  #panel-close {
+    position:absolute; top:14px; right:16px; left:auto;
+    width:32px; height:32px; font-size:14px;
+    opacity:0; pointer-events:none;
+  }
+  #panel.open #panel-close { opacity:1; pointer-events:all; }
+
+  #panel-header { padding:14px 20px 14px; }
+  #panel-city   { font-size:20px; }
+  #panel-body   { padding:12px 18px 80px; }
+
+  /* 时间轴 */
+  #timeline { padding:10px 14px 14px; gap:6px; }
+  .day-btn  { padding:9px 12px; font-size:12px; }
+
+  /* 图例 */
+  #legend { bottom:72px; left:12px; }
+  #tile-toggle { padding:5px 10px; font-size:11px; }
+
+  /* 交通图例：移动端折叠进面板，不在地图上浮动 */
+  #transport-legend { display:none!important; }
+
+  /* 路线点标签：小屏省略，避免重叠 */
+  .wp-label { display:none; }
+
+  /* 缩放控件位置右移避免被图例遮挡 */
+  .leaflet-control-zoom { margin-right:10px!important; }
+}
+
+@media (max-width: 400px) {
+  #header h1 { font-size:13px; }
+  #panel { height:78vh; }
+  .day-btn { padding:8px 10px; font-size:11px; }
+}
+</style>
+</head>
+<body>
+<div id="map"></div>
+
+<div id="header">
+  <h1>🇮🇹 意大利 · 瑞士 🇨🇭 &nbsp;10日行程</h1>
+  <p>邹豪 &amp; 宁岳莎 &nbsp;·&nbsp; 2026 / 09 / 26 – 10 / 05 &nbsp;·&nbsp; 点击城市或下方日期查看路线详情</p>
+</div>
+
+<div id="panel">
+  <div id="panel-handle"></div>
+  <button id="panel-close" onclick="closePanel()">✕</button>
+  <div id="panel-header">
+    <div id="panel-day-label"></div>
+    <div id="panel-city"></div>
+    <div id="panel-date"></div>
+  </div>
+  <div id="panel-body"></div>
+</div>
+
+<div id="timeline"></div>
+
+<div id="legend">
+  <div class="legend-city"><div class="legend-dot" style="background:#00c896"></div>意大利</div>
+  <div class="legend-city"><div class="legend-dot" style="background:#dc3232"></div>瑞士</div>
+  <button id="tile-toggle" onclick="toggleTile()" title="当前：高德地图（国内快）· 点击切换">🇨🇳 高德</button>
+</div>
+
+<div id="transport-legend">
+  <div class="tleg-item"><div class="tleg-line" style="background:rgba(255,255,255,.45);height:1.5px;border-top:2px dashed rgba(255,255,255,.4)"></div>步行</div>
+  <div class="tleg-item"><div class="tleg-line" style="background:#c084fc"></div>地铁</div>
+  <div class="tleg-item"><div class="tleg-line" style="background:#fb923c;border-top:2px dashed #fb923c;height:0"></div>巴士</div>
+  <div class="tleg-item"><div class="tleg-line" style="background:#60a5fa"></div>火车</div>
+  <div class="tleg-item"><div class="tleg-line" style="background:#f43f5e"></div>高铁</div>
+  <div class="tleg-item"><div class="tleg-line" style="background:#818cf8"></div>国际列车</div>
+  <div class="tleg-item"><div class="tleg-line" style="background:#34d399;border-top:2px dashed #34d399;height:0"></div>观景列车</div>
+  <div class="tleg-item"><div class="tleg-line" style="background:#22d3ee;border-top:2px dashed #22d3ee;height:0"></div>游船</div>
+  <div class="tleg-item"><div class="tleg-line" style="background:#fbbf24;border-top:2px dashed #fbbf24;height:0"></div>缆车/齿轨</div>
+</div>
+
+<div id="tooltip"></div>
+
+<script>
+// ══════════════════════════════════════════════════
+//  交通类型样式
+// ══════════════════════════════════════════════════
+const T = {
+  walk:          { color:'rgba(255,255,255,.4)', weight:1.5, dash:'5,7',  icon:'🚶', label:'步行',    borderColor:'rgba(255,255,255,.25)' },
+  metro:         { color:'#c084fc',              weight:3,   dash:null,   icon:'🚇', label:'地铁',    borderColor:'#c084fc' },
+  bus:           { color:'#fb923c',              weight:2,   dash:'8,5',  icon:'🚌', label:'巴士',    borderColor:'#fb923c' },
+  train:         { color:'#60a5fa',              weight:3.5, dash:null,   icon:'🚆', label:'火车',    borderColor:'#60a5fa' },
+  highspeed:     { color:'#f43f5e',              weight:4,   dash:null,   icon:'🚄', label:'高铁',    borderColor:'#f43f5e' },
+  international: { color:'#818cf8',              weight:4,   dash:null,   icon:'🚂', label:'国际列车',borderColor:'#818cf8' },
+  scenic_train:  { color:'#34d399',              weight:3,   dash:'10,4', icon:'🚞', label:'观景列车',borderColor:'#34d399' },
+  boat:          { color:'#22d3ee',              weight:2.5, dash:'6,4',  icon:'⛵', label:'游船',    borderColor:'#22d3ee' },
+  cable_car:     { color:'#fbbf24',              weight:2,   dash:'4,4',  icon:'🚡', label:'缆车',    borderColor:'#fbbf24' },
+  funicular:     { color:'#f59e0b',              weight:2.5, dash:'6,3',  icon:'🚟', label:'齿轨火车',borderColor:'#f59e0b' },
+};
+
+// ══════════════════════════════════════════════════
+//  城市数据
+// ══════════════════════════════════════════════════
+const cities = [
+  { id:'milan',      name:'米兰',   nameEn:'Milano',    country:'italy', color:'#00c896', latlng:[45.4642,9.1900],  days:[1,2] },
+  { id:'florence',   name:'佛罗伦萨',nameEn:'Firenze',   country:'italy', color:'#00c896', latlng:[43.7696,11.2558], days:[2,3,4] },
+  { id:'lucerne',    name:'卢塞恩', nameEn:'Luzern',    country:'swiss', color:'#dc3232', latlng:[47.0502,8.3093],  days:[5,6] },
+  { id:'interlaken', name:'因特拉肯',nameEn:'Interlaken',country:'swiss', color:'#dc3232', latlng:[46.6863,7.8632],  days:[7,8] },
+  { id:'zurich',     name:'苏黎世', nameEn:'Zürich',    country:'swiss', color:'#dc3232', latlng:[47.3769,8.5417],  days:[9,10] },
+];
+
+// ══════════════════════════════════════════════════
+//  每日路线数据（带坐标 + 交通方式）
+// ══════════════════════════════════════════════════
+const dayRoutes = {
+  1: {
+    fitBounds: [[45.40,8.65],[45.70,9.28]],
+    waypoints: [
+      { id:'mxp',      name:'MXP 马尔彭萨机场', latlng:[45.6306,8.7231] },
+      { id:'centrale', name:'米兰中央站',        latlng:[45.4854,9.2045] },
+      { id:'hotel_mi', name:'Hotel Colombia',   latlng:[45.4843,9.2036] },
+      { id:'duomo_mi', name:'米兰大教堂',        latlng:[45.4641,9.1919] },
+      { id:'galleria', name:'埃马努埃莱二世长廊', latlng:[45.4654,9.1897] },
+      { id:'scala',    name:'斯卡拉广场',        latlng:[45.4675,9.1895] },
+      { id:'castello', name:'斯福尔扎城堡',      latlng:[45.4706,9.1796] },
+      { id:'navigli',  name:'Navigli 运河区',   latlng:[45.4495,9.1776] },
+    ],
+    legs: [
+      { from:'mxp',      to:'centrale', type:'train',  desc:'Malpensa Express · 约52分 · €13/人' },
+      { from:'centrale', to:'hotel_mi', type:'walk',   desc:'步行约5分钟' },
+      { from:'hotel_mi', to:'duomo_mi', type:'metro',  desc:'地铁M3 Centrale→Duomo · €2.2' },
+      { from:'duomo_mi', to:'galleria', type:'walk',   desc:'步行1分钟' },
+      { from:'galleria', to:'scala',    type:'walk',   desc:'步行2分钟' },
+      { from:'scala',    to:'castello', type:'walk',   desc:'步行约12分钟' },
+      { from:'castello', to:'navigli',  type:'walk',   desc:'步行约25分钟 或地铁M1' },
+    ],
+  },
+  2: {
+    fitBounds: [[43.70,9.10],[45.55,11.35]],
+    waypoints: [
+      { id:'hotel_mi2', name:'Hotel Colombia',   latlng:[45.4843,9.2036] },
+      { id:'duomo_mi2', name:'米兰大教堂广场',    latlng:[45.4641,9.1919] },
+      { id:'centrale2', name:'米兰中央站',        latlng:[45.4854,9.2045] },
+      { id:'smn',       name:'佛罗伦萨 SMN 站',  latlng:[43.7759,11.2482] },
+      { id:'opera_bb',  name:'Opera B&B',        latlng:[43.7886,11.2581] },
+      { id:'accademia', name:'学院美术馆（大卫）', latlng:[43.7767,11.2589] },
+      { id:'duomo_fi',  name:'圣母百花大教堂夜景', latlng:[43.7730,11.2560] },
+    ],
+    legs: [
+      { from:'hotel_mi2', to:'duomo_mi2', type:'walk',      desc:'步行补看大教堂广场' },
+      { from:'duomo_mi2', to:'centrale2', type:'metro',     desc:'地铁M1/M3 回中央站' },
+      { from:'centrale2', to:'smn',       type:'highspeed', desc:'Frecciarossa 高铁 · 约1h55 · 建议提前订票' },
+      { from:'smn',       to:'opera_bb',  type:'walk',      desc:'步行约15分钟（或打车€12）' },
+      { from:'opera_bb',  to:'accademia', type:'walk',      desc:'步行约12分钟' },
+      { from:'accademia', to:'duomo_fi',  type:'walk',      desc:'步行约5分钟' },
+    ],
+  },
+  3: {
+    fitBounds: [[43.755,11.245],[43.798,11.275]],
+    waypoints: [
+      { id:'duomo_fi3',   name:'圣母百花大教堂 登顶',  latlng:[43.7730,11.2560] },
+      { id:'campanile',   name:'乔托钟楼',            latlng:[43.7733,11.2566] },
+      { id:'battistero',  name:'洗礼堂',              latlng:[43.7730,11.2548] },
+      { id:'signoria',    name:'领主广场 · 市政厅',   latlng:[43.7697,11.2560] },
+      { id:'pontevecchio',name:'老桥 Ponte Vecchio',  latlng:[43.7680,11.2531] },
+      { id:'santacroce',  name:'圣十字教堂',          latlng:[43.7687,11.2626] },
+      { id:'piazzale',    name:'米开朗基罗广场',       latlng:[43.7629,11.2646] },
+    ],
+    legs: [
+      { from:'duomo_fi3',   to:'campanile',    type:'walk', desc:'步行1分钟（同一广场）' },
+      { from:'campanile',   to:'battistero',   type:'walk', desc:'步行1分钟' },
+      { from:'battistero',  to:'signoria',     type:'walk', desc:'步行约8分钟' },
+      { from:'signoria',    to:'pontevecchio', type:'walk', desc:'步行约5分钟' },
+      { from:'pontevecchio',to:'santacroce',   type:'walk', desc:'步行约10分钟' },
+      { from:'santacroce',  to:'piazzale',     type:'bus',  desc:'公交12/13路上山 或步行约20分钟' },
+    ],
+  },
+  4: {
+    fitBounds: [[43.758,11.240],[43.782,11.268]],
+    waypoints: [
+      { id:'uffizi',  name:'乌菲兹美术馆',         latlng:[43.7682,11.2553] },
+      { id:'mercato', name:'中央市场 Mercato Centrale',latlng:[43.7770,11.2531] },
+      { id:'pitti',   name:'皮蒂宫',               latlng:[43.7655,11.2502] },
+      { id:'boboli',  name:'波波里花园',            latlng:[43.7633,11.2497] },
+      { id:'spirito', name:'圣神大殿区 · 皮革店',  latlng:[43.7667,11.2493] },
+    ],
+    legs: [
+      { from:'uffizi',  to:'mercato', type:'walk', desc:'步行约15分钟' },
+      { from:'mercato', to:'pitti',   type:'walk', desc:'步行约20分钟（过老桥）' },
+      { from:'pitti',   to:'boboli',  type:'walk', desc:'步行2分钟（同一建筑群）' },
+      { from:'boboli',  to:'spirito', type:'walk', desc:'步行约5分钟' },
+    ],
+  },
+  5: {
+    fitBounds: [[43.70,8.20],[47.15,11.35]],
+    waypoints: [
+      { id:'smn5',          name:'佛罗伦萨 SMN 站',    latlng:[43.7759,11.2482] },
+      { id:'centrale5',     name:'米兰中央站',          latlng:[45.4854,9.2045] },
+      { id:'lucerne_st',    name:'卢塞恩站',            latlng:[47.0505,8.3101] },
+      { id:'hofgarten',     name:'Hotel Hofgarten',     latlng:[47.0539,8.3157] },
+      { id:'kapellbrucke',  name:'卡佩尔廊桥',          latlng:[47.0516,8.3074] },
+      { id:'wasserturm',    name:'八角水塔',            latlng:[47.0514,8.3066] },
+      { id:'altstadt_lz',   name:'老城广场',            latlng:[47.0503,8.3054] },
+    ],
+    legs: [
+      { from:'smn5',         to:'centrale5',    type:'highspeed',     desc:'Frecciarossa 高铁 · 约1h55' },
+      { from:'centrale5',    to:'lucerne_st',   type:'international', desc:'EuroCity 国际列车 · 约3h40 · 过圣哥达隧道 风景极佳' },
+      { from:'lucerne_st',   to:'hofgarten',    type:'walk',          desc:'步行约10分钟' },
+      { from:'hofgarten',    to:'kapellbrucke', type:'walk',          desc:'步行约8分钟' },
+      { from:'kapellbrucke', to:'wasserturm',   type:'walk',          desc:'步行1分钟（紧邻）' },
+      { from:'wasserturm',   to:'altstadt_lz',  type:'walk',          desc:'步行3分钟' },
+    ],
+  },
+  6: {
+    fitBounds: [[46.90,8.22],[47.10,8.36]],
+    waypoints: [
+      { id:'pier_lz',        name:'卢塞恩码头',          latlng:[47.0496,8.3011] },
+      { id:'alpnachstad',    name:'Alpnachstad',          latlng:[46.9411,8.2841] },
+      { id:'pilatus',        name:'皮拉图斯峰顶 2132m',  latlng:[46.9790,8.2525] },
+      { id:'kriens',         name:'Kriens',               latlng:[47.0338,8.2827] },
+      { id:'lion',           name:'狮子纪念碑',           latlng:[47.0584,8.3143] },
+      { id:'gletschergarten',name:'冰川公园',             latlng:[47.0589,8.3152] },
+      { id:'museggmauer',    name:'城墙 Museggmauer',     latlng:[47.0578,8.3087] },
+    ],
+    legs: [
+      { from:'pier_lz',         to:'alpnachstad',     type:'boat',     desc:'游船 · 约1小时 · Swiss Travel Pass 免费' },
+      { from:'alpnachstad',     to:'pilatus',          type:'funicular',desc:'世界最陡齿轨火车 · STP 5折' },
+      { from:'pilatus',         to:'kriens',           type:'cable_car',desc:'龙脊缆车下山' },
+      { from:'kriens',          to:'lion',             type:'bus',      desc:'巴士/公交回市区' },
+      { from:'lion',            to:'gletschergarten',  type:'walk',     desc:'步行2分钟' },
+      { from:'gletschergarten', to:'museggmauer',      type:'walk',     desc:'步行约8分钟' },
+    ],
+  },
+  7: {
+    fitBounds: [[46.60,7.78],[47.10,8.36]],
+    waypoints: [
+      { id:'luzern_st7',    name:'卢塞恩站',         latlng:[47.0505,8.3101] },
+      { id:'interlaken_ost',name:'因特拉肯东站',      latlng:[46.6912,7.8691] },
+      { id:'hoeheweg',      name:'何维克街 · 荷黑马特草坪',latlng:[46.6851,7.8576] },
+      { id:'thunersee',     name:'图恩湖畔',          latlng:[46.6695,7.7870] },
+      { id:'brienzersee',   name:'布里恩茨湖畔',      latlng:[46.7127,7.9628] },
+    ],
+    legs: [
+      { from:'luzern_st7',    to:'interlaken_ost', type:'scenic_train', desc:'GoldenPass 金色山口观景列车 · 约1h50 · STP 免费 · 湖光山色' },
+      { from:'interlaken_ost',to:'hoeheweg',       type:'walk',         desc:'步行约10分钟' },
+      { from:'hoeheweg',      to:'thunersee',      type:'walk',         desc:'步行约20分钟' },
+      { from:'thunersee',     to:'brienzersee',    type:'walk',         desc:'步行约40分钟 或公交' },
+    ],
+  },
+  8: {
+    fitBounds: [[46.50,7.87],[46.72,8.02]],
+    waypoints: [
+      { id:'interlaken_ost8',  name:'因特拉肯东站',         latlng:[46.6912,7.8691] },
+      { id:'lauterbrunnen',    name:'劳特布龙嫩',           latlng:[46.5931,7.9080] },
+      { id:'kleine_scheidegg', name:'小夏戴格',             latlng:[46.5849,7.9604] },
+      { id:'jungfraujoch',     name:'少女峰观景台（欧洲之巅）3454m', latlng:[46.5473,7.9854] },
+    ],
+    legs: [
+      { from:'interlaken_ost8',  to:'lauterbrunnen',    type:'train',    desc:'登山火车 · 约21分' },
+      { from:'lauterbrunnen',    to:'kleine_scheidegg', type:'train',    desc:'艾格快线 · 约30分' },
+      { from:'kleine_scheidegg', to:'jungfraujoch',     type:'funicular',desc:'少女峰铁路（隧道）· 约35分 · CHF130/人（STP折后）' },
+    ],
+  },
+  9: {
+    fitBounds: [[46.62,7.80],[47.43,8.61]],
+    waypoints: [
+      { id:'interlaken_ost9', name:'因特拉肯东站',   latlng:[46.6912,7.8691] },
+      { id:'zurich_hb',       name:'苏黎世中央站 HB',latlng:[47.3779,8.5400] },
+      { id:'wellenberg',      name:'Hotel Wellenberg',latlng:[47.3725,8.5433] },
+      { id:'bahnhofstrasse',  name:'班霍夫大街',      latlng:[47.3726,8.5353] },
+      { id:'lindenhof',       name:'林登霍夫山丘',    latlng:[47.3736,8.5396] },
+      { id:'niederdorf',      name:'老城 Niederdorf', latlng:[47.3727,8.5434] },
+      { id:'zurichsee',       name:'苏黎世湖',        latlng:[47.3554,8.5490] },
+    ],
+    legs: [
+      { from:'interlaken_ost9', to:'zurich_hb',      type:'train', desc:'IC 城际 · 约2h · 经伯尔尼' },
+      { from:'zurich_hb',       to:'wellenberg',     type:'walk',  desc:'步行约7分钟' },
+      { from:'wellenberg',      to:'bahnhofstrasse', type:'walk',  desc:'步行约5分钟' },
+      { from:'bahnhofstrasse',  to:'lindenhof',      type:'walk',  desc:'步行约8分钟' },
+      { from:'lindenhof',       to:'niederdorf',     type:'walk',  desc:'步行约3分钟' },
+      { from:'niederdorf',      to:'zurichsee',      type:'walk',  desc:'步行约15分钟' },
+    ],
+  },
+  10: {
+    fitBounds: [[47.34,8.49],[47.48,8.62]],
+    waypoints: [
+      { id:'wellenberg10', name:'Hotel Wellenberg',   latlng:[47.3725,8.5433] },
+      { id:'zurichsee10',  name:'苏黎世湖 · 老城漫步', latlng:[47.3554,8.5490] },
+      { id:'zurich_hb10',  name:'苏黎世中央站 HB',    latlng:[47.3779,8.5400] },
+      { id:'zrh',          name:'苏黎世机场 ZRH ✈️',  latlng:[47.4508,8.5617] },
+    ],
+    legs: [
+      { from:'wellenberg10', to:'zurichsee10', type:'walk',  desc:'步行老城最后漫步' },
+      { from:'zurichsee10',  to:'zurich_hb10', type:'walk',  desc:'步行约15分钟' },
+      { from:'zurich_hb10',  to:'zrh',         type:'train', desc:'直达火车 · 约10–13分 · STP' },
+    ],
+  },
+};
+
+// ══════════════════════════════════════════════════
+//  行程文字数据
+// ══════════════════════════════════════════════════
+const days = [
+  { day:1, date:'9/26 周六', city:'milan', title:'抵达米兰',
+    schedule:[
+      { time:'08:00', text:'抵达米兰马尔彭萨机场 MXP T1',
+        next:{ type:'walk', desc:'步行取行李 + 入境排队' } },
+      { time:'08–09', text:'入境（申根盖章）、取行李', warn:true, warnText:'备好酒店单/回程票以备询问',
+        next:{ type:'train', desc:'Malpensa Express · 约52分 · €13/人' } },
+      { time:'09:10', text:'乘 Malpensa Express 出发 → 米兰中央站',
+        next:{ type:'walk', desc:'步行约5分钟' } },
+      { time:'10:10', text:'到中央站，寄存行李 Hotel Colombia',
+        next:{ type:'metro', desc:'地铁M3 Centrale→Duomo · €2.2' } },
+      { time:'10:30', text:'登米兰大教堂 + 屋顶露台', ticket:true,
+        next:{ type:'walk', desc:'步行1分钟' } },
+      { time:'12:30', text:'埃马努埃莱二世长廊午餐、斯卡拉广场',
+        next:{ type:'walk', desc:'步行约12分钟' } },
+      { time:'14:00', text:'斯福尔扎城堡、森皮奥内公园',
+        next:{ type:'walk', desc:'步行约25分钟 或地铁M1' } },
+      { time:'15:00', text:'（可选）运河区 Navigli 散步',
+        next:{ type:'metro', desc:'地铁回中央站，步行到酒店' } },
+      { time:'15:00', text:'酒店正式办理入住（14:00起）' },
+      { time:'晚上',  text:'老城晚餐（意面/肉）' },
+    ],
+    note:'⚠️ 长途红眼刚落地，别排太满；M1/M3 地铁单程€2.2',
+  },
+  { day:2, date:'9/27 周日', city:'milan', title:'米兰 → 佛罗伦萨',
+    schedule:[
+      { time:'08:30', text:'早餐、退房行李',
+        next:{ type:'walk', desc:'步行至大教堂广场' } },
+      { time:'09:00', text:'补看米兰（主教堂广场、购物街）',
+        next:{ type:'metro', desc:'地铁M1/M3 回中央站' } },
+      { time:'12:30', text:'中央站乘 Frecciarossa 高铁 → 佛罗伦萨', ticket:true,
+        next:{ type:'highspeed', desc:'约1h55，到达 SMN 站' } },
+      { time:'14:30', text:'抵佛罗伦萨 SMN 站',
+        next:{ type:'walk', desc:'步行约15分钟（或打车€12）' } },
+      { time:'15:00', text:'Opera B&B 办理入住',
+        next:{ type:'walk', desc:'步行约12分钟' } },
+      { time:'16:00', text:'学院美术馆 — 看《大卫》真迹', ticket:true, warn:true, warnText:'周日开放，必须预约时段（周一闭馆）',
+        next:{ type:'walk', desc:'步行约5分钟' } },
+      { time:'18:30', text:'老城晚餐，圣母百花大教堂夜景' },
+    ],
+    note:'⚠️ 学院美术馆周日17:30停止入场',
+  },
+  { day:3, date:'9/28 周一', city:'florence', title:'佛罗伦萨 古城步行日',
+    schedule:[
+      { time:'08:30', text:'超市早餐',
+        next:{ type:'walk', desc:'步行至大教堂广场' } },
+      { time:'09:00', text:'圣母百花大教堂登顶（布鲁内莱斯基穹顶，463级）', ticket:true, warnText:'Brunelleschi Pass须预约时段',
+        next:{ type:'walk', desc:'步行1分钟（同一广场）' } },
+      { time:'10:30', text:'乔托钟楼 / 洗礼堂（同套票）',
+        next:{ type:'walk', desc:'步行约8分钟' } },
+      { time:'12:00', text:'午餐、领主广场、市政厅（乌菲兹外观）',
+        next:{ type:'walk', desc:'步行约5分钟' } },
+      { time:'13:30', text:'老桥 Ponte Vecchio、阿诺河边',
+        next:{ type:'walk', desc:'步行约10分钟' } },
+      { time:'15:00', text:'圣十字教堂',
+        next:{ type:'bus', desc:'公交12/13路上山，约10分' } },
+      { time:'17:30', text:'米开朗基罗广场看日落（俯瞰全城）' },
+      { time:'晚上',  text:'山下或老城晚餐' },
+    ],
+    note:'⚠️ 周一乌菲兹/学院闭馆，今天安排登顶+户外正合适 | 穹顶需爬陡窄楼梯，无电梯',
+  },
+  { day:4, date:'9/29 周二', city:'florence', title:'佛罗伦萨 美术馆日',
+    schedule:[
+      { time:'08:15', text:'乌菲兹美术馆（文艺复兴名画，8:15开门）', ticket:true, warn:true, warnText:'周二开放，务必预约以避开排队',
+        next:{ type:'walk', desc:'步行约15分钟' } },
+      { time:'11:30', text:'午餐、中央市场 Mercato Centrale',
+        next:{ type:'walk', desc:'步行约20分钟，过老桥' } },
+      { time:'13:00', text:'皮蒂宫',
+        next:{ type:'walk', desc:'步行2分钟（同一建筑群）' } },
+      { time:'14:00', text:'波波里花园',
+        next:{ type:'walk', desc:'步行约5分钟' } },
+      { time:'15:30', text:'圣神大殿区、皮革店 / 纪念品' },
+      { time:'晚上',  text:'告别佛罗伦萨晚餐' },
+    ],
+    note:'⚠️ 乌菲兹安检严，大背包需寄存 | 提前确认明天长途车票',
+  },
+  { day:5, date:'9/30 周三', city:'lucerne', title:'佛罗伦萨 → 卢塞恩 跨国日',
+    schedule:[
+      { time:'07:30', text:'早餐、退房',
+        next:{ type:'walk', desc:'步行至 SMN 站，约5分钟' } },
+      { time:'08:30', text:'SMN 站 高铁出发 → 米兰中央站', ticket:true,
+        next:{ type:'highspeed', desc:'Frecciarossa · 约1h55' } },
+      { time:'10:30', text:'米兰中央站转车（约30分钟换乘）',
+        next:{ type:'international', desc:'EuroCity 国际列车 · 约3h40 · 过圣哥达隧道' } },
+      { time:'11:00', text:'EuroCity 出发 米兰 → 卢塞恩', ticket:true },
+      { time:'14:40', text:'抵卢塞恩站',
+        next:{ type:'walk', desc:'步行约10分钟' } },
+      { time:'15:00', text:'Hotel Hofgarten 入住',
+        next:{ type:'walk', desc:'步行约8分钟' } },
+      { time:'15:30', text:'卡佩尔廊桥（木廊桥）、八角水塔、老城广场、莱茵河畔' },
+      { time:'晚上',  text:'老城晚餐（瑞士物价高，可超市补给）' },
+    ],
+    note:'⚠️ 今天路上约6.5小时，是全程最长交通日，备好水和泡面 | 入瑞士无须再过关（同申根）',
+  },
+  { day:6, date:'10/01 周四', city:'lucerne', title:'卢塞恩 皮拉图斯黄金环线',
+    schedule:[
+      { time:'08:30', text:'含早早餐',
+        next:{ type:'walk', desc:'步行至码头，约5分钟' } },
+      { time:'09:00', text:'卢塞恩码头乘游船 → Alpnachstad',
+        next:{ type:'boat', desc:'约1小时 · Swiss Travel Pass 免费' } },
+      { time:'10:15', text:'Alpnachstad 换乘世界最陡齿轨火车上山',
+        next:{ type:'funicular', desc:'约30分钟 · STP 5折' } },
+      { time:'11:00', text:'皮拉图斯峰顶观景 2132m、徒步、午餐（自带或山顶餐厅）',
+        next:{ type:'cable_car', desc:'龙脊缆车下山 → Kriens' } },
+      { time:'13:30', text:'缆车下山抵 Kriens',
+        next:{ type:'bus', desc:'巴士/公交回市区，约15分' } },
+      { time:'14:30', text:'回到卢塞恩市区',
+        next:{ type:'walk', desc:'步行约10分钟' } },
+      { time:'15:00', text:'狮子纪念碑、冰川公园',
+        next:{ type:'walk', desc:'步行约8分钟' } },
+      { time:'16:00', text:'城墙 Museggmauer（俯瞰全城）' },
+      { time:'晚上',  text:'老城晚餐' },
+    ],
+    note:'⚠️ 山顶冷风大，带厚外套 | 10月齿轨火车仍运营，遇大风可能改全程缆车',
+  },
+  { day:7, date:'10/02 周五', city:'interlaken', title:'卢塞恩 → 因特拉肯 金色山口',
+    schedule:[
+      { time:'08:30', text:'含早早餐、退房',
+        next:{ type:'walk', desc:'步行至卢塞恩站，约5分钟' } },
+      { time:'09:00', text:'补看卢塞恩湖边、老城',
+        next:{ type:'scenic_train', desc:'GoldenPass 金色山口观景列车 · 约1h50' } },
+      { time:'11:00', text:'GoldenPass 观景列车 卢塞恩 → 因特拉肯东站', ticket:true },
+      { time:'13:00', text:'抵因特拉肯东站',
+        next:{ type:'walk', desc:'步行至酒店' } },
+      { time:'13:30', text:'酒店入住',
+        next:{ type:'walk', desc:'步行约10分钟' } },
+      { time:'14:30', text:'何维克街 · 荷黑马特草坪看少女峰',
+        next:{ type:'walk', desc:'步行约20分钟' } },
+      { time:'16:00', text:'图恩湖畔 / 布里恩茨湖畔散步' },
+      { time:'晚上',  text:'镇上晚餐' },
+    ],
+    note:'⚠️ GoldenPass 建议提前订座（STP持有者也需要） | 住因特拉肯东站附近，次日上山最省时',
+  },
+  { day:8, date:'10/03 周六', city:'interlaken', title:'少女峰地区一日游',
+    schedule:[
+      { time:'07:30', text:'早餐（镇上超市/泡面）',
+        next:{ type:'walk', desc:'步行至因特拉肯东站，约5分钟' } },
+      { time:'08:30', text:'🏔️ 方案A：因特拉肯东站 出发登顶少女峰', ticket:true, warn:true, warnText:'少女峰车票提前订，约CHF130/人（STP折后）',
+        next:{ type:'train', desc:'登山火车 → 劳特布龙嫩，约21分' } },
+      { time:'08:51', text:'劳特布龙嫩换乘',
+        next:{ type:'train', desc:'艾格快线 → 小夏戴格，约30分' } },
+      { time:'09:30', text:'小夏戴格换乘',
+        next:{ type:'funicular', desc:'少女峰铁路（隧道）→ 欧洲之巅，约35分' } },
+      { time:'10:00', text:'少女峰观景台 3454m：冰宫、斯芬克斯观景台、户外雪地' },
+      { time:'12:00', text:'峰顶午餐' },
+      { time:'14:00', text:'原路下山，途经小镇（米伦/格林德瓦）' },
+      { time:'18:00', text:'返回因特拉肯' },
+      { time:'晚上',  text:'镇上晚餐' },
+    ],
+    note:'⚠️ 全天往返约4h车程，早出发 | 海拔3454m，保暖防晒慢行防高反 | 末班下山车较早，留意时刻',
+  },
+  { day:9, date:'10/04 周日', city:'zurich', title:'因特拉肯 → 苏黎世',
+    schedule:[
+      { time:'08:30', text:'早餐、退房寄存',
+        next:{ type:'walk', desc:'步行至因特拉肯东站' } },
+      { time:'09:00', text:'湖区晨景、何维克街最后漫步',
+        next:{ type:'train', desc:'IC 城际 · 约2h · 经伯尔尼' } },
+      { time:'12:00', text:'因特拉肯东站 IC 出发 → 苏黎世中央站', ticket:true },
+      { time:'14:00', text:'到苏黎世 HB',
+        next:{ type:'walk', desc:'步行约7分钟' } },
+      { time:'14:15', text:'Hotel Wellenberg 入住',
+        next:{ type:'walk', desc:'步行约5分钟' } },
+      { time:'15:00', text:'班霍夫大街（购物大街）',
+        next:{ type:'walk', desc:'步行约8分钟' } },
+      { time:'16:00', text:'林登霍夫山丘（俯瞰利马特河）',
+        next:{ type:'walk', desc:'步行约3分钟' } },
+      { time:'16:30', text:'老城 Niederdorf',
+        next:{ type:'walk', desc:'步行约15分钟' } },
+      { time:'17:30', text:'苏黎世湖畔散步' },
+      { time:'晚上',  text:'老城告别晚餐' },
+    ],
+    note:'⚠️ 周日瑞士商店多关门，购物请放到周一 | 餐厅照常营业',
+  },
+  { day:10, date:'10/05 周一', city:'zurich', title:'苏黎世 → 返程',
+    schedule:[
+      { time:'07:30', text:'含早早餐、退房',
+        next:{ type:'walk', desc:'步行苏黎世湖老城' } },
+      { time:'08:00', text:'苏黎世湖 / 老城最后漫步、买伴手礼（周一开门）',
+        next:{ type:'walk', desc:'步行约15分钟回 HB' } },
+      { time:'10:15', text:'苏黎世中央站 HB 出发',
+        next:{ type:'train', desc:'火车直达苏黎世机场 · 约10–13分 · STP' } },
+      { time:'10:45', text:'到苏黎世机场 ZRH，办理退税（如购物）、值机、安检', warn:true, warnText:'国际航班建议起飞前2.5小时到' },
+      { time:'13:30', text:'✈️ CX382 起飞 → 香港' },
+      { time:'次日',  text:'06:55 抵达香港 🏠' },
+    ],
+    note:'⚠️ 退税（Global Blue）需离境前盖章 | 液体100ml限制，纪念品酒/橄榄油放托运',
+  },
+];
+
+// ══════════════════════════════════════════════════
+//  地图初始化
+// ══════════════════════════════════════════════════
+const map = L.map('map', { center:[45.5,10.5], zoom:6, zoomControl:true });
+
+const tileSources = {
+  amap: L.tileLayer('https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}', {
+    attribution:'&copy; <a href="https://www.amap.com">高德地图</a>',
+    subdomains:'1234', maxZoom:18,
+  }),
+  osm: L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution:'&copy; OpenStreetMap &copy; CARTO',
+    subdomains:'abcd', maxZoom:19,
+  }),
+};
+let currentTile = 'amap';
+tileSources.amap.addTo(map);
+
+function toggleTile() {
+  const next = currentTile === 'amap' ? 'osm' : 'amap';
+  map.removeLayer(tileSources[currentTile]);
+  tileSources[next].addTo(map);
+  currentTile = next;
+  const btn = document.getElementById('tile-toggle');
+  btn.textContent = next === 'amap' ? '🇨🇳 高德' : '🌍 OSM';
+  btn.title = next === 'amap' ? '当前：高德地图（国内快）· 点击切换' : '当前：OpenStreetMap（国外快）· 点击切换';
+}
+
+// 城市间总路线（底色）
+const cityCoords = cities.map(c => c.latlng);
+L.polyline(cityCoords, { color:'rgba(255,255,255,.06)', weight:2, dashArray:'6,8' }).addTo(map);
+
+// 动画绘制主路线
+let drawnCoords = [cityCoords[0]];
+const routeLine = L.polyline(drawnCoords, { color:'rgba(255,255,255,.4)', weight:2, lineCap:'round' }).addTo(map);
+function animateRoute(i) {
+  if (i >= cityCoords.length) return;
+  drawnCoords.push(cityCoords[i]);
+  routeLine.setLatLngs(drawnCoords);
+  setTimeout(() => animateRoute(i + 1), 300);
+}
+setTimeout(() => animateRoute(1), 900);
+
+// ── 城市标记 ──
+const markerMap = {};
+cities.forEach(city => {
+  const c = city.color;
+  const el = document.createElement('div');
+  el.style.cssText = 'position:relative;width:48px;height:48px;display:flex;align-items:center;justify-content:center;cursor:pointer;';
+  el.innerHTML = `
+    <div class="marker-ring" style="color:${c};border-color:${c};position:absolute;"></div>
+    <div class="marker-ring" style="color:${c};border-color:${c};position:absolute;animation-delay:.8s;"></div>
+    <div class="marker-dot" style="background:${c};color:${c};"></div>
+    <div class="marker-label">${city.name}</div>`;
+
+  const m = L.marker(city.latlng, {
+    icon: L.divIcon({ className:'', html:el.outerHTML, iconSize:[48,48], iconAnchor:[24,24] }),
+    zIndexOffset:100,
+  }).addTo(map);
+  m.on('click', () => openPanel(city.days[0]));
+  m.on('mouseover', e => showTooltip(e, city));
+  m.on('mouseout',  () => hideTooltip());
+  markerMap[city.id] = m;
+});
+
+// ── 底部时间轴 ──
+const tl = document.getElementById('timeline');
+days.forEach(d => {
+  const city = cities.find(c => c.id === d.city);
+  const btn = document.createElement('div');
+  btn.className = `day-btn ${city.country}`;
+  btn.id = `btn-day-${d.day}`;
+  btn.innerHTML = `<span style="opacity:.45;font-size:10px">D${d.day}</span> ${d.date.split(' ')[0]}`;
+  btn.title = d.title;
+  btn.onclick = () => openPanel(d.day);
+  tl.appendChild(btn);
+});
+
+// ══════════════════════════════════════════════════
+//  当日路线层管理
+// ══════════════════════════════════════════════════
+let dayLayers = [];
+
+function clearDayLayers() {
+  dayLayers.forEach(l => map.removeLayer(l));
+  dayLayers = [];
+}
+
+function drawDayRoute(dayNum) {
+  clearDayLayers();
+  const route = dayRoutes[dayNum];
+  if (!route) return;
+
+  const wpMap = {};
+  route.waypoints.forEach(wp => { wpMap[wp.id] = wp; });
+
+  // 交通路线线段
+  route.legs.forEach(leg => {
+    const from = wpMap[leg.from];
+    const to   = wpMap[leg.to];
+    if (!from || !to) return;
+    const style = T[leg.type] || T.walk;
+    const opts = { color:style.color, weight:style.weight, opacity:.9 };
+    if (style.dash) opts.dashArray = style.dash;
+    const line = L.polyline([from.latlng, to.latlng], opts).addTo(map);
+    line.on('mouseover', e => {
+      const tip = document.getElementById('tooltip');
+      tip.innerHTML = `<span style="font-size:14px">${style.icon}</span> <strong>${style.label}</strong><br><span style="color:rgba(255,255,255,.55);font-size:11px">${leg.desc}</span>`;
+      tip.classList.add('show');
+      moveTip(e.originalEvent);
+    });
+    line.on('mouseout', () => document.getElementById('tooltip').classList.remove('show'));
+    dayLayers.push(line);
+  });
+
+  // 路线点标记
+  route.waypoints.forEach((wp, i) => {
+    const city = cities.find(c => days.find(d => d.day === dayNum && d.city === c.id));
+    const color = city ? city.color : '#60a5fa';
+    const el = document.createElement('div');
+    el.style.position = 'relative';
+    el.innerHTML = `<div class="wp-marker" style="background:${color}cc;border-color:${color}">${i+1}</div><div class="wp-label">${wp.name}</div>`;
+    const m = L.marker(wp.latlng, {
+      icon: L.divIcon({ className:'', html:el.outerHTML, iconSize:[22,22], iconAnchor:[11,11] }),
+      zIndexOffset:200,
+    }).addTo(map);
+    dayLayers.push(m);
+  });
+
+  // 调整视野
+  if (route.fitBounds) {
+    map.fitBounds(route.fitBounds, { padding:[80,80], maxZoom:14 });
+  }
+}
+
+// ══════════════════════════════════════════════════
+//  面板
+// ══════════════════════════════════════════════════
+let currentDay = null;
+
+function openPanel(dayNum) {
+  const d = days.find(x => x.day === dayNum);
+  if (!d) return;
+  currentDay = dayNum;
+  const city  = cities.find(c => c.id === d.city);
+  const color = city.color;
+
+  document.getElementById('panel-day-label').innerHTML = `<span style="color:${color}">Day ${d.day}</span>`;
+  document.getElementById('panel-city').textContent = d.title;
+  document.getElementById('panel-date').textContent = `${d.date}　${city.name} · ${city.nameEn}`;
+
+  const body = document.getElementById('panel-body');
+  body.innerHTML = '';
+
+  d.schedule.forEach((item, i) => {
+    // 行程条目
+    const row = document.createElement('div');
+    row.className = 'sch-item';
+    row.style.animationDelay = `${i * 0.065}s`;
+    const isLast = i === d.schedule.length - 1;
+    const tags = [];
+    if (item.ticket) tags.push('<span class="tag tag-ticket">🎫 须订票</span>');
+    if (item.warn && item.warnText) tags.push('<span class="tag tag-warn">⚠️</span>');
+    row.innerHTML = `
+      <div class="time-col"><span class="time-text">${item.time}</span></div>
+      <div class="dot-col">
+        <div class="dot" style="background:${color}"></div>
+        ${!isLast || item.next ? `<div class="dot-line" style="background:${item.next ? T[item.next.type]?.color||'rgba(255,255,255,.12)' : 'rgba(255,255,255,.1)'}"></div>` : ''}
+      </div>
+      <div class="content-col">
+        <div class="content-text">${item.text}${tags.join('')}</div>
+        ${item.warn && item.warnText ? `<div class="warn-sub">⚠️ ${item.warnText}</div>` : ''}
+      </div>`;
+    body.appendChild(row);
+
+    // 交通方式条
+    if (item.next) {
+      const style = T[item.next.type] || T.walk;
+      const tr = document.createElement('div');
+      tr.className = 'transport-row';
+      tr.style.borderLeftColor = style.color;
+      tr.style.animationDelay = `${i * 0.065 + 0.04}s`;
+      tr.innerHTML = `<span class="transport-icon">${style.icon}</span><span class="transport-desc">${style.label} &nbsp;·&nbsp; ${item.next.desc}</span>`;
+      body.appendChild(tr);
+    }
+  });
+
+  if (d.note) {
+    const nb = document.createElement('div');
+    nb.className = 'note-box';
+    nb.style.animationDelay = `${d.schedule.length * 0.065 + 0.1}s`;
+    nb.textContent = d.note;
+    body.appendChild(nb);
+  }
+
+  document.getElementById('panel').classList.add('open');
+  body.scrollTop = 0;
+
+  document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById(`btn-day-${dayNum}`);
+  if (btn) { btn.classList.add('active'); btn.scrollIntoView({ behavior:'smooth', inline:'center', block:'nearest' }); }
+
+  document.getElementById('transport-legend').classList.add('visible');
+  drawDayRoute(dayNum);
+}
+
+function closePanel() {
+  document.getElementById('panel').classList.remove('open');
+  document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('transport-legend').classList.remove('visible');
+  currentDay = null;
+  clearDayLayers();
+  map.flyTo([45.5,10.5], 6, { animate:true, duration:1.0 });
+}
+
+// ── Tooltip ──
+const tooltip = document.getElementById('tooltip');
+function showTooltip(e, city) {
+  const ds = days.filter(d => d.city === city.id).map(d => `Day ${d.day}`).join(' / ');
+  tooltip.innerHTML = `<strong>${city.name}</strong><br><span style="color:rgba(255,255,255,.5);font-size:11px">${ds}</span><br><span style="color:rgba(255,255,255,.4);font-size:11px">点击查看详情</span>`;
+  tooltip.classList.add('show');
+  moveTip(e.originalEvent);
+}
+function hideTooltip() { tooltip.classList.remove('show'); }
+function moveTip(e) {
+  let x = e.clientX + 14, y = e.clientY - 10;
+  if (x + 220 > window.innerWidth)  x = e.clientX - 224;
+  if (y + 80  > window.innerHeight) y = e.clientY - 90;
+  tooltip.style.left = x + 'px';
+  tooltip.style.top  = y + 'px';
+}
+document.addEventListener('mousemove', e => { if (tooltip.classList.contains('show')) moveTip(e); });
+map.on('click', () => { if (document.getElementById('panel').classList.contains('open')) closePanel(); });
+
+// 键盘
+document.addEventListener('keydown', e => {
+  if (!currentDay) return;
+  if (e.key === 'ArrowRight' && currentDay < 10) openPanel(currentDay + 1);
+  if (e.key === 'ArrowLeft'  && currentDay > 1)  openPanel(currentDay - 1);
+  if (e.key === 'Escape') closePanel();
+});
+
+// ── 移动端：手柄下滑关闭面板 ──
+(function () {
+  const panel  = document.getElementById('panel');
+  const handle = document.getElementById('panel-handle');
+  let startY = 0, isDragging = false;
+
+  function onTouchStart(e) {
+    startY = e.touches[0].clientY;
+    isDragging = true;
+  }
+  function onTouchMove(e) {
+    if (!isDragging) return;
+    const dy = e.touches[0].clientY - startY;
+    if (dy > 0) {
+      panel.style.transform = `translateY(${dy}px)`;
+      e.preventDefault();
+    }
+  }
+  function onTouchEnd(e) {
+    if (!isDragging) return;
+    isDragging = false;
+    const dy = e.changedTouches[0].clientY - startY;
+    panel.style.transform = '';
+    if (dy > 80) closePanel();
+  }
+
+  handle.addEventListener('touchstart', onTouchStart, { passive:true });
+  handle.addEventListener('touchmove',  onTouchMove,  { passive:false });
+  handle.addEventListener('touchend',   onTouchEnd,   { passive:true });
+
+  // 面板顶部区域也支持下滑（仅当内容滚到顶部时）
+  panel.addEventListener('touchstart', e => {
+    startY = e.touches[0].clientY;
+  }, { passive:true });
+  panel.addEventListener('touchend', e => {
+    const body = document.getElementById('panel-body');
+    const dy = e.changedTouches[0].clientY - startY;
+    if (dy > 120 && body.scrollTop === 0) closePanel();
+  }, { passive:true });
+})();
+</script>
+</body>
+</html>
