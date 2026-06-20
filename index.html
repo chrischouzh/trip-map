@@ -219,7 +219,7 @@ body { font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif; bac
 
   /* 面板 → 底部抽屉 */
   #panel {
-    width:100%; height:72vh;
+    width:100%; height:58vh;
     top:auto; bottom:0; left:0; right:0;
     border-left:none;
     border-top:1px solid rgba(255,255,255,.08);
@@ -849,7 +849,16 @@ function drawDayRoute(dayNum) {
 
   // 调整视野
   if (route.fitBounds) {
-    map.fitBounds(route.fitBounds, { padding:[80,80], maxZoom:14 });
+    const mobile = window.innerWidth <= 768;
+    // 面板在移动端占底部 58vh，桌面端占右侧 440px
+    // paddingBottomRight 让 fitBounds 把遮挡区域排除在外，地图内容始终落在可见区域里
+    const padOpts = mobile
+      ? { paddingTopLeft:[30, 70], paddingBottomRight:[30, Math.round(window.innerHeight * 0.60)] }
+      : { paddingTopLeft:[60, 80], paddingBottomRight:[460, 60] };
+    // 等面板滑入动画结束后再居中（动画 0.4s）
+    setTimeout(() => {
+      map.fitBounds(route.fitBounds, { ...padOpts, maxZoom:14, animate:true });
+    }, 420);
   }
 }
 
@@ -930,7 +939,7 @@ function closePanel() {
   document.getElementById('transport-legend').classList.remove('visible');
   currentDay = null;
   clearDayLayers();
-  map.flyTo([45.5,10.5], 6, { animate:true, duration:1.0 });
+  map.flyTo([45.5,10.5], 6, { animate:true, duration:0.8 });
 }
 
 // ── Tooltip ──
