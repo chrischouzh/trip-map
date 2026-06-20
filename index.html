@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>意大利·瑞士 10日行程地图</title>
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<script src="https://cdn.bootcdn.net/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="data.js"></script>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif; background:#0a0a0f; overflow:hidden; height:100vh; }
+#map { width:100vw; height:100vh; z-index:1; }
+
+#header {
+  position:fixed; top:0; left:0; right:0; z-index:1000;
+  padding:18px 28px;
+  background:linear-gradient(180deg,rgba(10,10,20,.88) 0%,transparent 100%);
+  pointer-events:none;
+}
+#header h1 { color:#fff; font-size:20px; font-weight:600; letter-spacing:2px; text-shadow:0 2px 12px rgba(0,0,0,.6); }
+#header p  { color:rgba(255,255,255,.55); font-size:13px; margin-top:3px; letter-spacing:1px; }
+
+/* ── 时间轴 ── */
+#timeline {
+  position:fixed; bottom:0; left:0; right:0; z-index:1000;
+  padding:16px 24px 20px;
+  background:linear-gradient(0deg,rgba(10,10,20,.92) 0%,transparent 100%);
+  display:flex; gap:8px; align-items:center;
+  overflow-x:auto; scrollbar-width:none;
+}
+#timeline::-webkit-scrollbar { display:none; }
+.day-btn {
+  flex-shrink:0; padding:8px 14px; border-radius:20px;
+  border:1.5px solid rgba(255,255,255,.2);
+  background:rgba(255,255,255,.07); color:rgba(255,255,255,.65);
+  font-size:12px; cursor:pointer; transition:all .25s ease;
+  backdrop-filter:blur(6px); white-space:nowrap;
+}
+.day-btn:hover { background:rgba(255,255,255,.15); border-color:rgba(255,255,255,.5); color:#fff; transform:translateY(-2px); }
+.day-btn.active { background:rgba(255,255,255,.22); border-color:#fff; color:#fff; font-weight:600; }
+.day-btn.italy  { border-color:rgba(0,200,150,.45); }
+.day-btn.italy:hover,.day-btn.italy.active { background:rgba(0,200,150,.2); border-color:#00c896; }
+.day-btn.swiss  { border-color:rgba(220,50,50,.45); }
+.day-btn.swiss:hover,.day-btn.swiss.active  { background:rgba(220,50,50,.2); border-color:#dc3232; }
+
+/* ── 右侧面板 ── */
+#panel {
+  position:fixed; top:0; right:0; width:420px; height:100vh; z-index:999;
+  background:rgba(11,11,21,.94); backdrop-filter:blur(22px);
+  border-left:1px solid rgba(255,255,255,.07);
+  transform:translateX(100%);
+  transition:transform .45s cubic-bezier(.16,1,.3,1);
+  display:flex; flex-direction:column; overflow:hidden;
+}
+#panel.open { transform:translateX(0); }
+
+#panel-close {
+  position:absolute; top:18px; left:-44px;
+  width:36px; height:36px; border-radius:50%;
+  background:rgba(11,11,21,.9); border:1px solid rgba(255,255,255,.15);
+  color:rgba(255,255,255,.7); font-size:15px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:all .2s; backdrop-filter:blur(6px);
+  opacity:0; pointer-events:none;
+}
+#panel.open #panel-close { opacity:1; pointer-events:all; }
+#panel-close:hover { background:rgba(255,255,255,.15); color:#fff; }
+
+#panel-header { padding:26px 24px 18px; border-bottom:1px solid rgba(255,255,255,.07); flex-shrink:0; }
+#panel-day-label { font-size:11px; letter-spacing:2px; text-transform:uppercase; margin-bottom:5px; }
+#panel-city  { font-size:24px; font-weight:700; color:#fff; margin-bottom:4px; }
+#panel-date  { font-size:12px; color:rgba(255,255,255,.4); }
+
+#panel-body {
+  flex:1; overflow-y:auto; padding:18px 22px 90px;
+  scrollbar-width:thin; scrollbar-color:rgba(255,255,255,.1) transparent;
+}
+#panel-body::-webkit-scrollbar { width:3px; }
+#panel-body::-webkit-scrollbar-thumb { background:rgba(255,255,255,.1); border-radius:2px; }
+
+/* ── 行程条目 ── */
+.sch-item {
+  display:flex; gap:12px; margin-bottom:0;
+  opacity:0; transform:translateX(16px);
+  animation:slideIn .35s ease forwards;
+}
+@keyframes slideIn { to { opacity:1; transform:translateX(0); } }
+
+.time-col { flex-shrink:0; width:48px; text-align:right; padding-top:3px; }
+.time-text { font-size:11px; color:rgba(255,255,255,.32); font-variant-numeric:tabular-nums; }
+
+.dot-col { flex-shrink:0; display:flex; flex-direction:column; align-items:center; }
+.dot { width:8px; height:8px; border-radius:50%; margin-top:5px; flex-shrink:0; transition:transform .2s; }
+.sch-item:hover .dot { transform:scale(1.4); }
+.dot-line { width:1.5px; flex:1; min-height:16px; margin-top:3px; }
+
+.content-col { flex:1; padding-top:2px; padding-bottom:4px; }
+.content-text { font-size:13.5px; color:rgba(255,255,255,.82); line-height:1.55; }
+.tag { display:inline-block; font-size:10px; padding:1px 6px; border-radius:4px; margin-left:5px; vertical-align:middle; font-weight:500; }
+.tag-ticket { background:rgba(255,200,0,.18); color:#ffc800; }
+.tag-warn   { background:rgba(255,100,0,.18); color:#ff8040; }
+.warn-sub   { font-size:11px; color:rgba(255,160,60,.8); margin-top:3px; }
+
+/* ── 交通方式指示条 ── */
+.transport-row {
+  display:flex; align-items:center; gap:10px;
+  margin:2px 0; padding:6px 10px;
+  margin-left:60px;
+  border-radius:8px;
+  background:rgba(255,255,255,.04);
+  border-left:2px solid;
+  opacity:0; animation:slideIn .3s ease forwards;
+}
+.transport-icon { font-size:13px; flex-shrink:0; }
+.transport-desc { font-size:11.5px; color:rgba(255,255,255,.5); line-height:1.4; }
+
+/* ── note ── */
+.note-box {
+  background:rgba(255,255,255,.04); border-radius:10px;
+  padding:12px 14px; margin-top:12px;
+  font-size:12px; color:rgba(255,255,255,.42);
+  line-height:1.65; border-left:2px solid rgba(255,255,255,.12);
+  opacity:0; animation:slideIn .35s ease forwards;
+}
+
+/* ── 图例 ── */
+#legend {
+  position:fixed; bottom:80px; left:16px; z-index:1000;
+  display:flex; flex-direction:column; gap:5px;
+}
+.legend-city { display:flex; align-items:center; gap:7px; font-size:11px; color:rgba(255,255,255,.5); }
+.legend-dot  { width:9px; height:9px; border-radius:50%; }
+#tile-toggle {
+  margin-top:8px; padding:6px 12px; border-radius:16px;
+  border:1.5px solid rgba(255,255,255,.2);
+  background:rgba(255,255,255,.08); color:rgba(255,255,255,.75);
+  font-size:12px; cursor:pointer; backdrop-filter:blur(6px);
+  transition:all .2s; width:100%;
+}
+#tile-toggle:hover { background:rgba(255,255,255,.18); color:#fff; border-color:rgba(255,255,255,.5); }
+
+#transport-legend {
+  position:fixed; bottom:80px; right:20px; z-index:1000;
+  background:rgba(10,10,20,.82); backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.08); border-radius:10px;
+  padding:10px 14px; display:none; flex-direction:column; gap:5px;
+}
+#transport-legend.visible { display:flex; }
+.tleg-item { display:flex; align-items:center; gap:8px; font-size:11px; color:rgba(255,255,255,.5); }
+.tleg-line { width:28px; height:3px; border-radius:2px; }
+
+/* ── 城市标记 ── */
+.marker-ring {
+  position:absolute; width:48px; height:48px; border-radius:50%;
+  border:2px solid currentColor; opacity:0;
+  animation:pulse 2.5s ease-out infinite;
+}
+.marker-ring:nth-child(2) { animation-delay:.8s; }
+@keyframes pulse { 0%{transform:scale(.5);opacity:.6} 100%{transform:scale(1.8);opacity:0} }
+.marker-dot {
+  position:relative; width:13px; height:13px; border-radius:50%;
+  border:2.5px solid rgba(255,255,255,.9); z-index:2;
+  box-shadow:0 0 10px currentColor,0 2px 8px rgba(0,0,0,.5);
+  transition:transform .2s;
+}
+.marker-dot:hover { transform:scale(1.5); }
+.marker-label {
+  position:absolute; bottom:-22px; left:50%; transform:translateX(-50%);
+  white-space:nowrap; font-size:11.5px; font-weight:600; color:#fff;
+  text-shadow:0 1px 6px rgba(0,0,0,.9); pointer-events:none;
+}
+
+/* ── 路线点标记 ── */
+.wp-marker {
+  width:22px; height:22px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:10px; font-weight:700; color:#fff;
+  border:2px solid rgba(255,255,255,.7);
+  box-shadow:0 2px 8px rgba(0,0,0,.5);
+  cursor:pointer; transition:transform .2s;
+}
+.wp-marker:hover { transform:scale(1.3); }
+.wp-label {
+  position:absolute; top:-20px; left:50%; transform:translateX(-50%);
+  white-space:nowrap; font-size:10px; color:rgba(255,255,255,.85);
+  text-shadow:0 1px 4px rgba(0,0,0,.9); pointer-events:none; font-weight:500;
+}
+
+/* tooltip */
+#tooltip {
+  position:fixed; z-index:2000;
+  background:rgba(10,10,20,.9); border:1px solid rgba(255,255,255,.14);
+  border-radius:10px; padding:9px 13px; color:#fff; font-size:13px;
+  pointer-events:none; opacity:0; transition:opacity .15s;
+  backdrop-filter:blur(10px); max-width:210px;
+}
+#tooltip.show { opacity:1; }
+
+/* leaflet */
+.leaflet-control-zoom { border:none!important; box-shadow:0 2px 12px rgba(0,0,0,.4)!important; }
+.leaflet-control-zoom a { background:rgba(12,12,22,.85)!important; color:rgba(255,255,255,.7)!important; border-color:rgba(255,255,255,.1)!important; backdrop-filter:blur(6px); }
+.leaflet-control-zoom a:hover { background:rgba(255,255,255,.15)!important; color:#fff!important; }
+.leaflet-control-attribution { background:rgba(0,0,0,.4)!important; color:rgba(255,255,255,.3)!important; font-size:10px!important; }
+.leaflet-control-attribution a { color:rgba(255,255,255,.4)!important; }
+
+/* ══ 移动端适配 ══ */
+#panel-handle {
+  display:none;
+  width:36px; height:4px; border-radius:2px;
+  background:rgba(255,255,255,.2);
+  margin:10px auto 0; flex-shrink:0;
+}
+
+@media (max-width: 768px) {
+  /* 标题栏 */
+  #header { padding:12px 16px 10px; }
+  #header h1 { font-size:15px; letter-spacing:1px; }
+  #header p  { font-size:11px; margin-top:2px; }
+
+  /* 面板 → 底部抽屉 */
+  #panel {
+    width:100%; height:58vh;
+    top:auto; bottom:0; left:0; right:0;
+    border-left:none;
+    border-top:1px solid rgba(255,255,255,.08);
+    border-radius:18px 18px 0 0;
+    transform:translateY(105%);
+    transition:transform .4s cubic-bezier(.16,1,.3,1);
+  }
+  #panel.open { transform:translateY(0); }
+
+  /* 拖拽手柄显示 */
+  #panel-handle { display:block; }
+
+  /* 关闭按钮移到面板内右上角 */
+  #panel-close {
+    position:absolute; top:14px; right:16px; left:auto;
+    width:32px; height:32px; font-size:14px;
+    opacity:0; pointer-events:none;
+  }
+  #panel.open #panel-close { opacity:1; pointer-events:all; }
+
+  #panel-header { padding:14px 20px 14px; }
+  #panel-city   { font-size:20px; }
+  #panel-body   { padding:12px 18px 80px; }
+
+  /* 时间轴 */
+  #timeline { padding:10px 14px 14px; gap:6px; }
+  .day-btn  { padding:9px 12px; font-size:12px; }
+
+  /* 图例 */
+  #legend { bottom:72px; left:12px; }
+  #tile-toggle { padding:5px 10px; font-size:11px; }
+
+  /* 交通图例：移动端折叠进面板，不在地图上浮动 */
+  #transport-legend { display:none!important; }
+
+  /* 路线点标签：小屏省略，避免重叠 */
+  .wp-label { display:none; }
+
+  /* 缩放控件位置右移避免被图例遮挡 */
+  .leaflet-control-zoom { margin-right:10px!important; }
+}
+
+@media (max-width: 400px) {
+  #header h1 { font-size:13px; }
+  #panel { height:78vh; }
+  .day-btn { padding:8px 10px; font-size:11px; }
+}
+</style>
+</head>
+<body>
+<div id="map"></div>
+
+<div id="header">
+  <h1>🇮🇹 意大利 · 瑞士 🇨🇭 &nbsp;10日行程</h1>
+  <p>邹豪 &amp; 宁岳莎 &nbsp;·&nbsp; 2026 / 09 / 26 – 10 / 05 &nbsp;·&nbsp; 点击城市或下方日期查看路线详情</p>
+</div>
+
+<div id="panel">
+  <div id="panel-handle"></div>
+  <button id="panel-close" onclick="closePanel()">✕</button>
+  <div id="panel-header">
+    <div id="panel-day-label"></div>
+    <div id="panel-city"></div>
+    <div id="panel-date"></div>
+  </div>
+  <div id="panel-body"></div>
+</div>
+
+<div id="timeline"></div>
+
+<div id="legend">
+  <div class="legend-city"><div class="legend-dot" style="background:#00c896"></div>意大利</div>
+  <div class="legend-city"><div class="legend-dot" style="background:#dc3232"></div>瑞士</div>
+  <button id="tile-toggle" onclick="toggleTile()" title="当前：高德地图（国内快）· 点击切换">🇨🇳 高德</button>
+</div>
+
+<div id="transport-legend">
+  <div class="tleg-item"><div class="tleg-line" style="background:rgba(255,255,255,.45);height:1.5px;border-top:2px dashed rgba(255,255,255,.4)"></div>步行</div>
+  <div class="tleg-item"><div class="tleg-line" style="background:#c084fc"></div>地铁</div>
+  <div class="tleg-item"><div class="tleg-line" style="background:#fb923c;border-top:2px dashed #fb923c;height:0"></div>巴士</div>
+  <div class="tleg-item"><div class="tleg-line" style="background:#60a5fa"></div>火车</div>
+  <div class="tleg-item"><div class="tleg-line" style="background:#f43f5e"></div>高铁</div>
+  <div class="tleg-item"><div class="tleg-line" style="background:#818cf8"></div>国际列车</div>
+  <div class="tleg-item"><div class="tleg-line" style="background:#34d399;border-top:2px dashed #34d399;height:0"></div>观景列车</div>
+  <div class="tleg-item"><div class="tleg-line" style="background:#22d3ee;border-top:2px dashed #22d3ee;height:0"></div>游船</div>
+  <div class="tleg-item"><div class="tleg-line" style="background:#fbbf24;border-top:2px dashed #fbbf24;height:0"></div>缆车/齿轨</div>
+</div>
+
+<div id="tooltip"></div>
+
+<script>
+// ══════════════════════════════════════════════════
+//  交通类型样式
+// ══════════════════════════════════════════════════
+const T = {
+  walk:          { color:'rgba(255,255,255,.4)', weight:1.5, dash:'5,7',  icon:'🚶', label:'步行',    borderColor:'rgba(255,255,255,.25)' },
+  metro:         { color:'#c084fc',              weight:3,   dash:null,   icon:'🚇', label:'地铁',    borderColor:'#c084fc' },
+  bus:           { color:'#fb923c',              weight:2,   dash:'8,5',  icon:'🚌', label:'巴士',    borderColor:'#fb923c' },
+  train:         { color:'#60a5fa',              weight:3.5, dash:null,   icon:'🚆', label:'火车',    borderColor:'#60a5fa' },
+  highspeed:     { color:'#f43f5e',              weight:4,   dash:null,   icon:'🚄', label:'高铁',    borderColor:'#f43f5e' },
+  international: { color:'#818cf8',              weight:4,   dash:null,   icon:'🚂', label:'国际列车',borderColor:'#818cf8' },
+  scenic_train:  { color:'#34d399',              weight:3,   dash:'10,4', icon:'🚞', label:'观景列车',borderColor:'#34d399' },
+  boat:          { color:'#22d3ee',              weight:2.5, dash:'6,4',  icon:'⛵', label:'游船',    borderColor:'#22d3ee' },
+  cable_car:     { color:'#fbbf24',              weight:2,   dash:'4,4',  icon:'🚡', label:'缆车',    borderColor:'#fbbf24' },
+  funicular:     { color:'#f59e0b',              weight:2.5, dash:'6,3',  icon:'🚟', label:'齿轨火车',borderColor:'#f59e0b' },
+};
+
+// ══════════════════════════════════════════════════
+//  Data from data.js (works both locally and on server)
+// ══════════════════════════════════════════════════
+const { cities, dayRoutes, days } = window.TRIP_DATA;
+
+function initMap() {
+
+// ══════════════════════════════════════════════════
+//  地图初始化
+// ══════════════════════════════════════════════════
+const map = L.map('map', { center:[45.5,10.5], zoom:6, zoomControl:true });
+
+const tileSources = {
+  amap: L.tileLayer('https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}', {
+    attribution:'&copy; <a href="https://www.amap.com">高德地图</a>',
+    subdomains:'1234', maxZoom:18,
+  }),
+  osm: L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution:'&copy; OpenStreetMap &copy; CARTO',
+    subdomains:'abcd', maxZoom:19,
+  }),
+};
+let currentTile = 'amap';
+tileSources.amap.addTo(map);
+
+window.toggleTile = function toggleTile() {
+  const next = currentTile === 'amap' ? 'osm' : 'amap';
+  map.removeLayer(tileSources[currentTile]);
+  tileSources[next].addTo(map);
+  currentTile = next;
+  const btn = document.getElementById('tile-toggle');
+  btn.textContent = next === 'amap' ? '🇨🇳 高德' : '🌍 OSM';
+  btn.title = next === 'amap' ? '当前：高德地图（国内快）· 点击切换' : '当前：OpenStreetMap（国外快）· 点击切换';
+}
+
+// 城市间总路线（底色）
+const cityCoords = cities.map(c => c.latlng);
+L.polyline(cityCoords, { color:'rgba(255,255,255,.06)', weight:2, dashArray:'6,8' }).addTo(map);
+
+// 动画绘制主路线
+let drawnCoords = [cityCoords[0]];
+const routeLine = L.polyline(drawnCoords, { color:'rgba(255,255,255,.4)', weight:2, lineCap:'round' }).addTo(map);
+function animateRoute(i) {
+  if (i >= cityCoords.length) return;
+  drawnCoords.push(cityCoords[i]);
+  routeLine.setLatLngs(drawnCoords);
+  setTimeout(() => animateRoute(i + 1), 300);
+}
+setTimeout(() => animateRoute(1), 900);
+
+// ── 城市标记 ──
+const markerMap = {};
+cities.forEach(city => {
+  const c = city.color;
+  const el = document.createElement('div');
+  el.style.cssText = 'position:relative;width:48px;height:48px;display:flex;align-items:center;justify-content:center;cursor:pointer;';
+  el.innerHTML = `
+    <div class="marker-ring" style="color:${c};border-color:${c};position:absolute;"></div>
+    <div class="marker-ring" style="color:${c};border-color:${c};position:absolute;animation-delay:.8s;"></div>
+    <div class="marker-dot" style="background:${c};color:${c};"></div>
+    <div class="marker-label">${city.name}</div>`;
+
+  const m = L.marker(city.latlng, {
+    icon: L.divIcon({ className:'', html:el.outerHTML, iconSize:[48,48], iconAnchor:[24,24] }),
+    zIndexOffset:100,
+  }).addTo(map);
+  m.on('click', () => openPanel(city.days[0]));
+  m.on('mouseover', e => showTooltip(e, city));
+  m.on('mouseout',  () => hideTooltip());
+  markerMap[city.id] = m;
+});
+
+// ── 底部时间轴 ──
+const tl = document.getElementById('timeline');
+days.forEach(d => {
+  const city = cities.find(c => c.id === d.city);
+  const btn = document.createElement('div');
+  btn.className = `day-btn ${city.country}`;
+  btn.id = `btn-day-${d.day}`;
+  btn.innerHTML = `<span style="opacity:.45;font-size:10px">D${d.day}</span> ${d.date.split(' ')[0]}`;
+  btn.title = d.title;
+  btn.onclick = () => openPanel(d.day);
+  tl.appendChild(btn);
+});
+
+// ══════════════════════════════════════════════════
+//  当日路线层管理
+// ══════════════════════════════════════════════════
+let dayLayers = [];
+
+function clearDayLayers() {
+  dayLayers.forEach(l => map.removeLayer(l));
+  dayLayers = [];
+}
+
+function drawDayRoute(dayNum) {
+  clearDayLayers();
+  const route = dayRoutes[dayNum];
+  if (!route) return;
+
+  const wpMap = {};
+  route.waypoints.forEach(wp => { wpMap[wp.id] = wp; });
+
+  // 交通路线线段
+  route.legs.forEach(leg => {
+    const from = wpMap[leg.from];
+    const to   = wpMap[leg.to];
+    if (!from || !to) return;
+    const style = T[leg.type] || T.walk;
+    const opts = { color:style.color, weight:style.weight, opacity:.9 };
+    if (style.dash) opts.dashArray = style.dash;
+    const line = L.polyline([from.latlng, to.latlng], opts).addTo(map);
+    line.on('mouseover', e => {
+      const tip = document.getElementById('tooltip');
+      tip.innerHTML = `<span style="font-size:14px">${style.icon}</span> <strong>${style.label}</strong><br><span style="color:rgba(255,255,255,.55);font-size:11px">${leg.desc}</span>`;
+      tip.classList.add('show');
+      moveTip(e.originalEvent);
+    });
+    line.on('mouseout', () => document.getElementById('tooltip').classList.remove('show'));
+    dayLayers.push(line);
+  });
+
+  // 路线点标记
+  route.waypoints.forEach((wp, i) => {
+    const city = cities.find(c => days.find(d => d.day === dayNum && d.city === c.id));
+    const color = city ? city.color : '#60a5fa';
+    const el = document.createElement('div');
+    el.style.position = 'relative';
+    el.innerHTML = `<div class="wp-marker" style="background:${color}cc;border-color:${color}">${i+1}</div><div class="wp-label">${wp.name}</div>`;
+    const m = L.marker(wp.latlng, {
+      icon: L.divIcon({ className:'', html:el.outerHTML, iconSize:[22,22], iconAnchor:[11,11] }),
+      zIndexOffset:200,
+    }).addTo(map);
+    dayLayers.push(m);
+  });
+
+  // 调整视野
+  if (route.fitBounds) {
+    const mobile = window.innerWidth <= 768;
+    // 面板在移动端占底部 58vh，桌面端占右侧 440px
+    // paddingBottomRight 让 fitBounds 把遮挡区域排除在外，地图内容始终落在可见区域里
+    const padOpts = mobile
+      ? { paddingTopLeft:[30, 70], paddingBottomRight:[30, Math.round(window.innerHeight * 0.60)] }
+      : { paddingTopLeft:[60, 80], paddingBottomRight:[460, 60] };
+    // 等面板滑入动画结束后再居中（动画 0.4s）
+    setTimeout(() => {
+      map.fitBounds(route.fitBounds, { ...padOpts, maxZoom:14, animate:true });
+    }, 420);
+  }
+}
+
+// ══════════════════════════════════════════════════
+//  面板
+// ══════════════════════════════════════════════════
+let currentDay = null;
+
+function openPanel(dayNum) {
+  const d = days.find(x => x.day === dayNum);
+  if (!d) return;
+  currentDay = dayNum;
+  const city  = cities.find(c => c.id === d.city);
+  const color = city.color;
+
+  document.getElementById('panel-day-label').innerHTML = `<span style="color:${color}">Day ${d.day}</span>`;
+  document.getElementById('panel-city').textContent = d.title;
+  document.getElementById('panel-date').textContent = `${d.date}　${city.name} · ${city.nameEn}`;
+
+  const body = document.getElementById('panel-body');
+  body.innerHTML = '';
+
+  d.schedule.forEach((item, i) => {
+    // 行程条目
+    const row = document.createElement('div');
+    row.className = 'sch-item';
+    row.style.animationDelay = `${i * 0.065}s`;
+    const isLast = i === d.schedule.length - 1;
+    const tags = [];
+    if (item.ticket) tags.push('<span class="tag tag-ticket">🎫 须订票</span>');
+    if (item.warn && item.warnText) tags.push('<span class="tag tag-warn">⚠️</span>');
+    row.innerHTML = `
+      <div class="time-col"><span class="time-text">${item.time}</span></div>
+      <div class="dot-col">
+        <div class="dot" style="background:${color}"></div>
+        ${!isLast || item.next ? `<div class="dot-line" style="background:${item.next ? T[item.next.type]?.color||'rgba(255,255,255,.12)' : 'rgba(255,255,255,.1)'}"></div>` : ''}
+      </div>
+      <div class="content-col">
+        <div class="content-text">${item.text}${tags.join('')}</div>
+        ${item.warn && item.warnText ? `<div class="warn-sub">⚠️ ${item.warnText}</div>` : ''}
+      </div>`;
+    body.appendChild(row);
+
+    // 交通方式条
+    if (item.next) {
+      const style = T[item.next.type] || T.walk;
+      const tr = document.createElement('div');
+      tr.className = 'transport-row';
+      tr.style.borderLeftColor = style.color;
+      tr.style.animationDelay = `${i * 0.065 + 0.04}s`;
+      tr.innerHTML = `<span class="transport-icon">${style.icon}</span><span class="transport-desc">${style.label} &nbsp;·&nbsp; ${item.next.desc}</span>`;
+      body.appendChild(tr);
+    }
+  });
+
+  if (d.note) {
+    const nb = document.createElement('div');
+    nb.className = 'note-box';
+    nb.style.animationDelay = `${d.schedule.length * 0.065 + 0.1}s`;
+    nb.textContent = d.note;
+    body.appendChild(nb);
+  }
+
+  document.getElementById('panel').classList.add('open');
+  body.scrollTop = 0;
+
+  document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById(`btn-day-${dayNum}`);
+  if (btn) { btn.classList.add('active'); btn.scrollIntoView({ behavior:'smooth', inline:'center', block:'nearest' }); }
+
+  document.getElementById('transport-legend').classList.add('visible');
+  drawDayRoute(dayNum);
+}
+
+window.closePanel = function closePanel() {
+  document.getElementById('panel').classList.remove('open');
+  document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('transport-legend').classList.remove('visible');
+  currentDay = null;
+  clearDayLayers();
+  map.flyTo([45.5,10.5], 6, { animate:true, duration:0.8 });
+}
+
+// ── Tooltip ──
+const tooltip = document.getElementById('tooltip');
+function showTooltip(e, city) {
+  const ds = days.filter(d => d.city === city.id).map(d => `Day ${d.day}`).join(' / ');
+  tooltip.innerHTML = `<strong>${city.name}</strong><br><span style="color:rgba(255,255,255,.5);font-size:11px">${ds}</span><br><span style="color:rgba(255,255,255,.4);font-size:11px">点击查看详情</span>`;
+  tooltip.classList.add('show');
+  moveTip(e.originalEvent);
+}
+function hideTooltip() { tooltip.classList.remove('show'); }
+function moveTip(e) {
+  let x = e.clientX + 14, y = e.clientY - 10;
+  if (x + 220 > window.innerWidth)  x = e.clientX - 224;
+  if (y + 80  > window.innerHeight) y = e.clientY - 90;
+  tooltip.style.left = x + 'px';
+  tooltip.style.top  = y + 'px';
+}
+document.addEventListener('mousemove', e => { if (tooltip.classList.contains('show')) moveTip(e); });
+map.on('click', () => { if (document.getElementById('panel').classList.contains('open')) closePanel(); });
+
+// 键盘
+document.addEventListener('keydown', e => {
+  if (!currentDay) return;
+  if (e.key === 'ArrowRight' && currentDay < 10) openPanel(currentDay + 1);
+  if (e.key === 'ArrowLeft'  && currentDay > 1)  openPanel(currentDay - 1);
+  if (e.key === 'Escape') closePanel();
+});
+
+// ── 移动端：手柄下滑关闭面板 ──
+(function () {
+  const panel  = document.getElementById('panel');
+  const handle = document.getElementById('panel-handle');
+  let startY = 0, isDragging = false;
+
+  function onTouchStart(e) {
+    startY = e.touches[0].clientY;
+    isDragging = true;
+  }
+  function onTouchMove(e) {
+    if (!isDragging) return;
+    const dy = e.touches[0].clientY - startY;
+    if (dy > 0) {
+      panel.style.transform = `translateY(${dy}px)`;
+      e.preventDefault();
+    }
+  }
+  function onTouchEnd(e) {
+    if (!isDragging) return;
+    isDragging = false;
+    const dy = e.changedTouches[0].clientY - startY;
+    panel.style.transform = '';
+    if (dy > 80) closePanel();
+  }
+
+  handle.addEventListener('touchstart', onTouchStart, { passive:true });
+  handle.addEventListener('touchmove',  onTouchMove,  { passive:false });
+  handle.addEventListener('touchend',   onTouchEnd,   { passive:true });
+
+  // 面板顶部区域也支持下滑（仅当内容滚到顶部时）
+  panel.addEventListener('touchstart', e => {
+    startY = e.touches[0].clientY;
+  }, { passive:true });
+  panel.addEventListener('touchend', e => {
+    const body = document.getElementById('panel-body');
+    const dy = e.changedTouches[0].clientY - startY;
+    if (dy > 120 && body.scrollTop === 0) closePanel();
+  }, { passive:true });
+})();
+} // end initMap
+
+initMap();
+</script>
+</body>
+</html>
