@@ -612,7 +612,7 @@ window.TRIP_DATA = {
       dayWeather:{ icon:"sunny", high:23, low:14 },
       note:"⚠️ 乌菲兹安检严，大背包需寄存 | 提前确认明天长途车票 | 🌅 今天在奥尔特拉诺(河南岸)收尾，上米开朗基罗广场最顺——日落机动好备选，若 D2 没看成今晚补 | 午餐已改奥尔特拉诺就近（中央市场移到D2路过），全程河南岸不折返",
       schedule:[
-        { time:"08:15", text:"乌菲兹美术馆（文艺复兴名画，8:15开门）", ticket:true, warn:true, warnText:"周五开放，务必预约以避开排队", next:{ type:"walk", desc:"过老桥到奥尔特拉诺 · 步行约12分钟" } },
+        { time:"08:15", text:"乌菲兹美术馆（文艺复兴名画，8:15开门）", pdf:[{ name:"🎫 乌菲兹门票", url:"pdfs/ticket-uffizi.pdf" }], next:{ type:"walk", desc:"过老桥到奥尔特拉诺 · 步行约12分钟" } },
         { time:"11:30", text:"皮蒂宫", next:{ type:"walk", desc:"步行2分钟（同一建筑群）" } },
         { time:"12:30", text:"波波里花园", next:{ type:"walk", desc:"步行约5分钟" } },
         { time:"14:00", text:"午餐 · 奥尔特拉诺就近（替代中央市场）", next:{ type:"walk", desc:"步行约5分钟" } },
@@ -621,7 +621,7 @@ window.TRIP_DATA = {
         { time:"19:30", text:"告别佛罗伦萨晚餐" }
       ],
       activities:[
-        { time:"08:15", name:"乌菲兹美术馆（文艺复兴名画）", img:"images/uffizi.jpg", duration:"3小时", cost:320, note:"《维纳斯的诞生》| 大背包寄存 | 8:15开门", ticketTip:"建议提前3-4周购票（旺季2-3周售罄）| 有票安检约15-20分钟，无票约2-4小时 | 8:15开门是全天人最少时段", booking:[{ name:"乌菲兹官网", url:"https://www.uffizi.it/en/the-uffizi/tickets" },{ name:"Klook", url:"https://www.klook.com/zh-CN/activity/2492-uffizi-gallery-florence/" }] },
+        { time:"08:15", name:"乌菲兹美术馆（文艺复兴名画）", img:"images/uffizi.jpg", duration:"3小时", cost:320, note:"《维纳斯的诞生》| 大背包寄存 | 8:15开门", pdf:[{ name:"🎫 乌菲兹门票", url:"pdfs/ticket-uffizi.pdf" }] },
         { time:"11:30", name:"皮蒂宫（美第奇家族宫殿）", img:"images/pitti.jpg", duration:"1.5小时", cost:280, transport:"步行12分钟过老桥", ticketTip:"提前1-2周购票即可 | 旺季排队约20-30分钟", booking:[{ name:"乌菲兹网站（含皮蒂）", url:"https://www.uffizi.it/en/pitti-palace/tickets" }] },
         { time:"12:30", name:"波波里花园", img:"images/boboli.jpg", cost:0, note:"皮蒂宫票含花园" },
         { time:"14:00", name:"午餐 · 奥尔特拉诺(Oltrarno)就近", meal:{ name:"奥尔特拉诺本地小馆", cuisine:"托斯卡纳菜", perPerson:30, recommended:"松露意面、牛肚包、本地红酒", location:"皮蒂宫/圣神大殿一带" }, note:"替代原中央市场午餐，避免折返过河，就近吃" },
