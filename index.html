@@ -145,14 +145,8 @@ body { font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif; bac
   opacity:0; animation:slideIn .35s ease forwards;
 }
 
-/* ── 凭证 PDF ── */
-.docs-box {
-  background:rgba(255,255,255,.04); border-radius:10px;
-  padding:12px 14px; margin-top:12px;
-  border-left:2px solid rgba(255,200,0,.5);
-  opacity:0; animation:slideIn .35s ease forwards;
-}
-.docs-h { font-size:11px; letter-spacing:1px; color:rgba(255,200,0,.85); margin-bottom:8px; }
+/* ── 凭证 PDF（内嵌于活动） ── */
+.pdf-row { display:flex; flex-wrap:wrap; gap:6px; margin-top:7px; }
 .doc-link {
   display:inline-flex; align-items:center; gap:4px;
   font-size:12px; padding:5px 10px; margin:2px 6px 2px 0; border-radius:8px;
@@ -588,6 +582,9 @@ function openPanel(dayNum) {
     const bookingLinks = item.booking
       ? item.booking.map(b => `<a class="booking-link" href="${b.url}" target="_blank" rel="noopener">🔗 ${b.name}</a>`).join('')
       : '';
+    const pdfLinks = item.pdf
+      ? item.pdf.map(p => `<a class="doc-link" href="${p.url}" target="_blank" rel="noopener">${p.name}</a>`).join('')
+      : '';
     row.innerHTML = `
       <div class="time-col"><span class="time-text">${item.time}</span></div>
       <div class="dot-col">
@@ -598,6 +595,7 @@ function openPanel(dayNum) {
         <div class="content-text">${item.text}${tags.join('')}</div>
         ${item.warn && item.warnText ? `<div class="warn-sub">⚠️ ${item.warnText}</div>` : ''}
         ${bookingLinks ? `<div class="booking-row">${bookingLinks}</div>` : ''}
+        ${pdfLinks ? `<div class="pdf-row">${pdfLinks}</div>` : ''}
       </div>`;
     body.appendChild(row);
 
@@ -619,15 +617,6 @@ function openPanel(dayNum) {
     nb.style.animationDelay = `${d.schedule.length * 0.065 + 0.1}s`;
     nb.textContent = d.note;
     body.appendChild(nb);
-  }
-
-  if (d.docs && d.docs.length) {
-    const db = document.createElement('div');
-    db.className = 'docs-box';
-    db.style.animationDelay = `${d.schedule.length * 0.065 + 0.14}s`;
-    db.innerHTML = '<div class="docs-h">📎 凭证 · 点击预览</div>' +
-      d.docs.map(doc => `<a class="doc-link" href="${doc.url}" target="_blank" rel="noopener">${doc.name}</a>`).join('');
-    body.appendChild(db);
   }
 
   document.getElementById('panel').classList.add('open');

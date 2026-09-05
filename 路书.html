@@ -102,8 +102,7 @@
   .act-booking { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
   .booking-pill { display:inline-flex; align-items:center; gap:4px; font-size:.72rem; padding:3px 10px; border-radius:99px; background:rgba(14,165,233,.1); border:1px solid rgba(14,165,233,.35); color:#0284C7; text-decoration:none; white-space:nowrap; transition:all .18s ease; }
   .booking-pill:hover { background:rgba(14,165,233,.22); border-color:#0EA5E9; color:#0369A1; }
-  .day-docs { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-top:16px; padding:12px 14px; background:#F0F9FF; border:1px solid #BAE6FD; border-radius:var(--radius-sm); }
-  .day-docs .docs-h { width:100%; font-size:.75rem; font-weight:700; color:var(--primary-dark); letter-spacing:.02em; margin-bottom:2px; }
+  .act-pdf { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
   .doc-pill { display:inline-flex; align-items:center; gap:4px; font-size:.78rem; padding:4px 11px; border-radius:99px; background:white; border:1px solid rgba(14,165,233,.35); color:#0284C7; text-decoration:none; white-space:nowrap; transition:all .18s ease; }
   .doc-pill:hover { background:rgba(14,165,233,.14); border-color:#0EA5E9; color:#0369A1; }
 
@@ -277,8 +276,7 @@ const tripData = {
       weekday:    parts.slice(1).join(' '),
       theme:      d.theme,
       weather:    d.dayWeather,
-      activities: d.activities || [],
-      docs:       d.docs || []
+      activities: d.activities || []
     };
   })
 };
@@ -365,17 +363,17 @@ document.getElementById('genDate').textContent      = raw.generationDate || '';
         bHtml += '</div>';
         html += bHtml;
       }
+      if (a.pdf && a.pdf.length) {
+        var pHtml = '<div class="act-pdf">';
+        for (var pi = 0; pi < a.pdf.length; pi++) {
+          pHtml += '<a href="' + a.pdf[pi].url + '" target="_blank" rel="noopener" class="doc-pill">📄 ' + a.pdf[pi].name + '</a>';
+        }
+        pHtml += '</div>';
+        html += pHtml;
+      }
       html += '</div></div>';
       return html;
     }).join('');
-
-    var docsHtml = '';
-    if (day.docs && day.docs.length) {
-      docsHtml = '<div class="day-docs">'
-        + '<div class="docs-h">📎 凭证 · 点击预览 PDF</div>'
-        + day.docs.map(function(dc) { return '<a class="doc-pill" href="' + dc.url + '" target="_blank" rel="noopener">' + dc.name + '</a>'; }).join('')
-        + '</div>';
-    }
 
     return '<div class="day-card">'
       + '<div class="day-header" tabindex="0" role="button" aria-expanded="true"'
@@ -389,7 +387,7 @@ document.getElementById('genDate').textContent      = raw.generationDate || '';
       + '</div></div></div>'
       + '<div class="toggle-icon">▾</div>'
       + '</div>'
-      + '<div class="day-body"><div class="timeline">' + acts + '</div>' + docsHtml + '</div>'
+      + '<div class="day-body"><div class="timeline">' + acts + '</div></div>'
       + '</div>';
   }).join('');
 })();
