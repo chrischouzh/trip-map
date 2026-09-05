@@ -253,17 +253,15 @@ body { font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif; bac
 }
 .back-btn:hover { background:rgba(255,255,255,.16); color:#fff; border-color:rgba(255,255,255,.45); }
 
-/* 导航按钮 */
-.place-actions { display:flex; gap:8px; flex-wrap:wrap; }
-.nav-btn {
-  display:inline-flex; align-items:center; gap:6px;
-  padding:9px 16px; border-radius:20px; cursor:pointer;
-  background:rgba(0,150,255,.16); border:1px solid rgba(0,150,255,.45);
-  color:#6cb8ff; font-size:12.5px; font-family:inherit; font-weight:600;
-  text-decoration:none; transition:all .2s;
-  opacity:0; animation:slideIn .35s ease .15s forwards;
+/* 导航按钮（行程列表行内） */
+.nav-mini {
+  display:inline-flex; align-items:center; gap:3px;
+  margin-left:6px; padding:2px 8px; border-radius:12px;
+  background:rgba(0,150,255,.14); border:1px solid rgba(0,150,255,.4);
+  color:#6cb8ff; font-size:10.5px; cursor:pointer; text-decoration:none;
+  white-space:nowrap; vertical-align:middle; transition:all .18s;
 }
-.nav-btn:hover { background:rgba(0,150,255,.3); border-color:#4da3ff; color:#a9d4ff; }
+.nav-mini:hover { background:rgba(0,150,255,.28); border-color:#4da3ff; color:#a9d4ff; }
 
 /* tooltip */
 #tooltip {
@@ -597,6 +595,9 @@ function openPanel(dayNum) {
     const pdfLinks = item.pdf
       ? item.pdf.map(p => `<a class="doc-link" href="${p.url}" target="_blank" rel="noopener">${p.name}</a>`).join('')
       : '';
+    const navBtn = item.latlng
+      ? `<a class="nav-mini" href="javascript:;" onclick="navTo(${item.latlng[0]},${item.latlng[1]})">🧭 导航</a>`
+      : '';
     row.innerHTML = `
       <div class="time-col"><span class="time-text">${item.time}</span></div>
       <div class="dot-col">
@@ -604,7 +605,7 @@ function openPanel(dayNum) {
         ${!isLast || item.next ? `<div class="dot-line" style="background:${item.next ? T[item.next.type]?.color||'rgba(255,255,255,.12)' : 'rgba(255,255,255,.1)'}"></div>` : ''}
       </div>
       <div class="content-col">
-        <div class="content-text">${item.text}${tags.join('')}</div>
+        <div class="content-text">${item.text}${navBtn}${tags.join('')}</div>
         ${item.warn && item.warnText ? `<div class="warn-sub">⚠️ ${item.warnText}</div>` : ''}
         ${bookingLinks ? `<div class="booking-row">${bookingLinks}</div>` : ''}
         ${pdfLinks ? `<div class="pdf-row">${pdfLinks}</div>` : ''}
@@ -665,10 +666,7 @@ function openPlace(dayNum, wp) {
     html += '</div>';
   }
   if (!info) html += '<div class="place-desc" style="color:rgba(255,255,255,.45)">途经点 · 暂无更多详情</div>';
-  html += `<div class="place-actions">
-    <a class="nav-btn" href="javascript:;" onclick="navTo(${wp.latlng[0]},${wp.latlng[1]},${JSON.stringify(wp.name)})">🧭 导航</a>
-    <button class="back-btn" onclick="openPanel(${dayNum})">← 返回当日行程</button>
-  </div>`;
+  html += `<button class="back-btn" onclick="openPanel(${dayNum})">← 返回当日行程</button>`;
   body.innerHTML = html;
   body.scrollTop = 0;
 
@@ -679,10 +677,10 @@ window.openPlace = openPlace;
 
 // 导航：iPhone/iPad 用系统 Apple 地图，其他平台用 Google 地图
 window.navTo = function navTo(lat, lng, name) {
-  const nm = encodeURIComponent(name || '目的地');
   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const nm = name ? `&q=${encodeURIComponent(name)}` : '';
   const url = isIOS
-    ? `https://maps.apple.com/?daddr=${lat},${lng}&q=${nm}`
+    ? `https://maps.apple.com/?daddr=${lat},${lng}${nm}`
     : `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
   window.open(url, '_blank', 'noopener');
 };
