@@ -105,6 +105,8 @@
   .act-pdf { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
   .doc-pill { display:inline-flex; align-items:center; gap:4px; font-size:.78rem; padding:4px 11px; border-radius:99px; background:white; border:1px solid rgba(14,165,233,.35); color:#0284C7; text-decoration:none; white-space:nowrap; transition:all .18s ease; }
   .doc-pill:hover { background:rgba(14,165,233,.14); border-color:#0EA5E9; color:#0369A1; }
+  .nav-mini { display:inline-flex; align-items:center; gap:3px; margin-left:8px; padding:2px 9px; border-radius:99px; background:var(--primary-light); border:1px solid rgba(14,165,233,.4); color:var(--primary-dark); font-size:.72rem; font-weight:600; cursor:pointer; text-decoration:none; white-space:nowrap; vertical-align:middle; transition:all .18s ease; }
+  .nav-mini:hover { background:var(--primary); color:#fff; border-color:var(--primary); }
 
   /* Meal */
   .meal-card { display:flex; align-items:center; gap:14px; padding:12px 16px; background:linear-gradient(135deg,#FFF7ED,#FFFBEB); border:1px solid #FED7AA; border-radius:var(--radius-sm); margin-top:6px; }
@@ -331,9 +333,10 @@ document.getElementById('genDate').textContent      = raw.generationDate || '';
 
     var acts = (day.activities || []).map(function(a) {
       var isMeal = !!(a.meal) || /[午晚早]餐/.test(a.name);
+      var navBtn = a.latlng ? '<a class="nav-mini" href="javascript:;" onclick="navTo(' + a.latlng[0] + ',' + a.latlng[1] + ')">🧭 导航</a>' : '';
       var html = '<div class="tl-item' + (isMeal ? ' is-meal' : '') + '"><div class="tl-dot"></div>';
       html += '<div class="tl-time">' + a.time + (a.duration ? ' · ' + a.duration : '') + '</div>';
-      html += '<div class="tl-content"><h4>' + a.name + '</h4>';
+      html += '<div class="tl-content"><h4>' + a.name + navBtn + '</h4>';
       if (a.note) html += '<p>' + a.note + '</p>';
       if (a.img) html += '<img class="tl-photo" loading="lazy" src="' + a.img + '" alt="' + a.name + '" onclick="openLightbox(this.src,\'' + a.name.replace(/'/g,"\\'") + '\')" onerror="this.style.display=\'none\'">';
       if (a.meal) {
@@ -396,6 +399,14 @@ function toggleDay(el) {
   var card = el.closest('.day-card');
   card.classList.toggle('collapsed');
   el.setAttribute('aria-expanded', !card.classList.contains('collapsed'));
+}
+
+function navTo(lat, lng) {
+  var isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  var url = isIOS
+    ? 'https://maps.apple.com/?daddr=' + lat + ',' + lng
+    : 'https://www.google.com/maps/dir/?api=1&destination=' + lat + ',' + lng;
+  window.open(url, '_blank', 'noopener');
 }
 
 // ── Hotels ──
