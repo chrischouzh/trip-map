@@ -36,7 +36,7 @@ window.TRIP_DATA = {
       items: [
         { name:"国泰航空 CX233(9/29)+CX382(10/8) 机票 ×2（含税¥19,702）",            cost:19702 },
         { name:"Malpensa Express 机场快线 ×2",                  cost:208   },
-        { name:"意大利高铁 Frecciarossa ×3段 ×2人（估）",       cost:1680  },
+        { name:"意大利高铁 Italo ×2段 ×2人（已购 €159.60）",       cost:1680  },
         { name:"EuroCity 国际列车 米兰→卢塞恩 意段 ×2（估）",   cost:700   },
         { name:"Swiss Travel Pass 6日 10/3–10/8 ×2（约CHF459/人，覆盖全程）", cost:7800  },
         { name:"市内地铁/公交（意大利）（估）",                  cost:200   }
@@ -370,7 +370,7 @@ window.TRIP_DATA = {
       ],
       legs: [
         { from:"hotel_mi2", to:"centrale2", type:"metro",     desc:"地铁M1/M3 回中央站" },
-        { from:"centrale2", to:"smn",       type:"highspeed", desc:"Frecciarossa 高铁 · 约1h55 · 早班车提前到佛城" },
+        { from:"centrale2", to:"smn",       type:"highspeed", desc:"Italo 9919 · 08:40发 · 约1h55 · 10:35到" },
         { from:"smn",       to:"opera_bb",  type:"walk",      desc:"先到酒店放行李 · 约18分钟（提前联系房东确认能否早放；不行则SMN寄存）" },
         { from:"opera_bb",  to:"accademia", type:"walk",      desc:"步行约18分钟（看大卫）" },
         { from:"accademia", to:"mercato2",  type:"walk",      desc:"路过中央市场 · 步行约6分钟（看时间决定进不进）" },
@@ -425,7 +425,7 @@ window.TRIP_DATA = {
         { id:"altstadt_lz",  name:"老城广场",            latlng:[47.0503,8.3054], img:"images/luzern.jpg" }
       ],
       legs: [
-        { from:"smn5",      to:"centrale5",  type:"highspeed",     desc:"Frecciarossa 高铁 · 约1h55" },
+        { from:"smn5",      to:"centrale5",  type:"highspeed",     desc:"Italo 9904 · 07:25发 · 约1h55 · 09:20到" },
         { from:"centrale5", to:"lucerne_st", type:"international", desc:"EuroCity 国际列车 · 约3h40 · 过圣哥达隧道" },
         { from:"lucerne_st",to:"hotel_lz",   type:"walk",          desc:"步行约8分钟到酒店放行李" },
         { from:"hotel_lz",  to:"kapellbrucke",type:"walk",         desc:"步行约8分钟" },
@@ -561,9 +561,9 @@ window.TRIP_DATA = {
       dayWeather:{ icon:"sunny", high:23, low:15 },
       note:"务必提前订时段票、坐早班高铁提前到佛城留缓冲 | 学院美术馆周一闭馆，本程周三看《大卫》不受影响 | 中央市场顺路可选 | 🌅 米开朗基罗广场日落：D3 去托斯卡纳，改在 D2/D4 两晚挑晴天上（今晚可主排）",
       schedule:[
-        { time:"08:00", text:"早餐 · 退房 · 前往米兰中央站", next:{ type:"highspeed", desc:"Frecciarossa · 约1h55（坐早班车提前到佛城）" } },
-        { time:"09:30", text:"米兰中央站 → 佛罗伦萨 SMN", ticket:true, next:{ type:"walk", desc:"到酒店寄存行李（15:00后正式入住）" } },
-        { time:"11:30", text:"抵 SMN · 先到酒店放行李 · 午餐", next:{ type:"walk", desc:"步行约18分钟或打车去学院美术馆" } },
+        { time:"08:00", text:"早餐 · 退房 · 前往米兰中央站", next:{ type:"highspeed", desc:"Italo 9919 · 08:40发 · 10:35到" } },
+        { time:"08:40", text:"Italo 9919 米兰中央站 → 佛罗伦萨 SMN（10:35到）", ticket:true, next:{ type:"walk", desc:"到酒店寄存行李（15:00后正式入住）" } },
+        { time:"10:35", text:"抵 SMN · 先到酒店放行李 · 午餐", next:{ type:"walk", desc:"步行约18分钟或打车去学院美术馆" } },
         { time:"14:00", text:"学院美术馆 — 看《大卫》真迹", ticket:true, warn:true, warnText:"学院美术馆周一闭馆；今日周三开放，务必预约时段", next:{ type:"walk", desc:"步行约6分钟" } },
         { time:"16:00", text:"（路过·看时间）中央市场美食广场", next:{ type:"walk", desc:"步行约7分钟" } },
         { time:"17:00", text:"老城漫步 · 圣母百花大教堂广场", next:{ type:"walk", desc:"步行回酒店约12分钟" } },
@@ -571,8 +571,8 @@ window.TRIP_DATA = {
       ],
       activities:[
         { time:"08:00", name:"早餐 · 退房 · 前往米兰中央站", note:"D1已逛过米兰主要景点，今天坐早班高铁提前到佛城，给大卫留足缓冲" },
-        { time:"09:30", name:"Frecciarossa 高铁 → 佛罗伦萨 SMN", duration:"约1h55", cost:560, transport:"高铁", ticketTip:"建议出发前2-3个月购票，特惠票€29起 | 订早班车（约09:30）越早到越从容", booking:[{ name:"Trenitalia官网", url:"https://www.trenitalia.com/en.html" },{ name:"Rail Europe", url:"https://www.raileurope.com/" }] },
-        { time:"11:30", name:"抵 SMN · 先到酒店放行李", note:"倾向先到酒店放行李——⚠️公寓15:00才入住、无24h前台，请提前用Booking联系房东确认能否提前寄放；若不行就用SMN车站KiPoint寄存（约€6），轻装看大卫" },
+        { time:"08:40", name:"Italo 9919 → 佛罗伦萨 SMN（10:35到）", duration:"约1h55", cost:560, transport:"高铁", note:"已购票：Italo 9919，PRIMA 2车2-3座，FAST TRACK | 08:40发 10:35到，到佛城时间充裕", ticketTip:"已购（Italo 9919）", booking:[{ name:"Italo官网", url:"https://www.italotreno.com/" }] },
+        { time:"10:35", name:"抵 SMN · 先到酒店放行李", note:"倾向先到酒店放行李——⚠️公寓15:00才入住、无24h前台，请提前用Booking联系房东确认能否提前寄放；若不行就用SMN车站KiPoint寄存（约€6），轻装看大卫" },
         { time:"12:00", name:"午餐（SMN / 老城）", meal:{ name:"SMN或老城小馆", cuisine:"托斯卡纳菜", perPerson:30, recommended:"帕尼尼、牛肚包", location:"车站/老城" } },
         { time:"14:00", name:"学院美术馆 — 《大卫》真迹", img:"images/david.jpg", duration:"2小时", cost:240, transport:"步行18分钟", note:"学院美术馆周一闭馆（本程周三看不受影响）| 17:30停止入场 | 提前到给缓冲，订14:00左右时段最稳", ticketTip:"强烈建议提前4-6周购票！最易售罄 | 无票旺季排队2-3小时 | 选与到达时间匹配的时段", booking:[{ name:"学院美术馆官网", url:"https://www.galleriaaccademiafirenze.it/en/visit/" },{ name:"Klook", url:"https://www.klook.com/zh-CN/activity/2493-accademia-gallery-florence/" }] },
         { time:"16:00", name:"（路过·看时间）中央市场 Mercato Centrale", img:"images/mercato.jpg", cost:0, transport:"步行6分钟", note:"距大卫仅6分钟，有时间就进二楼美食广场逛吃/喝咖啡，没时间略过（D4午餐也会来）" },
@@ -635,12 +635,12 @@ window.TRIP_DATA = {
       theme:"跨国长途 · 佛罗伦萨→卢塞恩（今日入瑞士）",
       weekday:"周六",
       dayWeather:{ icon:"cloudy", high:18, low:10 },
-      note:"⚠️ 最长交通日：07:55 发 / 13:41 到卢塞恩（约5h46）| 公寓无24h前台，提前联系房东约早退还钥匙（+39 380 124 1597）| 拖箱打车去SMN（约8分）| ⚠️米兰换乘仅20分钟，建议出联程票防晚点 | 入瑞士无须过关（同申根）| STP 今日激活",
+      note:"⚠️ 最长交通日：07:25 发 / 13:41 到卢塞恩（约6h16）| 公寓无24h前台，提前联系房东约早退还钥匙（+39 380 124 1597）| 拖箱打车去SMN（约8分）| 米兰换乘约50分钟（09:20到 / 10:10发），较从容 | 入瑞士无须过关（同申根）| STP 今日激活",
       schedule:[
         { time:"06:50", text:"早餐从简 · 退房 · 打车前往 SMN 站", next:{ type:"walk", desc:"打车约8分钟（拖箱别走路）· 钥匙按房东指引归还" } },
         { time:"07:30", text:"抵 SMN 站 · 检票找站台（binario）", next:null },
-        { time:"07:55", text:"Frecciarossa 高铁 → 米兰中央站", ticket:true, next:{ type:"highspeed", desc:"FR · 约1h55 · 09:50 到米兰" } },
-        { time:"09:50", text:"米兰中央站换乘（仅20分钟，抓紧找站台）", warn:true, warnText:"换乘仅20分钟，建议出联程票以防晚点", next:{ type:"international", desc:"EuroCity 10:10 发 · 过圣哥达隧道" } },
+        { time:"07:25", text:"Italo 9904 → 米兰中央站（09:20到）", ticket:true, next:{ type:"highspeed", desc:"约1h55 · 09:20 到米兰" } },
+        { time:"09:20", text:"米兰中央站换乘（约50分钟，较从容）· 找站台", next:{ type:"international", desc:"EuroCity 10:10 发 · 过圣哥达隧道" } },
         { time:"10:10", text:"EuroCity 出发 米兰 → 卢塞恩", ticket:true, next:{ type:"international", desc:"约3h30 · 方向 Basel SBB · 到达 Pl.7" } },
         { time:"13:41", text:"抵卢塞恩站 Luzern", next:{ type:"walk", desc:"步行约8分钟到酒店" } },
         { time:"14:00", text:"Hotel Hofgarten 存行李（正式入住 15:00 起）", next:{ type:"walk", desc:"步行约8分钟到廊桥" } },
@@ -649,9 +649,9 @@ window.TRIP_DATA = {
       ],
       activities:[
         { time:"07:30", name:"早餐 · 退房", note:"公寓有厨房可自理早餐；到SMN站约18-20分钟，拖箱建议打车，今天最长交通日" },
-        { time:"08:30", name:"Frecciarossa 高铁 → 米兰中央站", duration:"约1h55", cost:560, transport:"高铁", ticketTip:"出发前2-3个月与Day2高铁一起订 | 特惠票€29起", booking:[{ name:"Trenitalia官网", url:"https://www.trenitalia.com/en.html" }] },
-        { time:"11:00", name:"EuroCity 国际列车 米兰 → 卢塞恩", duration:"约3h40", cost:560, transport:"国际列车", note:"过圣哥达隧道风景壮观", ticketTip:"STP持有者免费乘坐，但需在SBB提前预约座位", booking:[{ name:"SBB 瑞士铁路", url:"https://www.sbb.ch/en" },{ name:"Rail Europe", url:"https://www.raileurope.com/" }] },
-        { time:"14:40", name:"抵卢塞恩站 · 酒店入住", note:"Hotel Hofgarten，步行10分钟" },
+        { time:"07:25", name:"Italo 9904 → 米兰中央站（09:20到）", duration:"约1h55", cost:560, transport:"高铁", note:"已购票：Italo 9904，SMART 9车15-16座 | 07:25发 09:20到", ticketTip:"已购（Italo 9904）", booking:[{ name:"Italo官网", url:"https://www.italotreno.com/" }] },
+        { time:"10:10", name:"EuroCity 国际列车 米兰 → 卢塞恩", duration:"约3h31", cost:560, transport:"国际列车", note:"过圣哥达隧道风景壮观 | STP 覆盖瑞士段，米兰→意瑞边境段需另购票", ticketTip:"STP 需在 SBB 预约瑞士段座位（约€5/人）", booking:[{ name:"SBB 瑞士铁路", url:"https://www.sbb.ch/en" },{ name:"Rail Europe", url:"https://www.raileurope.com/" }] },
+        { time:"13:41", name:"抵卢塞恩站 · 酒店入住", note:"Hotel Hofgarten，步行10分钟" },
         { time:"15:30", name:"卡佩尔廊桥 · 八角水塔 · 老城广场漫步", img:"images/lucerne.jpg", duration:"2小时", cost:0, note:"1333年建欧洲最古老有顶木桥" },
         { time:"19:00", name:"老城晚餐", meal:{ name:"卢塞恩老城餐厅", cuisine:"瑞士菜", perPerson:90, recommended:"奶酪火锅 Fondue、Rösti", location:"老城区" } }
       ]
