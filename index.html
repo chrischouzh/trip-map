@@ -21,7 +21,7 @@ body { font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif; bac
 #header h1 { color:#fff; font-size:20px; font-weight:600; letter-spacing:2px; text-shadow:0 2px 12px rgba(0,0,0,.6); }
 #header p  { color:rgba(255,255,255,.55); font-size:13px; margin-top:3px; letter-spacing:1px; }
 
-/* ── 顶部按钮（路书 / 购票链接） ── */
+/* ── 顶部按钮（路书入口） ── */
 .top-bar { position:fixed; top:14px; right:14px; z-index:1200; display:flex; gap:8px; align-items:center; }
 .top-btn { background:rgba(20,26,38,.82); color:#fff; border:1px solid rgba(255,255,255,.18); border-radius:10px; padding:8px 12px; font-size:13px; cursor:pointer; backdrop-filter:blur(8px); text-decoration:none; line-height:1.4; font-family:inherit; transition:all .2s; }
 .top-btn:hover { background:rgba(255,255,255,.14); border-color:rgba(255,255,255,.4); }
@@ -144,6 +144,23 @@ body { font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif; bac
   line-height:1.65; border-left:2px solid rgba(255,255,255,.12);
   opacity:0; animation:slideIn .35s ease forwards;
 }
+
+/* ── 凭证 PDF ── */
+.docs-box {
+  background:rgba(255,255,255,.04); border-radius:10px;
+  padding:12px 14px; margin-top:12px;
+  border-left:2px solid rgba(255,200,0,.5);
+  opacity:0; animation:slideIn .35s ease forwards;
+}
+.docs-h { font-size:11px; letter-spacing:1px; color:rgba(255,200,0,.85); margin-bottom:8px; }
+.doc-link {
+  display:inline-flex; align-items:center; gap:4px;
+  font-size:12px; padding:5px 10px; margin:2px 6px 2px 0; border-radius:8px;
+  background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.14);
+  color:rgba(255,255,255,.82); text-decoration:none; cursor:pointer;
+  transition:all .18s ease;
+}
+.doc-link:hover { background:rgba(255,200,0,.18); border-color:rgba(255,200,0,.6); color:#ffe566; }
 
 /* ── 图例 ── */
 #legend {
@@ -335,24 +352,6 @@ body { font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif; bac
 
 <div class="top-bar">
   <a href="路书.html" target="_blank" rel="noopener" class="top-btn">📖 路书</a>
-  <button id="ticket-btn" class="top-btn" onclick="document.getElementById('ticket-panel').classList.toggle('open')">🎫 购票链接</button>
-</div>
-<div id="ticket-panel"
-  style="position:fixed;top:56px;right:14px;z-index:1200;width:330px;max-width:88vw;max-height:78vh;overflow:auto;background:rgba(18,24,36,.94);color:#e8edf4;border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:14px 16px;backdrop-filter:blur(10px);box-shadow:0 12px 40px rgba(0,0,0,.45);display:none">
-  <style>#ticket-panel.open{display:block!important}#ticket-panel a{color:#7cc4ff;text-decoration:none}#ticket-panel a:hover{text-decoration:underline}#ticket-panel .grp{margin:11px 0 3px;font-size:11px;letter-spacing:.04em;color:#9fb0c4}#ticket-panel .row{font-size:12.5px;line-height:1.55;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.06)}</style>
-  <div style="font-size:14px;font-weight:600">🎫 出发前购票 · 官网链接</div>
-  <div style="font-size:11px;color:#9fb0c4;margin:2px 0 4px">离出发约 8 周，🔴 项尽快订；也可点每日面板里各景点的购票链接</div>
-  <div class="grp">🔴 立刻订（时段票 / 易售罄）</div>
-  <div class="row">学院美术馆《大卫》· D2 · <a href="https://www.galleriaaccademiafirenze.it/en/visit/" target="_blank" rel="noopener">官网</a> · <a href="https://www.klook.com/zh-CN/activity/2493-accademia-gallery-florence/" target="_blank" rel="noopener">Klook</a></div>
-  <div class="row">乌菲兹美术馆 · D4 · <a href="https://www.uffizi.it/en/the-uffizi/tickets" target="_blank" rel="noopener">官网</a> · <a href="https://www.klook.com/zh-CN/activity/2492-uffizi-gallery-florence/" target="_blank" rel="noopener">Klook</a></div>
-  <div class="row">米兰大教堂 + 屋顶 · D1 · <a href="https://ticket.duomomilano.it/en/" target="_blank" rel="noopener">官网</a></div>
-  <div class="row">托斯卡纳瓦尔多尔恰一日团 · D3 · <a href="https://www.getyourguide.com/florence-l32/val-d-orcia-cheese-and-wine-tasting-tour-t62160/" target="_blank" rel="noopener">GetYourGuide</a> · <a href="https://www.viator.com/tours/Florence/Val-dOrcia-tour-Montalcino-Pienza-and-Montepulciano/d519-29255P69" target="_blank" rel="noopener">Viator</a></div>
-  <div class="grp">🟠 早订更省</div>
-  <div class="row">意铁高铁 Frecciarossa · D2 / D5 · <a href="https://www.trenitalia.com/en.html" target="_blank" rel="noopener">Trenitalia</a></div>
-  <div class="row">Swiss Travel Pass 6日（10/3 激活）· <a href="https://www.sbb.ch/en/travelcards-and-tickets/tickets-for-switzerland/swiss-travel-pass.html" target="_blank" rel="noopener">SBB 官网</a></div>
-  <div class="row">GoldenPass 座位预约 · D7 · <a href="https://www.sbb.ch/en" target="_blank" rel="noopener">SBB / GoldenPass</a></div>
-  <div class="grp">🟢 现场买即可（STP 折扣）</div>
-  <div class="row" style="border:none">皮拉图斯齿轨(D6) · First 缆车+飞索(D8) · 冰川公园/狮子纪念碑(D6) · 各湖游船</div>
 </div>
 
 <div id="panel">
@@ -620,6 +619,15 @@ function openPanel(dayNum) {
     nb.style.animationDelay = `${d.schedule.length * 0.065 + 0.1}s`;
     nb.textContent = d.note;
     body.appendChild(nb);
+  }
+
+  if (d.docs && d.docs.length) {
+    const db = document.createElement('div');
+    db.className = 'docs-box';
+    db.style.animationDelay = `${d.schedule.length * 0.065 + 0.14}s`;
+    db.innerHTML = '<div class="docs-h">📎 凭证 · 点击预览</div>' +
+      d.docs.map(doc => `<a class="doc-link" href="${doc.url}" target="_blank" rel="noopener">${doc.name}</a>`).join('');
+    body.appendChild(db);
   }
 
   document.getElementById('panel').classList.add('open');

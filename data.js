@@ -531,6 +531,7 @@ window.TRIP_DATA = {
       weekday:"周二",
       dayWeather:{ icon:"partlyCloudy", high:22, low:14 },
       note:"⚠️ 长途红眼刚落地，别排太满；地铁单程€2.2",
+      docs:[ { name:"🎫 米兰大教堂 + 屋顶门票", url:"pdfs/ticket-duomo-milano.pdf" }, { name:"🏨 Hotel Charly 酒店确认单", url:"pdfs/hotel-milan.pdf" }, { name:"🛂 过关行程单（英文）", url:"pdfs/border-itinerary.pdf" } ],
       schedule:[
         { time:"08:00", text:"抵达 MXP T1 · 入境取行李", next:{ type:"train", desc:"Malpensa Express · 约52分 · €13/人" } },
         { time:"09:10", text:"乘 Malpensa Express → 米兰中央站", next:{ type:"walk", desc:"步行约5分钟" } },
@@ -560,6 +561,7 @@ window.TRIP_DATA = {
       weekday:"周三",
       dayWeather:{ icon:"sunny", high:23, low:15 },
       note:"务必提前订时段票、坐早班高铁提前到佛城留缓冲 | 学院美术馆周一闭馆，本程周三看《大卫》不受影响 | 中央市场顺路可选 | 🌅 米开朗基罗广场日落：D3 去托斯卡纳，改在 D2/D4 两晚挑晴天上（今晚可主排）",
+      docs:[ { name:"🚄 Italo 车票（08:40 米兰→佛罗伦萨）", url:"pdfs/train-0930-milan-florence.pdf" }, { name:"🎫 学院美术馆《大卫》门票", url:"pdfs/ticket-accademia.pdf" }, { name:"🏨 佛罗伦萨酒店确认单", url:"pdfs/hotel-florence.pdf" } ],
       schedule:[
         { time:"08:00", text:"早餐 · 退房 · 前往米兰中央站", next:{ type:"highspeed", desc:"Italo 9919 · 08:40发 · 10:35到" } },
         { time:"08:40", text:"Italo 9919 米兰中央站 → 佛罗伦萨 SMN（10:35到）", ticket:true, next:{ type:"walk", desc:"到酒店寄存行李（15:00后正式入住）" } },
@@ -636,6 +638,7 @@ window.TRIP_DATA = {
       weekday:"周六",
       dayWeather:{ icon:"cloudy", high:18, low:10 },
       note:"⚠️ 最长交通日：07:25 发 / 13:41 到卢塞恩（约6h16）| 公寓无24h前台，提前联系房东约早退还钥匙（+39 380 124 1597）| 拖箱打车去SMN（约8分）| 米兰换乘约50分钟（09:20到 / 10:10发），较从容 | 入瑞士无须过关（同申根）| STP 今日激活",
+      docs:[ { name:"🚄 Italo 车票（07:25 佛罗伦萨→米兰）", url:"pdfs/train-1003-florence-milan.pdf" }, { name:"🎫 Swiss Travel Pass 通票", url:"pdfs/swiss-travel-pass.pdf" }, { name:"🎫 Swiss 车票二维码", url:"pdfs/swiss-pass-qr.pdf" }, { name:"📄 Swiss 通行证说明", url:"pdfs/swiss-pass-guide.pdf" }, { name:"🏨 卢塞恩酒店确认单", url:"pdfs/hotel-lucerne.pdf" } ],
       schedule:[
         { time:"06:50", text:"早餐从简 · 退房 · 打车前往 SMN 站", next:{ type:"walk", desc:"打车约8分钟（拖箱别走路）· 钥匙按房东指引归还" } },
         { time:"07:10", text:"抵 SMN 站 · 检票找站台（binario）", next:null },
@@ -691,6 +694,7 @@ window.TRIP_DATA = {
       weekday:"周一",
       dayWeather:{ icon:"partlyCloudy", high:15, low:7 },
       note:"⚠️ GoldenPass 建议提前订座 | 住 Essential by Dorint（西站旁·已订）| ⚠️金色山口列车到东站(Ost)，酒店在西站(West)，两站相隔一站约3分钟(STP免费) | 下午两湖漫步",
+      docs:[ { name:"🏨 因特拉肯酒店确认单", url:"pdfs/hotel-interlaken.pdf" } ],
       schedule:[
         { time:"08:30", text:"含早早餐 · 退房", next:{ type:"scenic_train", desc:"GoldenPass 金色山口观景列车 · 约1h50" } },
         { time:"11:00", text:"GoldenPass 卢塞恩 → 因特拉肯东站", ticket:true, next:{ type:"walk", desc:"到东站后坐1站至西站约3分钟" } },
@@ -751,6 +755,7 @@ window.TRIP_DATA = {
       weekday:"周三",
       dayWeather:{ icon:"sunny", high:18, low:10 },
       note:"⚠️ 今天周三商店正常营业，可安排购物 | 苏黎世老城傍晚氛围佳",
+      docs:[ { name:"🏨 苏黎世酒店确认单", url:"pdfs/hotel-zurich.pdf" } ],
       schedule:[
         { time:"07:30", text:"早餐 · 退房寄存行李" },
         { time:"08:15", text:"布里恩茨湖游船 东站出发 → 布里恩茨（STP免费）", next:{ type:"boat", desc:"约1小时单程 · 湖水翡翠绿" } },
