@@ -102,6 +102,22 @@ body { font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif; bac
 .tag-warn   { background:rgba(255,100,0,.18); color:#ff8040; }
 .warn-sub   { font-size:11px; color:rgba(255,160,60,.8); margin-top:3px; }
 
+/* ── 订票链接 ── */
+.booking-row {
+  display:flex; flex-wrap:wrap; gap:6px; margin-top:6px;
+}
+.booking-link {
+  display:inline-flex; align-items:center; gap:4px;
+  font-size:11px; padding:3px 9px; border-radius:12px;
+  background:rgba(255,200,0,.1); border:1px solid rgba(255,200,0,.3);
+  color:#ffc800; text-decoration:none; cursor:pointer;
+  transition:all .18s ease; white-space:nowrap;
+}
+.booking-link:hover {
+  background:rgba(255,200,0,.22); border-color:rgba(255,200,0,.7);
+  color:#ffe566; transform:translateY(-1px);
+}
+
 /* ── 交通方式指示条 ── */
 .transport-row {
   display:flex; align-items:center; gap:10px;
@@ -186,6 +202,40 @@ body { font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif; bac
   white-space:nowrap; font-size:10px; color:rgba(255,255,255,.85);
   text-shadow:0 1px 4px rgba(0,0,0,.9); pointer-events:none; font-weight:500;
 }
+.wp-marker.has-detail { box-shadow:0 0 0 2.5px rgba(255,255,255,.45),0 2px 8px rgba(0,0,0,.5); }
+.wp-cam {
+  position:absolute; top:-9px; right:-11px; font-size:10px; z-index:3;
+  pointer-events:none; filter:drop-shadow(0 1px 2px rgba(0,0,0,.85));
+}
+
+/* 景点详情（右侧面板内） */
+.place-photo {
+  display:block; width:100%; height:200px; object-fit:cover;
+  border-radius:12px; margin:2px 0 16px; background:#1a1a26;
+  box-shadow:0 6px 20px rgba(0,0,0,.4);
+  opacity:0; animation:slideIn .35s ease forwards;
+}
+.place-desc {
+  font-size:13.5px; color:rgba(255,255,255,.8); line-height:1.7;
+  margin-bottom:16px; opacity:0; animation:slideIn .35s ease .05s forwards;
+}
+.place-tips {
+  background:rgba(255,150,60,.07); border:1px solid rgba(255,150,60,.2);
+  border-radius:12px; padding:14px 16px; margin-bottom:18px;
+  opacity:0; animation:slideIn .35s ease .1s forwards;
+}
+.place-tips-h { font-size:12.5px; font-weight:700; color:#ffb060; letter-spacing:.5px; margin-bottom:10px; }
+.place-tip { display:flex; gap:8px; font-size:12.5px; color:rgba(255,255,255,.62); line-height:1.6; margin-bottom:7px; }
+.place-tip:last-child { margin-bottom:0; }
+.place-tip .pt-dot { color:#ffb060; font-weight:700; flex-shrink:0; }
+.back-btn {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:9px 16px; border-radius:20px; cursor:pointer;
+  background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.2);
+  color:rgba(255,255,255,.8); font-size:12.5px; font-family:inherit;
+  transition:all .2s; opacity:0; animation:slideIn .35s ease .15s forwards;
+}
+.back-btn:hover { background:rgba(255,255,255,.16); color:#fff; border-color:rgba(255,255,255,.45); }
 
 /* tooltip */
 #tooltip {
@@ -275,7 +325,27 @@ body { font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif; bac
 
 <div id="header">
   <h1>🇮🇹 意大利 · 瑞士 🇨🇭 &nbsp;10日行程</h1>
-  <p>邹豪 &amp; 宁岳莎 &nbsp;·&nbsp; 2026 / 09 / 26 – 10 / 05 &nbsp;·&nbsp; 点击城市或下方日期查看路线详情</p>
+  <p>邹豪 &amp; 宁岳莎 &nbsp;·&nbsp; 2026 / 09 / 29 – 10 / 08 &nbsp;·&nbsp; 点击城市或下方日期查看路线详情</p>
+</div>
+
+<button id="ticket-btn" onclick="document.getElementById('ticket-panel').classList.toggle('open')"
+  style="position:fixed;top:14px;right:14px;z-index:1200;background:rgba(20,26,38,.82);color:#fff;border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:8px 12px;font-size:13px;cursor:pointer;backdrop-filter:blur(8px)">🎫 购票链接</button>
+<div id="ticket-panel"
+  style="position:fixed;top:56px;right:14px;z-index:1200;width:330px;max-width:88vw;max-height:78vh;overflow:auto;background:rgba(18,24,36,.94);color:#e8edf4;border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:14px 16px;backdrop-filter:blur(10px);box-shadow:0 12px 40px rgba(0,0,0,.45);display:none">
+  <style>#ticket-panel.open{display:block!important}#ticket-panel a{color:#7cc4ff;text-decoration:none}#ticket-panel a:hover{text-decoration:underline}#ticket-panel .grp{margin:11px 0 3px;font-size:11px;letter-spacing:.04em;color:#9fb0c4}#ticket-panel .row{font-size:12.5px;line-height:1.55;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.06)}</style>
+  <div style="font-size:14px;font-weight:600">🎫 出发前购票 · 官网链接</div>
+  <div style="font-size:11px;color:#9fb0c4;margin:2px 0 4px">离出发约 8 周，🔴 项尽快订；也可点每日面板里各景点的购票链接</div>
+  <div class="grp">🔴 立刻订（时段票 / 易售罄）</div>
+  <div class="row">学院美术馆《大卫》· D2 · <a href="https://www.galleriaaccademiafirenze.it/en/visit/" target="_blank" rel="noopener">官网</a> · <a href="https://www.klook.com/zh-CN/activity/2493-accademia-gallery-florence/" target="_blank" rel="noopener">Klook</a></div>
+  <div class="row">乌菲兹美术馆 · D4 · <a href="https://www.uffizi.it/en/the-uffizi/tickets" target="_blank" rel="noopener">官网</a> · <a href="https://www.klook.com/zh-CN/activity/2492-uffizi-gallery-florence/" target="_blank" rel="noopener">Klook</a></div>
+  <div class="row">米兰大教堂 + 屋顶 · D1 · <a href="https://ticket.duomomilano.it/en/" target="_blank" rel="noopener">官网</a></div>
+  <div class="row">托斯卡纳瓦尔多尔恰一日团 · D3 · <a href="https://www.getyourguide.com/florence-l32/val-d-orcia-cheese-and-wine-tasting-tour-t62160/" target="_blank" rel="noopener">GetYourGuide</a> · <a href="https://www.viator.com/tours/Florence/Val-dOrcia-tour-Montalcino-Pienza-and-Montepulciano/d519-29255P69" target="_blank" rel="noopener">Viator</a></div>
+  <div class="grp">🟠 早订更省</div>
+  <div class="row">意铁高铁 Frecciarossa · D2 / D5 · <a href="https://www.trenitalia.com/en.html" target="_blank" rel="noopener">Trenitalia</a></div>
+  <div class="row">Swiss Travel Pass 6日（10/3 激活）· <a href="https://www.sbb.ch/en/travelcards-and-tickets/tickets-for-switzerland/swiss-travel-pass.html" target="_blank" rel="noopener">SBB 官网</a></div>
+  <div class="row">GoldenPass 座位预约 · D7 · <a href="https://www.sbb.ch/en" target="_blank" rel="noopener">SBB / GoldenPass</a></div>
+  <div class="grp">🟢 现场买即可（STP 折扣）</div>
+  <div class="row" style="border:none">皮拉图斯齿轨(D6) · First 缆车+飞索(D8) · 冰川公园/狮子纪念碑(D6) · 各湖游船</div>
 </div>
 
 <div id="panel">
@@ -331,7 +401,7 @@ const T = {
 // ══════════════════════════════════════════════════
 //  Data from data.js (works both locally and on server)
 // ══════════════════════════════════════════════════
-const { cities, dayRoutes, days } = window.TRIP_DATA;
+const { cities, dayRoutes, days, placeInfo } = window.TRIP_DATA;
 
 function initMap() {
 
@@ -456,11 +526,13 @@ function drawDayRoute(dayNum) {
     const color = city ? city.color : '#60a5fa';
     const el = document.createElement('div');
     el.style.position = 'relative';
-    el.innerHTML = `<div class="wp-marker" style="background:${color}cc;border-color:${color}">${i+1}</div><div class="wp-label">${wp.name}</div>`;
+    const badge = wp.img ? '<div class="wp-cam">📷</div>' : (wp.info ? '<div class="wp-cam wp-locate">📍</div>' : '');
+    el.innerHTML = `<div class="wp-marker${(wp.img || wp.info) ? ' has-detail' : ''}" style="background:${color}cc;border-color:${color}">${i+1}</div>${badge}<div class="wp-label">${wp.name}</div>`;
     const m = L.marker(wp.latlng, {
       icon: L.divIcon({ className:'', html:el.outerHTML, iconSize:[22,22], iconAnchor:[11,11] }),
       zIndexOffset:200,
     }).addTo(map);
+    m.on('click', e => { L.DomEvent.stopPropagation(e); openPlace(dayNum, wp); });
     dayLayers.push(m);
   });
 
@@ -507,6 +579,9 @@ function openPanel(dayNum) {
     const tags = [];
     if (item.ticket) tags.push('<span class="tag tag-ticket">🎫 须订票</span>');
     if (item.warn && item.warnText) tags.push('<span class="tag tag-warn">⚠️</span>');
+    const bookingLinks = item.booking
+      ? item.booking.map(b => `<a class="booking-link" href="${b.url}" target="_blank" rel="noopener">🔗 ${b.name}</a>`).join('')
+      : '';
     row.innerHTML = `
       <div class="time-col"><span class="time-text">${item.time}</span></div>
       <div class="dot-col">
@@ -516,6 +591,7 @@ function openPanel(dayNum) {
       <div class="content-col">
         <div class="content-text">${item.text}${tags.join('')}</div>
         ${item.warn && item.warnText ? `<div class="warn-sub">⚠️ ${item.warnText}</div>` : ''}
+        ${bookingLinks ? `<div class="booking-row">${bookingLinks}</div>` : ''}
       </div>`;
     body.appendChild(row);
 
@@ -549,6 +625,38 @@ function openPanel(dayNum) {
   document.getElementById('transport-legend').classList.add('visible');
   drawDayRoute(dayNum);
 }
+window.openPanel = openPanel;
+
+// 点击景点 → 右侧面板展示景点详情（描述 + 注意事项）
+function openPlace(dayNum, wp) {
+  const d = days.find(x => x.day === dayNum);
+  const city = d ? cities.find(c => c.id === d.city) : null;
+  const color = city ? city.color : '#60a5fa';
+  const key = wp.info ? wp.info : (wp.img ? wp.img.replace(/^.*\//, '').replace(/\.[a-z]+$/i, '') : null);
+  const info = (key && placeInfo) ? placeInfo[key] : null;
+
+  document.getElementById('panel-day-label').innerHTML = `<span style="color:${color}">📍 景点详情 · Day ${dayNum}</span>`;
+  document.getElementById('panel-city').textContent = wp.name;
+  document.getElementById('panel-date').textContent = d ? `${d.date}　${d.title}` : '';
+
+  const body = document.getElementById('panel-body');
+  let html = '';
+  if (wp.img) html += `<img class="place-photo" src="${wp.img}" alt="${wp.name}" onerror="this.style.display='none'">`;
+  if (info && info.desc) html += `<div class="place-desc">${info.desc}</div>`;
+  if (info && info.tips && info.tips.length) {
+    html += '<div class="place-tips"><div class="place-tips-h">⚠️ 注意事项</div>';
+    info.tips.forEach(t => { html += `<div class="place-tip"><span class="pt-dot">›</span><span>${t}</span></div>`; });
+    html += '</div>';
+  }
+  if (!info) html += '<div class="place-desc" style="color:rgba(255,255,255,.45)">途经点 · 暂无更多详情</div>';
+  html += `<button class="back-btn" onclick="openPanel(${dayNum})">← 返回当日行程</button>`;
+  body.innerHTML = html;
+  body.scrollTop = 0;
+
+  document.getElementById('panel').classList.add('open');
+  document.getElementById('transport-legend').classList.add('visible');
+}
+window.openPlace = openPlace;
 
 window.closePanel = function closePanel() {
   document.getElementById('panel').classList.remove('open');
@@ -576,7 +684,7 @@ function moveTip(e) {
   tooltip.style.top  = y + 'px';
 }
 document.addEventListener('mousemove', e => { if (tooltip.classList.contains('show')) moveTip(e); });
-map.on('click', () => { if (document.getElementById('panel').classList.contains('open')) closePanel(); });
+// 点击地图空白处不再自动收起面板/缩放（避免误操作）；关闭请用面板上的 ✕ 或 ESC
 
 // 键盘
 document.addEventListener('keydown', e => {
