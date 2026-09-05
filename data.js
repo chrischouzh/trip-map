@@ -587,7 +587,7 @@ window.TRIP_DATA = {
       dayWeather:{ icon:"sunny", high:24, low:15 },
       note:"⚠️ 今日跟团游托斯卡纳乡村，早出晚归（约7:15出发 / 19:30–20:00回）| 上车点 Piazzale Montelungo（SMN站旁，从酒店步行约20分或打车）| 穿舒适鞋、备防晒 | 佛罗伦萨登顶穹顶/圣十字本日取消，老桥&米开朗基罗广场日落已并入 D2/D4 | 🍷含 Brunello 品酒午餐，回程可小睡",
       schedule:[
-        { time:"07:15", text:"Piazzale Montelungo 集合上车", latlng:[43.7772,11.2470], ticket:true, warnText:"提前在 GetYourGuide/Viator/Klook 订好整日团", next:{ type:"bus", desc:"旅游大巴南下 · 约2小时" } },
+        { time:"07:15", text:"Piazzale Montelungo 集合上车", latlng:[43.7772,11.2470], next:{ type:"bus", desc:"旅游大巴南下 · 约2小时" } },
         { time:"09:30", text:"蒙塔奇诺 Montalcino · Brunello 酒乡山城", latlng:[43.0576,11.4894], next:{ type:"bus", desc:"车程约15分" } },
         { time:"11:00", text:"Brunello 圣殿 · Brunello 品酒 + 美食午餐", latlng:[43.0560,11.4890], next:{ type:"bus", desc:"车程约20–40分 · 沿途柏树山丘" } },
         { time:"13:00", text:"圣安蒂莫修道院 Sant'Antimo · 罗马式古修道院", latlng:[43.0131,11.5330], next:{ type:"bus", desc:"车程约40分" } },
@@ -596,9 +596,9 @@ window.TRIP_DATA = {
         { time:"晚上",  text:"老城简单晚餐（白天已吃丰盛品酒午餐）", latlng:[43.7671,11.2651] }
       ],
       activities:[
-        { time:"07:15", name:"Piazzale Montelungo 集合 · 跟团出发", latlng:[43.7772,11.247], note:"上车点在 SMN 火车站旁 Piazzale Montelungo，从圣十字区酒店步行约20分或打车几分钟；建议提前10分钟到 | 全程约12小时，穿舒适鞋", transport:"旅游大巴" },
+        { time:"07:15", name:"Piazzale Montelungo 集合 · 跟团出发", latlng:[43.7772,11.247], note:"上车点在 SMN 火车站旁 Piazzale Montelungo，从圣十字区酒店步行约20分或打车几分钟；建议提前10分钟到 | 全程约12小时，穿舒适鞋 | 已在小红书预订，微信群联系确认集合/车牌", transport:"旅游大巴" },
         { time:"09:30", name:"蒙塔奇诺 Montalcino", latlng:[43.0576,11.4894], duration:"约1小时", cost:0, note:"Brunello di Montalcino 名酒发源地，中世纪山城 + 要塞，可俯瞰瓦尔多尔恰葡萄园与柏树山丘" },
-        { time:"11:00", name:"Brunello 圣殿 · 品酒午餐", latlng:[43.056,11.489], duration:"约1.25小时", cost:1640, note:"含托斯卡纳美食午餐 + 3款 Brunello 品鉴（团费已含，约¥820/人，两人合计约¥1640）| 空腹品酒易醉，配餐慢饮", ticketTip:"跟团费含此项；出发前订整日团即可，24小时前多可免费取消", booking:[{ name:"GetYourGuide", url:"https://www.getyourguide.com/florence-l32/val-d-orcia-cheese-and-wine-tasting-tour-t62160/" },{ name:"Viator", url:"https://www.viator.com/tours/Florence/Val-dOrcia-tour-Montalcino-Pienza-and-Montepulciano/d519-29255P69" }] },
+        { time:"11:00", name:"Brunello 圣殿 · 品酒午餐", latlng:[43.056,11.489], duration:"约1.25小时", cost:1640, note:"含托斯卡纳美食午餐 + 3款 Brunello 品鉴（团费已含，约¥820/人，两人合计约¥1640）| 空腹品酒易醉，配餐慢饮", ticketTip:"团费已含此项；整日团已在小红书预订，微信群联系确认集合/车牌" },
         { time:"13:00", name:"圣安蒂莫修道院 Sant'Antimo", latlng:[43.0131,11.533], duration:"约1.75小时", cost:0, note:"橄榄林中的12世纪罗马式修道院，静谧空灵；周边田园风光是瓦尔多尔恰的经典画面" },
         { time:"14:30", name:"皮恩扎 Pienza", latlng:[43.0785,11.6786], duration:"约1.75小时", cost:0, note:"UNESCO 世界遗产「理想之城」，文艺复兴规划典范；城边观景步道俯瞰瓦尔多尔恰柏树山丘；名产佩科里诺羊奶酪可尝可买" },
         { time:"19:45", name:"返回佛罗伦萨", latlng:[43.7772,11.247], note:"约19:30–20:00 抵 Piazzale Montelungo 附近，步行/打车回酒店", transport:"旅游大巴" },
@@ -733,9 +733,9 @@ window.TRIP_DATA = {
       activities:[
         { time:"07:30", name:"早餐 · 行李留酒店", latlng:[46.6912,7.8691], note:"轻装出发，行李放 Essential by Dorint，今晚仍住这里，回来直接进房" },
         { time:"08:00", name:"因特拉肯东站 → 格林德瓦站", latlng:[46.6241,8.0341], duration:"约35分钟", cost:0, transport:"火车", note:"STP免费 | 艾格北壁一路出镜", ticketTip:"STP直接上车 | 建议8:00班次，9:00前到缆车站" },
-        { time:"08:45", name:"格林德瓦 First 缆车 → First 2168m", latlng:[46.6556,8.0461], img:"images/grindelwald.jpg", duration:"约25分钟", cost:660, transport:"缆车", note:"STP享50%折扣，约CHF40/人 | 分4节缆车上山", ticketTip:"缆车站现场购票（STP折后约CHF40/人）| 9:00前到站排队最短", booking:[{ name:"Jungfrau官网 First", url:"https://www.jungfrau.ch/en-gb/grindelwald-first/" }] },
+        { time:"08:45", name:"格林德瓦 First 缆车 → First 2168m", latlng:[46.6556,8.0461], img:"images/grindelwald.jpg", duration:"约25分钟", cost:660, transport:"缆车", note:"STP享50%折扣，约CHF40/人 | 分4节缆车上山", ticketTip:"早上现场排队购票（无线上票，STP折后约CHF40/人）| 建议9:00前到站排队最短" },
         { time:"09:15", name:"First Cliff Walk 悬崖步道（含玻璃平台）", latlng:[46.6556,8.0461], duration:"30分钟", cost:0, note:"2168m悬崖外挑玻璃走道，俯瞰格林德瓦山谷和少女峰三姐妹 | 含在缆车票内" },
-        { time:"10:00", name:"First Flyer 高空飞索（强烈推荐！）", latlng:[46.6556,8.0461], duration:"20分钟", cost:480, note:"800m俯冲飞索，时速约80km | 旺季现场排队约30-45分钟", ticketTip:"现场购票（约CHF29/人）| 9:30前玩，排队最短", booking:[{ name:"现场购票/官网", url:"https://www.jungfrau.ch/en-gb/grindelwald-first/first-flyer/" }] },
+        { time:"10:00", name:"First Flyer 高空飞索（强烈推荐！）", latlng:[46.6556,8.0461], duration:"20分钟", cost:480, note:"800m俯冲飞索，时速约80km | 旺季现场排队约30-45分钟", ticketTip:"现场排队购票（约CHF29/人）| 9:30前玩，排队最短" },
         { time:"11:00", name:"Bachalpsee 高山湖徒步", latlng:[46.6648,8.0622], img:"images/bachalpsee.jpg", duration:"约1.5小时往返", cost:0, note:"平坦山路约45分钟单程，倒映少女峰三姐妹 | 格林德瓦最美徒步线 | 运动鞋即可" },
         { time:"12:30", name:"First山顶午餐", latlng:[46.6556,8.0461], meal:{ name:"Bergrestaurant First", cuisine:"瑞士菜", perPerson:70, recommended:"自带三明治更省钱，或山顶汤+面包（约CHF20）", location:"First缆车站旁" } },
         { time:"14:30", name:"缆车下山 → 格林德瓦小镇漫步", latlng:[46.6241,8.0341], duration:"45分钟", cost:0, note:"艾格北壁近在眼前，绝佳拍照点 | Coop超市可买奶酪纪念品" },
