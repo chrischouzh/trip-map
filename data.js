@@ -532,7 +532,7 @@ window.TRIP_DATA = {
       dayWeather:{ icon:"partlyCloudy", high:22, low:14 },
       note:"⚠️ 长途红眼刚落地，别排太满；地铁单程€2.2",
       schedule:[
-        { time:"08:00", text:"抵达 MXP T1 · 入境取行李", pdf:[{ name:"🛂 过关行程单", url:"pdfs/border-itinerary.pdf" }], next:{ type:"train", desc:"Malpensa Express · 约52分 · €13/人" } },
+        { time:"08:00", text:"抵达 MXP T1 · 入境取行李", pdf:[{ name:"✈️ 机票出行单", url:"pdfs/flight-tickets.pdf" },{ name:"🛂 过关行程单", url:"pdfs/border-itinerary.pdf" }], next:{ type:"train", desc:"Malpensa Express · 约52分 · €13/人" } },
         { time:"09:10", text:"乘 Malpensa Express → 米兰中央站", next:{ type:"walk", desc:"步行约5分钟" } },
         { time:"10:15", text:"寄存行李 Hotel Charly", next:{ type:"metro", desc:"地铁M3 Centrale→Duomo · €2.2" } },
         { time:"10:30", text:"登米兰大教堂 + 屋顶露台", pdf:[{ name:"🎫 大教堂门票", url:"pdfs/ticket-duomo-milano.pdf" }], next:{ type:"walk", desc:"步行1分钟" } },
@@ -543,7 +543,7 @@ window.TRIP_DATA = {
         { time:"晚上",  text:"老城晚餐（意面/烩饭/炖牛膝）" }
       ],
       activities:[
-        { time:"08:00", name:"抵达 MXP T1 · 入境取行李", note:"国泰 CX233（香港00:50起飞）直飞落地约08:00 | 深圳需前一晚经跨境巴士/口岸大巴过境至香港机场，预留充足过关时间 | 入境申根盖章，备好酒店单/回程票以备询问", transport:"落地", pdf:[{ name:"🛂 过关行程单", url:"pdfs/border-itinerary.pdf" }] },
+        { time:"08:00", name:"抵达 MXP T1 · 入境取行李", note:"国泰 CX233（香港00:50起飞）直飞落地约08:00 | 深圳需前一晚经跨境巴士/口岸大巴过境至香港机场，预留充足过关时间 | 入境申根盖章，备好酒店单/回程票以备询问", transport:"落地", pdf:[{ name:"✈️ 机票出行单", url:"pdfs/flight-tickets.pdf" },{ name:"🛂 过关行程单", url:"pdfs/border-itinerary.pdf" }] },
         { time:"09:10", name:"乘 Malpensa Express → 米兰中央站", duration:"52分钟", cost:208, transport:"机场快线", note:"€13/人，车站直连机场T1，每30分钟一班", booking:[{ name:"官网购票", url:"https://www.malpensaexpress.it/en/" }] },
         { time:"10:15", name:"寄存行李 · Hotel Charly", note:"步行5分钟，14:00起正式入住", transport:"步行5分钟" },
         { time:"10:30", name:"登米兰大教堂 + 屋顶露台", img:"images/milan.jpg", duration:"2小时", cost:240, note:"屋顶可眺望阿尔卑斯山脉，已购票凭 PDF 直接入场，9:00开门前15分钟到场", pdf:[{ name:"🎫 大教堂门票", url:"pdfs/ticket-duomo-milano.pdf" }] },
@@ -786,7 +786,7 @@ window.TRIP_DATA = {
         { time:"08:00", text:"苏黎世湖老城最后漫步 · 伴手礼购买（周四·商店营业）" },
         { time:"10:15", text:"苏黎世中央站 HB 出发", next:{ type:"train", desc:"火车直达苏黎世机场 · 约10-13分 · STP" } },
         { time:"10:45", text:"苏黎世机场 ZRH · 退税/值机/安检", warn:true, warnText:"国际航班建议起飞前2.5小时到" },
-        { time:"13:30", text:"✈️ CX382 起飞 → 香港" },
+        { time:"13:30", text:"✈️ CX382 起飞 → 香港", pdf:[{ name:"✈️ 机票出行单", url:"pdfs/flight-tickets.pdf" }] },
         { time:"次日",  text:"06:55 抵达香港 🏠" }
       ],
       activities:[
@@ -794,7 +794,7 @@ window.TRIP_DATA = {
         { time:"08:00", name:"苏黎世湖老城最后漫步 · 伴手礼购买", img:"images/zurich.jpg", duration:"2小时", cost:0, note:"推荐：莲花巧克力、瑞士军刀、格雷登巧克力、Ricola" },
         { time:"10:15", name:"苏黎世中央站 HB → 苏黎世机场 ZRH", duration:"约10-13分钟", cost:0, transport:"直达火车", note:"STP包含 | 国际航班建议起飞前2.5小时到" },
         { time:"10:45", name:"苏黎世机场 ZRH · 退税/值机/安检", note:"退税（Global Blue）需离境前海关盖章 | 液体100ml托运", ticketTip:"退税须在离开申根区前完成：先在Global Blue自助机扫描，再找海关盖章 | 预留30分钟" },
-        { time:"13:30", name:"✈️ CX382 起飞 → 香港", transport:"国际航班", note:"国泰 CX382 苏黎世 ZRH 13:30 → 香港 HKG 次日06:55，直飞约12小时 | 抵港后再经口岸返回深圳" },
+        { time:"13:30", name:"✈️ CX382 起飞 → 香港", transport:"国际航班", note:"国泰 CX382 苏黎世 ZRH 13:30 → 香港 HKG 次日06:55，直飞约12小时 | 抵港后再经口岸返回深圳", pdf:[{ name:"✈️ 机票出行单", url:"pdfs/flight-tickets.pdf" }] },
         { time:"次日06:55", name:"抵达香港 🏠 旅程圆满结束", note:"10天10夜，意大利文艺与瑞士壮美，完美收官" }
       ]
     }
