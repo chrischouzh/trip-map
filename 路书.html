@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>意大利·瑞士 10日蜜月路书</title>
+<script src="data.js"></script>
+<style>
+  :root {
+    --primary: #0EA5E9; --primary-dark: #0284C7; --primary-light: #E0F2FE; --primary-50: #F0F9FF;
+    --accent: #F97316; --accent-dark: #EA580C; --accent-light: #FFF7ED;
+    --success: #10B981; --success-light: #D1FAE5;
+    --rose: #F43F5E; --rose-light: #FFF1F2; --violet: #8B5CF6;
+    --bg: #F8FAFC; --card: #FFFFFF; --text: #0C4A6E; --text-body: #334155; --text-muted: #64748B;
+    --border: #E2E8F0;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+    --shadow: 0 1px 3px rgba(0,0,0,.06),0 2px 8px rgba(0,0,0,.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,.07),0 2px 4px rgba(0,0,0,.04);
+    --shadow-lg: 0 12px 28px rgba(0,0,0,.08),0 4px 10px rgba(0,0,0,.04);
+    --radius: 16px; --radius-sm: 10px; --transition: 200ms ease-out;
+  }
+  *,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif; background:var(--bg); color:var(--text-body); line-height:1.65; -webkit-font-smoothing:antialiased; }
+  .container { max-width:980px; margin:0 auto; padding:24px 20px 48px; }
+
+  /* Hero */
+  .hero { position:relative; border-radius:var(--radius); padding:56px 44px 48px; margin-bottom:36px; overflow:hidden; color:white; background:linear-gradient(135deg,#0EA5E9 0%,#6366F1 50%,#8B5CF6 100%); }
+  .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 600px 400px at 20% 80%,rgba(249,115,22,.2) 0%,transparent 70%),radial-gradient(ellipse 500px 500px at 80% 20%,rgba(139,92,246,.3) 0%,transparent 60%); }
+  .hero-content { position:relative; z-index:1; }
+  .hero h1 { font-size:2.1rem; font-weight:800; letter-spacing:-.02em; margin-bottom:14px; line-height:1.2; }
+  .hero-meta { display:flex; flex-wrap:wrap; gap:20px; font-size:.92rem; opacity:.92; }
+  .hero-meta-item { display:flex; align-items:center; gap:7px; }
+  .hero-orb { position:absolute; border-radius:50%; filter:blur(60px); opacity:.12; pointer-events:none; animation:orbFloat 10s ease-in-out infinite alternate; }
+  .hero-orb-1 { width:300px; height:300px; background:#F97316; top:-80px; right:-60px; }
+  .hero-orb-2 { width:200px; height:200px; background:#38BDF8; bottom:-60px; left:-40px; animation-delay:-5s; }
+  @keyframes orbFloat { 0%{transform:translate(0,0) scale(1)} 100%{transform:translate(20px,-15px) scale(1.1)} }
+
+  /* Nav */
+  .section-nav { display:flex; gap:8px; margin-bottom:32px; overflow-x:auto; padding-bottom:4px; }
+  .section-nav::-webkit-scrollbar { height:0; }
+  .nav-pill { display:inline-flex; align-items:center; gap:6px; padding:8px 16px; border-radius:99px; font-size:.85rem; font-weight:500; white-space:nowrap; background:var(--card); border:1px solid var(--border); color:var(--text-muted); cursor:pointer; transition:all var(--transition); text-decoration:none; }
+  .nav-pill:hover { background:var(--primary-light); color:var(--primary); border-color:var(--primary); }
+
+  /* Section */
+  .section { margin-bottom:40px; scroll-margin-top:20px; }
+  .section-header { display:flex; align-items:center; gap:10px; margin-bottom:20px; }
+  .section-icon { display:flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:var(--radius-sm); background:var(--primary-light); color:var(--primary); }
+  .section-title { font-size:1.2rem; font-weight:700; color:var(--text); }
+
+  /* Weather */
+  .weather-bar { display:flex; gap:10px; overflow-x:auto; padding-bottom:6px; }
+  .weather-bar::-webkit-scrollbar { height:4px; }
+  .weather-bar::-webkit-scrollbar-thumb { background:var(--border); border-radius:99px; }
+  .weather-card { flex:0 0 auto; min-width:108px; background:var(--card); border-radius:var(--radius-sm); padding:14px 12px; text-align:center; box-shadow:var(--shadow-sm); border:1px solid var(--border); transition:all var(--transition); }
+  .weather-card:hover { box-shadow:var(--shadow-md); transform:translateY(-2px); }
+  .weather-card .w-date { font-size:.8rem; color:var(--text-muted); margin-bottom:6px; font-weight:500; }
+  .weather-card .w-icon { font-size:28px; line-height:1; margin:4px 0 8px; }
+  .weather-card .w-temp { font-size:.88rem; font-weight:600; color:var(--text); }
+  .weather-card .w-temp-low { color:var(--text-muted); font-weight:400; }
+  .weather-tip { display:flex; align-items:flex-start; gap:10px; margin-top:14px; padding:14px 18px; background:var(--primary-50); border:1px solid #BAE6FD; border-radius:var(--radius-sm); font-size:.88rem; color:var(--primary-dark); }
+
+  /* Day card */
+  .day-card { background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); border:1px solid var(--border); margin-bottom:16px; overflow:hidden; transition:box-shadow var(--transition); }
+  .day-card:hover { box-shadow:var(--shadow-md); }
+  .day-header { display:flex; align-items:center; justify-content:space-between; padding:18px 22px; cursor:pointer; user-select:none; transition:background var(--transition); }
+  .day-header:hover { background:var(--primary-50); }
+  .day-num { display:flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:var(--radius-sm); background:linear-gradient(135deg,var(--primary),var(--violet)); color:white; font-weight:700; font-size:.85rem; flex-shrink:0; margin-right:14px; }
+  .day-header-left { display:flex; align-items:center; }
+  .day-header-info h3 { font-size:1.05rem; font-weight:700; color:var(--text); line-height:1.3; }
+  .day-header-info .day-meta { font-size:.82rem; color:var(--text-muted); margin-top:2px; display:flex; align-items:center; gap:6px; }
+  .day-header .toggle-icon { width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:var(--bg); color:var(--text-muted); transition:all var(--transition); }
+  .day-card.collapsed .toggle-icon { transform:rotate(-90deg); }
+  .day-body { padding:4px 22px 22px; border-top:1px solid var(--border); max-height:4000px; overflow:hidden; transition:max-height .35s ease-out,padding .35s ease-out; }
+  .day-card.collapsed .day-body { max-height:0; padding-top:0; padding-bottom:0; border-top-color:transparent; }
+
+  /* Timeline */
+  .timeline { position:relative; padding-left:32px; padding-top:18px; }
+  .timeline::before { content:''; position:absolute; left:10px; top:24px; bottom:12px; width:2px; background:linear-gradient(to bottom,var(--primary),var(--border)); border-radius:2px; }
+  .tl-item { position:relative; margin-bottom:22px; }
+  .tl-item:last-child { margin-bottom:0; }
+  .tl-dot { position:absolute; left:-28px; top:4px; width:14px; height:14px; border-radius:50%; border:2.5px solid var(--primary); background:white; z-index:1; box-shadow:0 0 0 3px var(--primary-light); }
+  .tl-item.is-meal .tl-dot { border-color:var(--accent); background:var(--accent-light); box-shadow:0 0 0 3px var(--accent-light); }
+  .tl-time { font-size:.78rem; color:var(--text-muted); font-weight:600; text-transform:uppercase; letter-spacing:.02em; margin-bottom:3px; }
+  .tl-content h4 { font-size:.95rem; font-weight:600; color:var(--text); margin-bottom:3px; }
+  .tl-content p { font-size:.85rem; color:var(--text-muted); line-height:1.5; }
+  .tl-photo { display:block; width:100%; max-width:360px; aspect-ratio:16/10; object-fit:cover; border-radius:12px; margin:9px 0 5px; box-shadow:var(--shadow-sm); border:1px solid var(--border); cursor:zoom-in; transition:transform var(--transition),box-shadow var(--transition); }
+  .tl-photo:hover { transform:translateY(-2px); box-shadow:var(--shadow-md); }
+
+  /* Lightbox */
+  #lightbox { position:fixed; inset:0; z-index:3000; display:none; align-items:center; justify-content:center; background:rgba(10,15,25,.86); backdrop-filter:blur(6px); padding:24px; cursor:zoom-out; }
+  #lightbox.open { display:flex; }
+  #lightbox img { max-width:92vw; max-height:82vh; border-radius:14px; box-shadow:0 20px 60px rgba(0,0,0,.5); }
+  #lightbox .lb-cap { position:absolute; bottom:28px; left:0; right:0; text-align:center; color:#fff; font-size:.95rem; font-weight:600; text-shadow:0 2px 10px rgba(0,0,0,.7); }
+  #lightbox .lb-close { position:absolute; top:20px; right:24px; width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.25); color:#fff; font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+  .tl-tags { display:flex; gap:6px; margin-top:8px; flex-wrap:wrap; }
+  .tag { display:inline-flex; align-items:center; gap:4px; font-size:.73rem; padding:3px 10px; border-radius:99px; font-weight:500; }
+  .tag-cost { background:var(--accent-light); color:var(--accent-dark); }
+  .tag-transport { background:var(--success-light); color:#047857; }
+  .tag-free { background:var(--primary-light); color:var(--primary-dark); }
+  .ticket-tip { display:flex; align-items:flex-start; gap:7px; margin-top:8px; font-size:.78rem; color:#92400E; line-height:1.6; padding:7px 11px; background:#FFFBEB; border-radius:7px; border:1px solid #FDE68A; }
+  .ticket-tip .tt-icon { flex-shrink:0; }
+  .act-booking { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+  .booking-pill { display:inline-flex; align-items:center; gap:4px; font-size:.72rem; padding:3px 10px; border-radius:99px; background:rgba(14,165,233,.1); border:1px solid rgba(14,165,233,.35); color:#0284C7; text-decoration:none; white-space:nowrap; transition:all .18s ease; }
+  .booking-pill:hover { background:rgba(14,165,233,.22); border-color:#0EA5E9; color:#0369A1; }
+
+  /* Meal */
+  .meal-card { display:flex; align-items:center; gap:14px; padding:12px 16px; background:linear-gradient(135deg,#FFF7ED,#FFFBEB); border:1px solid #FED7AA; border-radius:var(--radius-sm); margin-top:6px; }
+  .meal-icon { width:38px; height:38px; border-radius:10px; background:white; display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow-sm); color:var(--accent); flex-shrink:0; }
+  .meal-info { flex:1; min-width:0; }
+  .meal-name { font-weight:600; font-size:.9rem; color:var(--text); }
+  .meal-detail { font-size:.8rem; color:var(--text-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .meal-price { font-weight:700; color:var(--accent-dark); white-space:nowrap; font-size:.95rem; }
+
+  /* Hotels */
+  .hotel-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px; }
+  .hotel-card { background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); border:1px solid var(--border); padding:22px; position:relative; transition:all var(--transition); }
+  .hotel-card:hover { box-shadow:var(--shadow-lg); transform:translateY(-3px); }
+  .hotel-badge { position:absolute; top:14px; right:14px; background:linear-gradient(135deg,var(--primary),var(--violet)); color:white; font-size:.72rem; font-weight:600; padding:3px 12px; border-radius:99px; }
+  .hotel-name { font-size:1.05rem; font-weight:700; color:var(--text); margin-bottom:6px; padding-right:60px; }
+  .hotel-area { display:flex; align-items:center; gap:5px; font-size:.83rem; color:var(--text-muted); margin-bottom:12px; }
+  .hotel-price-row { display:flex; align-items:baseline; gap:6px; margin-bottom:12px; }
+  .hotel-price { font-size:1.3rem; font-weight:800; color:var(--primary); }
+  .hotel-price-unit { font-size:.8rem; color:var(--text-muted); }
+  .hotel-tag { display:inline-block; font-size:.72rem; padding:2px 8px; border-radius:4px; background:var(--primary-light); color:var(--primary-dark); margin-right:4px; margin-bottom:4px; }
+
+  /* Budget */
+  .budget-wrapper { background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); border:1px solid var(--border); overflow:hidden; }
+  .budget-chart { display:flex; height:8px; overflow:hidden; }
+  .budget-table { width:100%; border-collapse:collapse; }
+  .budget-table th,.budget-table td { padding:12px 18px; text-align:left; border-bottom:1px solid var(--border); font-size:.88rem; }
+  .budget-table th { background:var(--bg); color:var(--text-muted); font-weight:600; font-size:.8rem; text-transform:uppercase; letter-spacing:.04em; }
+  .budget-table .cat-row td { font-weight:600; color:var(--text); background:var(--primary-50); }
+  .budget-table .sub-row td { color:var(--text-muted); padding-left:48px; }
+  .budget-table .subtotal { text-align:right; font-weight:600; color:var(--primary); }
+  .budget-table td:last-child { text-align:right; }
+  .budget-total { display:flex; justify-content:space-between; align-items:center; padding:22px 24px; background:linear-gradient(135deg,#0EA5E9 0%,#6366F1 50%,#8B5CF6 100%); border-radius:var(--radius); color:white; margin-top:16px; }
+  .budget-total-label { font-size:.95rem; font-weight:500; opacity:.9; }
+  .budget-total-per { font-size:.85rem; opacity:.75; margin-top:2px; }
+  .budget-total-amount { font-size:1.6rem; font-weight:800; letter-spacing:-.02em; }
+
+  /* Tips */
+  .tips-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:12px; }
+  .tip-card { display:flex; align-items:flex-start; gap:12px; padding:14px 16px; background:var(--accent-light); border:1px solid #FED7AA; border-radius:var(--radius-sm); font-size:.88rem; color:var(--text-body); }
+  .tip-icon { width:28px; height:28px; border-radius:8px; background:white; display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow-sm); color:var(--accent); flex-shrink:0; font-size:14px; }
+
+  /* Footer */
+  .footer { text-align:center; padding:28px 20px; color:var(--text-muted); font-size:.78rem; margin-top:20px; }
+  .footer-line { width:48px; height:3px; background:linear-gradient(90deg,var(--primary),var(--violet)); border-radius:99px; margin:0 auto 12px; }
+
+  /* Responsive */
+  @media(max-width:640px){
+    .container{padding:16px 14px 32px}
+    .hero{padding:36px 24px 32px}
+    .hero h1{font-size:1.55rem}
+    .hero-meta{gap:12px;font-size:.85rem}
+    .day-header{padding:14px 16px}
+    .day-body{padding:4px 16px 16px}
+    .hotel-grid,.tips-grid{grid-template-columns:1fr}
+    .budget-total{flex-direction:column;text-align:center;gap:8px;padding:18px}
+  }
+  @media print{
+    body{background:white}
+    .toggle-icon,.section-nav{display:none!important}
+    .day-card.collapsed .day-body{max-height:none!important;padding:4px 22px 22px!important;border-top:1px solid var(--border)!important}
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="hero" role="banner">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-content">
+      <h1 id="heroTitle"></h1>
+      <div class="hero-meta">
+        <div class="hero-meta-item">📅 <span id="heroDate"></span></div>
+        <div class="hero-meta-item">👫 <span id="heroTravelers"></span></div>
+        <div class="hero-meta-item">💰 预估 <strong id="heroBudget"></strong></div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="section-nav">
+    <a class="nav-pill" href="#sec-weather">☀️ 天气</a>
+    <a class="nav-pill" href="#sec-days">📋 行程</a>
+    <a class="nav-pill" href="#sec-hotels">🏨 住宿</a>
+    <a class="nav-pill" href="#sec-budget">💳 预算</a>
+    <a class="nav-pill" href="#sec-tips">💡 贴士</a>
+  </nav>
+
+  <div class="section" id="sec-weather">
+    <div class="section-header">
+      <div class="section-icon">☀️</div>
+      <h2 class="section-title">天气概览</h2>
+    </div>
+    <div class="weather-bar" id="weatherBar"></div>
+    <div class="weather-tip" id="weatherTip"></div>
+  </div>
+
+  <div class="section" id="sec-days">
+    <div class="section-header">
+      <div class="section-icon">📋</div>
+      <h2 class="section-title">每日行程</h2>
+    </div>
+    <div id="daysContainer"></div>
+  </div>
+
+  <div class="section" id="sec-hotels">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--accent-light);color:var(--accent)">🏨</div>
+      <h2 class="section-title">住宿推荐</h2>
+    </div>
+    <div class="hotel-grid" id="hotelGrid"></div>
+  </div>
+
+  <div class="section" id="sec-budget">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--success-light);color:var(--success)">💳</div>
+      <h2 class="section-title">预算明细</h2>
+    </div>
+    <div class="budget-wrapper">
+      <div class="budget-chart" id="budgetChart"></div>
+      <table class="budget-table" id="budgetTable">
+        <thead><tr><th>分类</th><th>项目</th><th style="text-align:right">费用</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="budget-total" id="budgetTotal">
+      <div>
+        <div class="budget-total-label">预估总费用</div>
+        <div class="budget-total-per" id="budgetPerPerson"></div>
+      </div>
+      <div class="budget-total-amount" id="budgetTotalAmount"></div>
+    </div>
+  </div>
+
+  <div class="section" id="sec-tips">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--rose-light);color:var(--rose)">💡</div>
+      <h2 class="section-title">实用贴士</h2>
+    </div>
+    <div class="tips-grid" id="tipsList"></div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-line"></div>
+    <p>由 AI 生成 · 价格与信息仅供参考，请以实际为准 · <span id="genDate"></span></p>
+  </footer>
+</div>
+
+<div id="lightbox" onclick="closeLightbox()">
+  <button class="lb-close" onclick="closeLightbox()" aria-label="关闭">✕</button>
+  <img id="lightbox-img" src="" alt="">
+  <div class="lb-cap" id="lightbox-cap"></div>
+</div>
+
+<script>
+// 从 data.js 读取数据，做字段映射
+const raw = window.TRIP_DATA;
+const tripData = {
+  title:     raw.title,
+  dateRange: raw.dateRange,
+  travelers: raw.travelers,
+  weather:   raw.weather,
+  hotels:    raw.hotels,
+  budget:    raw.budget,
+  tips:      raw.tips,
+  days: raw.days.map(function(d) {
+    var parts = d.date.split(' ');
+    return {
+      date:       parts[0],
+      weekday:    parts.slice(1).join(' '),
+      theme:      d.theme,
+      weather:    d.dayWeather,
+      activities: d.activities || []
+    };
+  })
+};
+
+// Weather icons (inline SVG)
+var WI = {
+  sunny:        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="32" height="32"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>',
+  cloudy:       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="32" height="32"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>',
+  partlyCloudy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="32" height="32"><path d="M12 2v2M4.93 4.93l1.41 1.41M20 12h2M4 12H2M19.07 4.93l-1.41 1.41"/><circle cx="12" cy="9" r="4" opacity=".5"/><path d="M18 13h-1.26A7 7 0 0 0 6 15.26 5 5 0 1 0 9 23h9a5 5 0 0 0 0-10z"/></svg>',
+  rainy:        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="32" height="32"><path d="M16 13V4a4 4 0 0 0-8 0v1H6a4 4 0 0 0 0 8h10a4 4 0 0 0 0-8Z"/><path d="M8 19v2M12 19v2M16 19v2"/></svg>',
+  overcast:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="32" height="32"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>'
+};
+var wiColor = { sunny:'#F59E0B', rainy:'#0EA5E9', partlyCloudy:'#64748B', cloudy:'#64748B', overcast:'#64748B' };
+
+var budgetColors = { transport:'#0EA5E9', accommodation:'#8B5CF6', food:'#F97316', tickets:'#F43F5E', other:'#64748B' };
+var budgetLabels = { transport:'交通', accommodation:'住宿', food:'餐饮', tickets:'门票', other:'其他' };
+
+// ── Hero ──
+document.getElementById('heroTitle').textContent    = tripData.title;
+document.getElementById('heroDate').textContent     = tripData.dateRange;
+document.getElementById('heroTravelers').textContent= tripData.travelers;
+document.getElementById('heroBudget').textContent   = '¥' + (tripData.budget.total || 0).toLocaleString();
+document.getElementById('genDate').textContent      = raw.generationDate || '';
+
+// ── Weather ──
+(function() {
+  var bar = document.getElementById('weatherBar');
+  bar.innerHTML = tripData.days.map(function(d) {
+    var w = d.weather || {};
+    var icon = WI[w.icon] || WI.partlyCloudy;
+    var col  = wiColor[w.icon] || '#64748B';
+    return '<div class="weather-card">'
+      + '<div class="w-date">' + d.date + ' ' + d.weekday + '</div>'
+      + '<div class="w-icon" style="color:' + col + '">' + icon + '</div>'
+      + '<div class="w-temp">' + (w.high||'—') + '° <span class="w-temp-low">/ ' + (w.low||'—') + '°</span></div>'
+      + '</div>';
+  }).join('');
+
+  var wt = tripData.weather;
+  document.getElementById('weatherTip').innerHTML =
+    '<span style="font-size:18px">ℹ️</span>'
+    + '<span>' + (wt.clothing||'') + ' · 降水概率 ' + (wt.rainfall||'') + ' · ' + (wt.tips||'') + '</span>';
+})();
+
+// ── Days ──
+(function() {
+  var container = document.getElementById('daysContainer');
+  container.innerHTML = tripData.days.map(function(day, i) {
+    var w = day.weather || {};
+    var wicon = WI[w.icon] || WI.partlyCloudy;
+    var wcol  = (w.icon === 'sunny') ? '#F59E0B' : '#64748B';
+
+    var acts = (day.activities || []).map(function(a) {
+      var isMeal = !!(a.meal) || /[午晚早]餐/.test(a.name);
+      var html = '<div class="tl-item' + (isMeal ? ' is-meal' : '') + '"><div class="tl-dot"></div>';
+      html += '<div class="tl-time">' + a.time + (a.duration ? ' · ' + a.duration : '') + '</div>';
+      html += '<div class="tl-content"><h4>' + a.name + '</h4>';
+      if (a.note) html += '<p>' + a.note + '</p>';
+      if (a.img) html += '<img class="tl-photo" loading="lazy" src="' + a.img + '" alt="' + a.name + '" onclick="openLightbox(this.src,\'' + a.name.replace(/'/g,"\\'") + '\')" onerror="this.style.display=\'none\'">';
+      if (a.meal) {
+        html += '<div class="meal-card">'
+          + '<div class="meal-icon">🍽️</div>'
+          + '<div class="meal-info">'
+          + '<div class="meal-name">' + a.meal.name + '</div>'
+          + '<div class="meal-detail">' + a.meal.cuisine + ' · ' + a.meal.location
+          + (a.meal.recommended ? ' · 推荐：' + a.meal.recommended : '') + '</div>'
+          + '</div>'
+          + '<div class="meal-price">¥' + a.meal.perPerson + '/人</div>'
+          + '</div>';
+      }
+      var tags = [];
+      if (a.cost === 0) tags.push('<span class="tag tag-free">免费</span>');
+      else if (a.cost) tags.push('<span class="tag tag-cost">¥' + a.cost + '</span>');
+      if (a.transport) tags.push('<span class="tag tag-transport">' + a.transport + '</span>');
+      if (tags.length) html += '<div class="tl-tags">' + tags.join('') + '</div>';
+      if (a.ticketTip) {
+        html += '<div class="ticket-tip"><span class="tt-icon">🎫</span><span>' + a.ticketTip + '</span></div>';
+      }
+      if (a.booking && a.booking.length) {
+        var bHtml = '<div class="act-booking">';
+        for (var bi = 0; bi < a.booking.length; bi++) {
+          bHtml += '<a href="' + a.booking[bi].url + '" target="_blank" rel="noopener" class="booking-pill">🔗 ' + a.booking[bi].name + '</a>';
+        }
+        bHtml += '</div>';
+        html += bHtml;
+      }
+      html += '</div></div>';
+      return html;
+    }).join('');
+
+    return '<div class="day-card">'
+      + '<div class="day-header" tabindex="0" role="button" aria-expanded="true"'
+      + ' onclick="toggleDay(this)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();toggleDay(this)}">'
+      + '<div class="day-header-left">'
+      + '<div class="day-num">D' + (i+1) + '</div>'
+      + '<div class="day-header-info">'
+      + '<h3>' + day.theme + '</h3>'
+      + '<div class="day-meta"><span>' + day.date + ' ' + day.weekday + '</span>'
+      + '<span style="display:inline-flex;align-items:center;gap:3px;color:' + wcol + '">' + wicon + ' ' + (w.high||'—') + '°/' + (w.low||'—') + '°</span>'
+      + '</div></div></div>'
+      + '<div class="toggle-icon">▾</div>'
+      + '</div>'
+      + '<div class="day-body"><div class="timeline">' + acts + '</div></div>'
+      + '</div>';
+  }).join('');
+})();
+
+function toggleDay(el) {
+  var card = el.closest('.day-card');
+  card.classList.toggle('collapsed');
+  el.setAttribute('aria-expanded', !card.classList.contains('collapsed'));
+}
+
+// ── Hotels ──
+(function() {
+  document.getElementById('hotelGrid').innerHTML = (tripData.hotels || []).map(function(h, i) {
+    var tags = h.highlights.split(/[;；、,，]/).filter(Boolean).map(function(t) {
+      return '<span class="hotel-tag">' + t.trim() + '</span>';
+    }).join('');
+    return '<div class="hotel-card">'
+      + (i === 0 ? '<div class="hotel-badge">推荐</div>' : '')
+      + '<div class="hotel-name">' + h.name + '</div>'
+      + '<div class="hotel-area">📍 ' + h.area + '</div>'
+      + '<div class="hotel-price-row"><span class="hotel-price">¥' + h.pricePerNight + '</span><span class="hotel-price-unit">/晚</span></div>'
+      + '<div style="margin-bottom:8px">' + tags + '</div>'
+      + (h.bookingUrl ? '<a href="' + h.bookingUrl + '" target="_blank" rel="noopener" class="booking-pill">🏨 查看/预订</a>' : '')
+      + '</div>';
+  }).join('');
+})();
+
+// ── Budget ──
+(function() {
+  var budget = tripData.budget;
+  var cats = Object.entries(budget).filter(function(e) { return !['total','perPerson'].includes(e[0]); });
+  var total = budget.total || 0;
+
+  document.getElementById('budgetChart').innerHTML = cats.map(function(e) {
+    return '<div style="width:' + (e[1].subtotal/total*100).toFixed(1) + '%;background:' + (budgetColors[e[0]]||'#94A3B8') + ';height:8px"></div>';
+  }).join('');
+
+  var tbody = document.querySelector('#budgetTable tbody');
+  tbody.innerHTML = cats.map(function(e) {
+    var cat = e[0], data = e[1];
+    var label = budgetLabels[cat] || cat;
+    var rows = '<tr class="cat-row"><td colspan="2">' + label + '</td><td class="subtotal">¥' + data.subtotal.toLocaleString() + '</td></tr>';
+    (data.items || []).forEach(function(item) {
+      rows += '<tr class="sub-row"><td></td><td>' + item.name + '</td><td>¥' + item.cost.toLocaleString() + '</td></tr>';
+    });
+    return rows;
+  }).join('');
+
+  document.getElementById('budgetTotalAmount').textContent = '¥' + total.toLocaleString();
+  document.getElementById('budgetPerPerson').textContent   = '人均 ¥' + (budget.perPerson||0).toLocaleString();
+})();
+
+// ── Tips ──
+(function() {
+  document.getElementById('tipsList').innerHTML = (tripData.tips || []).map(function(t) {
+    return '<div class="tip-card"><div class="tip-icon">💡</div><span>' + t + '</span></div>';
+  }).join('');
+})();
+
+// ── Lightbox ──
+function openLightbox(src, cap) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox-cap').textContent = cap || '';
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
+</script>
+</body>
+</html>
