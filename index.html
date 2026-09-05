@@ -253,6 +253,18 @@ body { font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif; bac
 }
 .back-btn:hover { background:rgba(255,255,255,.16); color:#fff; border-color:rgba(255,255,255,.45); }
 
+/* 导航按钮 */
+.place-actions { display:flex; gap:8px; flex-wrap:wrap; }
+.nav-btn {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:9px 16px; border-radius:20px; cursor:pointer;
+  background:rgba(0,150,255,.16); border:1px solid rgba(0,150,255,.45);
+  color:#6cb8ff; font-size:12.5px; font-family:inherit; font-weight:600;
+  text-decoration:none; transition:all .2s;
+  opacity:0; animation:slideIn .35s ease .15s forwards;
+}
+.nav-btn:hover { background:rgba(0,150,255,.3); border-color:#4da3ff; color:#a9d4ff; }
+
 /* tooltip */
 #tooltip {
   position:fixed; z-index:2000;
@@ -653,7 +665,10 @@ function openPlace(dayNum, wp) {
     html += '</div>';
   }
   if (!info) html += '<div class="place-desc" style="color:rgba(255,255,255,.45)">途经点 · 暂无更多详情</div>';
-  html += `<button class="back-btn" onclick="openPanel(${dayNum})">← 返回当日行程</button>`;
+  html += `<div class="place-actions">
+    <a class="nav-btn" href="javascript:;" onclick="navTo(${wp.latlng[0]},${wp.latlng[1]},${JSON.stringify(wp.name)})">🧭 导航</a>
+    <button class="back-btn" onclick="openPanel(${dayNum})">← 返回当日行程</button>
+  </div>`;
   body.innerHTML = html;
   body.scrollTop = 0;
 
@@ -661,6 +676,16 @@ function openPlace(dayNum, wp) {
   document.getElementById('transport-legend').classList.add('visible');
 }
 window.openPlace = openPlace;
+
+// 导航：iPhone/iPad 用系统 Apple 地图，其他平台用 Google 地图
+window.navTo = function navTo(lat, lng, name) {
+  const nm = encodeURIComponent(name || '目的地');
+  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const url = isIOS
+    ? `https://maps.apple.com/?daddr=${lat},${lng}&q=${nm}`
+    : `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
+  window.open(url, '_blank', 'noopener');
+};
 
 window.closePanel = function closePanel() {
   document.getElementById('panel').classList.remove('open');
