@@ -21,6 +21,11 @@ body { font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif; bac
 #header h1 { color:#fff; font-size:20px; font-weight:600; letter-spacing:2px; text-shadow:0 2px 12px rgba(0,0,0,.6); }
 #header p  { color:rgba(255,255,255,.55); font-size:13px; margin-top:3px; letter-spacing:1px; }
 
+/* ── 顶部按钮（路书 / 购票链接） ── */
+.top-bar { position:fixed; top:14px; right:14px; z-index:1200; display:flex; gap:8px; align-items:center; }
+.top-btn { background:rgba(20,26,38,.82); color:#fff; border:1px solid rgba(255,255,255,.18); border-radius:10px; padding:8px 12px; font-size:13px; cursor:pointer; backdrop-filter:blur(8px); text-decoration:none; line-height:1.4; font-family:inherit; transition:all .2s; }
+.top-btn:hover { background:rgba(255,255,255,.14); border-color:rgba(255,255,255,.4); }
+
 /* ── 时间轴 ── */
 #timeline {
   position:fixed; bottom:0; left:0; right:0; z-index:1000;
@@ -328,8 +333,10 @@ body { font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif; bac
   <p>邹豪 &amp; 宁岳莎 &nbsp;·&nbsp; 2026 / 09 / 29 – 10 / 08 &nbsp;·&nbsp; 点击城市或下方日期查看路线详情</p>
 </div>
 
-<button id="ticket-btn" onclick="document.getElementById('ticket-panel').classList.toggle('open')"
-  style="position:fixed;top:14px;right:14px;z-index:1200;background:rgba(20,26,38,.82);color:#fff;border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:8px 12px;font-size:13px;cursor:pointer;backdrop-filter:blur(8px)">🎫 购票链接</button>
+<div class="top-bar">
+  <a href="路书.html" target="_blank" rel="noopener" class="top-btn">📖 路书</a>
+  <button id="ticket-btn" class="top-btn" onclick="document.getElementById('ticket-panel').classList.toggle('open')">🎫 购票链接</button>
+</div>
 <div id="ticket-panel"
   style="position:fixed;top:56px;right:14px;z-index:1200;width:330px;max-width:88vw;max-height:78vh;overflow:auto;background:rgba(18,24,36,.94);color:#e8edf4;border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:14px 16px;backdrop-filter:blur(10px);box-shadow:0 12px 40px rgba(0,0,0,.45);display:none">
   <style>#ticket-panel.open{display:block!important}#ticket-panel a{color:#7cc4ff;text-decoration:none}#ticket-panel a:hover{text-decoration:underline}#ticket-panel .grp{margin:11px 0 3px;font-size:11px;letter-spacing:.04em;color:#9fb0c4}#ticket-panel .row{font-size:12.5px;line-height:1.55;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.06)}</style>
