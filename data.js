@@ -70,7 +70,7 @@ window.TRIP_DATA = {
         { name:"皮拉图斯齿轨火车（STP5折）×2",  cost:720 },
         { name:"冰川公园 ×2",                   cost:160 },
         { name:"GoldenPass 座位预约 ×2",         cost:80  },
-        { name:"First 缆车（STP25折）×2",        cost:660 },
+        { name:"First 缆车（STP5折）×2",        cost:660 },
         { name:"First Flyer 飞索 ×2",            cost:480 },
         { name:"托斯卡纳·瓦尔多尔恰一日团（含午餐+Brunello品酒）×2（约）", cost:1640 }
       ]
@@ -92,7 +92,7 @@ window.TRIP_DATA = {
     "🗓️ 【购票时间表】出发前3个月：机票；前2-3个月：Frecciarossa高铁；前4-6周：学院美术馆、乌菲兹（极易售罄）；前3-4周：大教堂穹顶、米兰大教堂；前2-3周：GoldenPass座位；前1-2周：First缆车（可当天买）",
     "🎫 学院美术馆（大卫）是佛罗伦萨最难抢的票，旺季常提前3-4周售罄，务必第一个订！无票旺季可能排队2-3小时仍买不到当日票",
     "⏰ 【建议到达时间】乌菲兹8:15开门准时到；大教堂穹顶按时段前10分钟到；学院美术馆开门前10分钟到；First缆车9:00前到（住格林德瓦可8:45到，几乎无队）",
-    "🏔️ First山（2168m）：悬崖步道+高空飞索+Bachalpsee高山湖，体验丰富，高反风险低，费用约¥660/人（STP25折），明显优于少女峰性价比",
+    "🏔️ First山（2168m）：悬崖步道+高空飞索+Bachalpsee高山湖，体验丰富，高反风险低，缆车约¥330/人（STP5折），明显优于少女峰性价比",
     "🚄 瑞士旅行通票（Swiss Travel Pass）：行程在瑞士需用车6天（10/3入境–10/8离境），STP无5日票，6日连续票约CHF459/人（约¥3900）即可全程零购票；4日票约CHF389/人但9/30瑞士段+10/5机场票需另买，实际仅省约CHF20/人且要逐段买票——故选6日票更划算省心。10/3入境当天激活，购票后须在SBB/GoldenPass网站预约D7观景列车座位",
     "💰 瑞士物价是意大利2倍，Migros/Coop超市买早餐和午餐可大幅节省，晚餐再享受正餐",
     "🌡️ 10月瑞士山区早晚温差10°C+，First山顶约5-10°C，皮拉图斯峰顶约0-5°C，必带防风抓绒+轻薄羽绒",
@@ -222,7 +222,7 @@ window.TRIP_DATA = {
     },
     grindelwald: {
       desc: "艾格北壁脚下的高山度假村，是格林德瓦–First 缆车起点。First 山（2168m）有悬崖玻璃步道、高空飞索与通往 Bachalpsee 的徒步线，性价比高于少女峰。",
-      tips: ["First 缆车 STP 享 25% 折扣（约 CHF40/人），现场购票", "建议 9:00 前到缆车站，排队最短", "住格林德瓦一晚可避开人潮、从缆车站直接出发"]
+      tips: ["First 缆车 STP 享 50% 折扣（约 CHF40/人），现场购票", "建议 9:00 前到缆车站，排队最短", "住格林德瓦一晚可避开人潮、从缆车站直接出发"]
     },
     bachalpsee: {
       desc: "First 山顶徒步约 45 分钟可达的明镜高山湖，晴朗无风时完美倒映施雷克峰与少女峰群，是格林德瓦最美徒步线的终点。",
@@ -320,7 +320,7 @@ window.TRIP_DATA = {
     },
     first_base: {
       desc: "格林德瓦 First 缆车山脚站，从格林德瓦村步行约 5 分钟可达，分段缆车约 25 分钟上 First（2168m）。",
-      tips: ["STP 缆车享 25% 折扣，现场购票", "9:00 前到排队最短", "山顶有悬崖步道与高空飞索，量力选择"]
+      tips: ["STP 缆车享 50% 折扣，现场购票", "9:00 前到排队最短", "山顶有悬崖步道与高空飞索，量力选择"]
     }
   },
 
@@ -479,7 +479,7 @@ window.TRIP_DATA = {
       legs: [
         { from:"interlaken_8", to:"grindelwald_8", type:"train",    desc:"火车 · 约35分 · STP免费（行李留酒店）" },
         { from:"grindelwald_8",to:"first_bot_8",   type:"walk",     desc:"步行5分钟至缆车站" },
-        { from:"first_bot_8",  to:"first_top_8",   type:"cable_car",desc:"First 缆车 · 约25分 · STP 25折" },
+        { from:"first_bot_8",  to:"first_top_8",   type:"cable_car",desc:"First 缆车 · 约25分 · STP 5折" },
         { from:"first_top_8",  to:"bachalpsee",    type:"walk",     desc:"Bachalpsee 徒步 · 约45分单程" },
         { from:"bachalpsee",   to:"first_top_8",   type:"walk",     desc:"返回 First 缆车站" },
         { from:"first_top_8",  to:"grindelwald_8", type:"cable_car",desc:"缆车下山 · 约25分" },
@@ -575,8 +575,8 @@ window.TRIP_DATA = {
         { time:"10:35", name:"抵 SMN · 先到酒店放行李", note:"倾向先到酒店放行李——⚠️公寓15:00才入住、无24h前台，请提前用Booking联系房东确认能否提前寄放；若不行就用SMN车站KiPoint寄存（约€6），轻装看大卫" },
         { time:"12:00", name:"午餐（SMN / 老城）", meal:{ name:"SMN或老城小馆", cuisine:"托斯卡纳菜", perPerson:30, recommended:"帕尼尼、牛肚包", location:"车站/老城" } },
         { time:"14:00", name:"学院美术馆 — 《大卫》真迹", img:"images/david.jpg", duration:"2小时", cost:240, transport:"步行18分钟", note:"学院美术馆周一闭馆（本程周三看不受影响）| 17:30停止入场 | 提前到给缓冲，订14:00左右时段最稳", ticketTip:"强烈建议提前4-6周购票！最易售罄 | 无票旺季排队2-3小时 | 选与到达时间匹配的时段", booking:[{ name:"学院美术馆官网", url:"https://www.galleriaaccademiafirenze.it/en/visit/" },{ name:"Klook", url:"https://www.klook.com/zh-CN/activity/2493-accademia-gallery-florence/" }] },
-        { time:"16:00", name:"（路过·看时间）中央市场 Mercato Centrale", img:"images/mercato.jpg", cost:0, transport:"步行6分钟", note:"距大卫仅6分钟，有时间就进二楼美食广场逛吃/喝咖啡，没时间略过（D4午餐也会来）" },
-        { time:"17:00", name:"老城漫步 · 圣母百花大教堂广场", img:"images/florence.jpg", cost:0, note:"白天先看Duomo外观与广场氛围，登顶安排在D3" },
+        { time:"16:00", name:"（路过·看时间）中央市场 Mercato Centrale", img:"images/mercato.jpg", cost:0, transport:"步行6分钟", note:"距大卫仅6分钟，有时间就进二楼美食广场逛吃/喝咖啡，没时间略过" },
+        { time:"17:00", name:"老城漫步 · 圣母百花大教堂广场", img:"images/florence.jpg", cost:0, note:"白天先看Duomo外观与广场氛围（穹顶登顶本程已取消，D3改为托斯卡纳一日团）" },
         { time:"18:30", name:"晚餐 · Duomo 附近", meal:{ name:"老城区餐厅", cuisine:"托斯卡纳菜", perPerson:55, recommended:"T骨牛排、野猪肉面", location:"大教堂附近" }, note:"🌅 若当晚天气晴好，可饭前/饭后上米开朗基罗广场看日落（三晚机动）" }
       ]
     },
@@ -638,7 +638,7 @@ window.TRIP_DATA = {
       note:"⚠️ 最长交通日：07:25 发 / 13:41 到卢塞恩（约6h16）| 公寓无24h前台，提前联系房东约早退还钥匙（+39 380 124 1597）| 拖箱打车去SMN（约8分）| 米兰换乘约50分钟（09:20到 / 10:10发），较从容 | 入瑞士无须过关（同申根）| STP 今日激活",
       schedule:[
         { time:"06:50", text:"早餐从简 · 退房 · 打车前往 SMN 站", next:{ type:"walk", desc:"打车约8分钟（拖箱别走路）· 钥匙按房东指引归还" } },
-        { time:"07:30", text:"抵 SMN 站 · 检票找站台（binario）", next:null },
+        { time:"07:10", text:"抵 SMN 站 · 检票找站台（binario）", next:null },
         { time:"07:25", text:"Italo 9904 → 米兰中央站（09:20到）", ticket:true, next:{ type:"highspeed", desc:"约1h55 · 09:20 到米兰" } },
         { time:"09:20", text:"米兰中央站换乘（约50分钟，较从容）· 找站台", next:{ type:"international", desc:"EuroCity 10:10 发 · 过圣哥达隧道" } },
         { time:"10:10", text:"EuroCity 出发 米兰 → 卢塞恩", ticket:true, next:{ type:"international", desc:"约3h30 · 方向 Basel SBB · 到达 Pl.7" } },
@@ -648,7 +648,7 @@ window.TRIP_DATA = {
         { time:"晚上",  text:"老城晚餐（瑞士物价高，可超市补给）" }
       ],
       activities:[
-        { time:"07:30", name:"早餐 · 退房", note:"公寓有厨房可自理早餐；到SMN站约18-20分钟，拖箱建议打车，今天最长交通日" },
+        { time:"06:50", name:"早餐 · 退房", note:"公寓有厨房可自理早餐；到SMN站约18-20分钟，拖箱建议打车，今天最长交通日" },
         { time:"07:25", name:"Italo 9904 → 米兰中央站（09:20到）", duration:"约1h55", cost:560, transport:"高铁", note:"已购票：Italo 9904，SMART 9车15-16座 | 07:25发 09:20到", ticketTip:"已购（Italo 9904）", booking:[{ name:"Italo官网", url:"https://www.italotreno.com/" }] },
         { time:"10:10", name:"EuroCity 国际列车 米兰 → 卢塞恩", duration:"约3h31", cost:560, transport:"国际列车", note:"过圣哥达隧道风景壮观 | STP 覆盖瑞士段，米兰→意瑞边境段需另购票", ticketTip:"STP 需在 SBB 预约瑞士段座位（约€5/人）", booking:[{ name:"SBB 瑞士铁路", url:"https://www.sbb.ch/en" },{ name:"Rail Europe", url:"https://www.raileurope.com/" }] },
         { time:"13:41", name:"抵卢塞恩站 · 酒店入住", note:"Hotel Hofgarten，步行10分钟" },
@@ -733,7 +733,7 @@ window.TRIP_DATA = {
       activities:[
         { time:"07:30", name:"早餐 · 行李留酒店", note:"轻装出发，行李放 Essential by Dorint，今晚仍住这里，回来直接进房" },
         { time:"08:00", name:"因特拉肯东站 → 格林德瓦站", duration:"约35分钟", cost:0, transport:"火车", note:"STP免费 | 艾格北壁一路出镜", ticketTip:"STP直接上车 | 建议8:00班次，9:00前到缆车站" },
-        { time:"08:45", name:"格林德瓦 First 缆车 → First 2168m", img:"images/grindelwald.jpg", duration:"约25分钟", cost:660, transport:"缆车", note:"STP享25%折扣，约CHF40/人 | 分4节缆车上山", ticketTip:"缆车站现场购票（STP折后约CHF40/人）| 9:00前到站排队最短", booking:[{ name:"Jungfrau官网 First", url:"https://www.jungfrau.ch/en-gb/grindelwald-first/" }] },
+        { time:"08:45", name:"格林德瓦 First 缆车 → First 2168m", img:"images/grindelwald.jpg", duration:"约25分钟", cost:660, transport:"缆车", note:"STP享50%折扣，约CHF40/人 | 分4节缆车上山", ticketTip:"缆车站现场购票（STP折后约CHF40/人）| 9:00前到站排队最短", booking:[{ name:"Jungfrau官网 First", url:"https://www.jungfrau.ch/en-gb/grindelwald-first/" }] },
         { time:"09:15", name:"First Cliff Walk 悬崖步道（含玻璃平台）", duration:"30分钟", cost:0, note:"2168m悬崖外挑玻璃走道，俯瞰格林德瓦山谷和少女峰三姐妹 | 含在缆车票内" },
         { time:"10:00", name:"First Flyer 高空飞索（强烈推荐！）", duration:"20分钟", cost:480, note:"800m俯冲飞索，时速约80km | 旺季现场排队约30-45分钟", ticketTip:"现场购票（约CHF29/人）| 9:30前玩，排队最短", booking:[{ name:"现场购票/官网", url:"https://www.jungfrau.ch/en-gb/grindelwald-first/first-flyer/" }] },
         { time:"11:00", name:"Bachalpsee 高山湖徒步", img:"images/bachalpsee.jpg", duration:"约1.5小时往返", cost:0, note:"平坦山路约45分钟单程，倒映少女峰三姐妹 | 格林德瓦最美徒步线 | 运动鞋即可" },
@@ -766,11 +766,11 @@ window.TRIP_DATA = {
         { time:"07:30", name:"早餐 · 退房寄存行李", note:"湖区晨景最美，早起值得" },
         { time:"08:15", name:"布里恩茨湖游船 因特拉肯东站 → 布里恩茨", duration:"约1小时单程", cost:0, transport:"游船", note:"STP全程免费 | 湖水翡翠绿，两岸山峰倒影 | 布里恩茨是产木雕的小镇，可短留后乘回程船或火车返回" },
         { time:"09:30", name:"游船返回因特拉肯 / 布里恩茨小镇短留", cost:0, note:"原路返回（约1小时）或从布里恩茨乘火车回（约20分，STP免费）" },
-        { time:"10:30", name:"何维克街最后漫步 · 纪念品购买", duration:"1小时", cost:0, note:"周日部分商店关门，手表/纪念品店仍营业" },
+        { time:"10:30", name:"何维克街最后漫步 · 纪念品购买", duration:"1小时", cost:0, note:"周三商店正常营业，可从容选购纪念品/手表" },
         { time:"12:00", name:"因特拉肯东站 IC 城际 → 苏黎世中央站", duration:"约2小时", cost:0, transport:"城际列车", note:"STP包含 | 经伯尔尼", ticketTip:"STP直接上车 | 十一黄金周末日，车厢可能较满" },
         { time:"14:15", name:"Hotel St. Josef 入住", note:"老城核心，步行到各景点5-10分钟" },
         { time:"15:00", name:"午餐", meal:{ name:"苏黎世老城餐厅", cuisine:"瑞士德语区菜", perPerson:80, recommended:"Zürcher Geschnetzeltes（酱汁牛肉丝）", location:"老城" } },
-        { time:"16:00", name:"班霍夫大街 · 林登霍夫山丘", img:"images/bahnhofstrasse.jpg", duration:"2小时", cost:0, note:"周日商店关门，橱窗欣赏" },
+        { time:"16:00", name:"班霍夫大街 · 林登霍夫山丘", img:"images/bahnhofstrasse.jpg", duration:"2小时", cost:0, note:"周三商店正常营业，名表/百货可入店选购" },
         { time:"18:00", name:"老城 Niederdorf · 苏黎世湖畔散步", img:"images/niederdorf.jpg", cost:0 },
         { time:"19:30", name:"老城告别晚餐", meal:{ name:"苏黎世老城餐厅", cuisine:"瑞士/欧陆菜", perPerson:100, recommended:"最后一顿，好好吃！", location:"老城" } }
       ]
@@ -783,14 +783,14 @@ window.TRIP_DATA = {
       note:"⚠️ 退税（Global Blue）需离境前盖章 | 液体100ml限制，纪念品酒放托运",
       schedule:[
         { time:"07:30", text:"含早早餐 · 退房", next:{ type:"walk", desc:"步行苏黎世湖老城" } },
-        { time:"08:00", text:"苏黎世湖老城最后漫步 · 伴手礼购买（周一开门）" },
+        { time:"08:00", text:"苏黎世湖老城最后漫步 · 伴手礼购买（周四·商店营业）" },
         { time:"10:15", text:"苏黎世中央站 HB 出发", next:{ type:"train", desc:"火车直达苏黎世机场 · 约10-13分 · STP" } },
         { time:"10:45", text:"苏黎世机场 ZRH · 退税/值机/安检", warn:true, warnText:"国际航班建议起飞前2.5小时到" },
         { time:"13:30", text:"✈️ CX382 起飞 → 香港" },
         { time:"次日",  text:"06:55 抵达香港 🏠" }
       ],
       activities:[
-        { time:"07:30", name:"含早早餐 · 退房", note:"周一商店开门，最后购物机会" },
+        { time:"07:30", name:"含早早餐 · 退房", note:"周四商店营业，最后购物机会" },
         { time:"08:00", name:"苏黎世湖老城最后漫步 · 伴手礼购买", img:"images/zurich.jpg", duration:"2小时", cost:0, note:"推荐：莲花巧克力、瑞士军刀、格雷登巧克力、Ricola" },
         { time:"10:15", name:"苏黎世中央站 HB → 苏黎世机场 ZRH", duration:"约10-13分钟", cost:0, transport:"直达火车", note:"STP包含 | 国际航班建议起飞前2.5小时到" },
         { time:"10:45", name:"苏黎世机场 ZRH · 退税/值机/安检", note:"退税（Global Blue）需离境前海关盖章 | 液体100ml托运", ticketTip:"退税须在离开申根区前完成：先在Global Blue自助机扫描，再找海关盖章 | 预留30分钟" },
