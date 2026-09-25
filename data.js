@@ -32,13 +32,14 @@ window.TRIP_DATA = {
   /* ── 预算（路书用） ── */
   budget: {
     transport: {
-      subtotal: 30290,
+      subtotal: 33272,
       items: [
         { name:"国泰航空 CX233(9/29)+CX382(10/8) 机票 ×2（含税¥19,702）",            cost:19702 },
         { name:"Malpensa Express 机场快线 ×2",                  cost:208   },
         { name:"意大利高铁 Italo ×2段 ×2人（已购 €159.60）",       cost:1680  },
-        { name:"EuroCity 国际列车 米兰→卢塞恩 意段 ×2（估）",   cost:700   },
-        { name:"Swiss Travel Pass 6日 10/3–10/8 ×2（约CHF459/人，覆盖全程）", cost:7800  },
+        { name:"EuroCity 米兰→卢塞恩 意段 ×2（已购 CHF24/人，含米兰→瑞境）", cost:410   },
+        { name:"Swiss Travel Pass 6日 10/3–10/8 ×2（CHF634/人，覆盖全程）", cost:10800  },
+        { name:"GoldenPass 座位预订 ×2（已购 CHF16/人）",        cost:272   },
         { name:"市内地铁/公交（意大利）（估）",                  cost:200   }
       ]
     },
@@ -61,18 +62,18 @@ window.TRIP_DATA = {
       ]
     },
     tickets: {
-      subtotal: 4820,
+      subtotal: 8842,
       items: [
         { name:"米兰大教堂登顶 ×2",             cost:240 },
         { name:"学院美术馆（大卫）×2",           cost:240 },
         { name:"乌菲兹美术馆 ×2",               cost:320 },
-        { name:"皮蒂宫+波波里花园 ×2",           cost:280 },
-        { name:"皮拉图斯齿轨火车（STP5折）×2",  cost:720 },
+        { name:"圣母百花讲解团（含穹顶登顶）×2", cost:1262   },
+        { name:"皮拉图斯齿轨+缆车（上下山·STP5折）×2", cost:800 },
         { name:"冰川公园 ×2",                   cost:160 },
-        { name:"GoldenPass 座位预约 ×2",         cost:80  },
+        { name:"因特拉肯滑翔伞（双人 tandem）×2（¥1520/人）", cost:3040 },
         { name:"First 缆车（STP5折）×2",        cost:660 },
         { name:"First Flyer 飞索 ×2",            cost:480 },
-        { name:"托斯卡纳·瓦尔多尔恰一日团（含午餐+Brunello品酒）×2（约）", cost:1640 }
+        { name:"托斯卡纳·瓦尔多尔恰一日团（8人小团包车）×2", cost:1640 }
       ]
     },
     other: {
@@ -83,17 +84,17 @@ window.TRIP_DATA = {
         { name:"杂项/应急",        cost:1000 }
       ]
     },
-    total: 79146,   // 交通¥30290 + 住宿¥23636 + 餐饮¥16800 + 门票/活动¥4820 + 其他¥3600
-    perPerson: 39573
+    total: 86168,   // 交通¥33290 + 住宿¥23636 + 餐饮¥16800 + 门票/活动¥8842 + 其他¥3600
+    perPerson: 43084
   },
 
   /* ── 实用贴士（路书用） ── */
   tips: [
-    "🗓️ 【购票时间表】出发前3个月：机票；前2-3个月：Frecciarossa高铁；前4-6周：学院美术馆、乌菲兹（极易售罄）；前3-4周：大教堂穹顶、米兰大教堂；前2-3周：GoldenPass座位；前1-2周：First缆车（可当天买）",
+    "🗓️ 【购票时间表】出发前3个月：机票；前2-3个月：意大利高铁 Italo；前4-6周：学院美术馆、乌菲兹（极易售罄）；前3-4周：大教堂穹顶、米兰大教堂；前1-2周：First缆车（可当天买）",
     "🎫 学院美术馆（大卫）是佛罗伦萨最难抢的票，旺季常提前3-4周售罄，务必第一个订！无票旺季可能排队2-3小时仍买不到当日票",
-    "⏰ 【建议到达时间】乌菲兹8:15开门准时到；大教堂穹顶按时段前10分钟到；学院美术馆开门前10分钟到；First缆车9:00前到（住格林德瓦可8:45到，几乎无队）",
+    "⏰ 【建议到达时间】乌菲兹14:15票面时段、按时段前10分钟到；大教堂屋顶16:00时段、按时段前10分钟到；学院美术馆14:15、开门前10分钟到；First缆车9:00前到（住格林德瓦可8:45到，几乎无队）",
     "🏔️ First山（2168m）：悬崖步道+高空飞索+Bachalpsee高山湖，体验丰富，高反风险低，缆车约¥330/人（STP5折），明显优于少女峰性价比",
-    "🚄 瑞士旅行通票（Swiss Travel Pass）：行程在瑞士需用车6天（10/3入境–10/8离境），STP无5日票，6日连续票约CHF459/人（约¥3900）即可全程零购票；4日票约CHF389/人但9/30瑞士段+10/5机场票需另买，实际仅省约CHF20/人且要逐段买票——故选6日票更划算省心。10/3入境当天激活，购票后须在SBB/GoldenPass网站预约D7观景列车座位",
+    "🚄 瑞士旅行通票（Swiss Travel Pass）：已购 6 日连续票 ×2（CHF634/人，约¥5400/人），10/3 入境 – 10/8 离境的瑞士火车/游船/公交全部免费、景点折扣，10/3 入境当天激活 | D7 金色山口观景列车（Luzern-Interlaken Express，PE 2916）免费乘车，已购座位预订 CHF16/人",
     "💰 瑞士物价是意大利2倍，Migros/Coop超市买早餐和午餐可大幅节省，晚餐再享受正餐",
     "🌡️ 10月瑞士山区早晚温差10°C+，First山顶约5-10°C，皮拉图斯峰顶约0-5°C，必带防风抓绒+轻薄羽绒",
     "🧾 购物满€154可退税（Global Blue），苏黎世机场离境前找海关盖章，预留30分钟，可退约13% VAT",
@@ -127,6 +128,10 @@ window.TRIP_DATA = {
     pontevecchio: {
       desc: "阿诺河上唯一幸存于二战的中世纪廊桥，桥上两侧是金银珠宝老店，桥顶为美第奇家族的瓦萨里走廊。",
       tips: ["黄昏与清晨光线最美、人最少", "桥上人多，注意随身财物防扒手"]
+    },
+    via_maggio: {
+      desc: "奥尔特拉诺（Oltrarno）的 Via Maggio 古董街，文艺复兴宫殿之间遍布古董店、画廊与手工皮具/纸品作坊，是佛罗伦萨最有气质的淘货街区。",
+      tips: ["与圣神大殿（Santo Spirito）一带连成手工艺区，可一并逛", "古董多为孤品，可议价但要懂行", "部分店铺午休（13:00–15:00），傍晚营业"]
     },
     david: {
       desc: "学院美术馆镇馆之宝——米开朗基罗 26 岁完成的大理石杰作《大卫》（高 5.17m）真迹，陈列于专属穹顶厅，另有其「未完成的奴隶」系列。",
@@ -183,6 +188,26 @@ window.TRIP_DATA = {
     pienza: {
       desc: "皮恩扎（Pienza），UNESCO 世界遗产、文艺复兴「理想之城」规划典范，主教座堂与庇护二世广场小巧精致，城边步道俯瞰瓦尔多尔恰明信片般的柏树山丘。",
       tips: ["名产佩科里诺（Pecorino di Pienza）羊奶酪，可尝可买", "沿城墙观景步道走一圈，黄昏最出片", "小城步行可逛完，留时间坐下喝杯咖啡"]
+    },
+    valdorcia_ss: {
+      desc: "奥尔恰谷的经典「小S弯」丝柏树机位，起伏的丘陵公路被成排丝柏与麦田环绕，是托斯卡纳明信片同款画面。",
+      tips: ["路边即停即拍，注意来往车辆", "侧光/黄昏光线最出片", "无人机需遵守当地规定"]
+    },
+    vitaleta: {
+      desc: "小耳朵教堂（Cappella della Madonna di Vitaleta），孤立于丝柏与麦田之间的小教堂，是瓦尔多尔恰最著名的明信片取景地。",
+      tips: ["最佳机位在 SP146 公路旁远眺，可步行近观", "黄昏金色光线最美"]
+    },
+    cypress_row: {
+      desc: "双排丝柏树，两排柏树夹道的乡间小路，电影同款画面，随手一拍即大片。",
+      tips: ["站在道路尽头取纵深感", "注意不要阻塞农庄出入通道"]
+    },
+    big_s: {
+      desc: "大S弯，托斯卡纳最具代表性的丘陵公路风景，蜿蜒公路穿行于丝柏与金色麦田间。",
+      tips: ["高处观景点俯拍效果最佳", "午后顺光更通透"]
+    },
+    siena: {
+      desc: "锡耶纳（Siena），保存完好的中世纪古城，贝壳形状的坎波广场（Piazza del Campo）与黑白大理石大教堂同列世界遗产。",
+      tips: ["坎波广场是古城核心，环形广场值得绕一圈", "大教堂地面马赛克精美，入内需另购票", "古城石板路多，穿舒适鞋"]
     },
     lucerne: {
       desc: "卡佩尔廊桥始建于 1333 年，是欧洲最古老的有顶木桥，桥身彩绘历史画作，八角水塔曾作监狱与宝库，是卢塞恩的象征。",
@@ -264,7 +289,7 @@ window.TRIP_DATA = {
     },
     luzern_bahnhof: {
       desc: "卢塞恩火车站，紧靠罗伊斯河口与琉森湖，门前石拱门为旧站遗迹，出站即见卡佩尔廊桥与老城。",
-      tips: ["出站左前方步行约 3–5 分钟到廊桥/老城", "湖滨游船码头就在站旁，去皮拉图斯/各湖区在此乘船", "GoldenPass 等观景列车在此发车，记得提前预约座位"]
+      tips: ["出站左前方步行约 3–5 分钟到廊桥/老城", "湖滨游船码头就在站旁，去皮拉图斯/各湖区在此乘船", "GoldenPass（PE 2916）在此发车，座位已预订（CHF16/人）"]
     },
     interlaken_ost: {
       desc: "因特拉肯东站（Interlaken Ost），前往少女峰地区（格林德瓦/劳特布龙嫩）与布里恩茨湖游船的换乘核心。",
@@ -381,37 +406,41 @@ window.TRIP_DATA = {
     "3": {
       fitBounds: [[42.98,11.23],[43.80,11.70]],
       waypoints: [
-        { id:"florence_dep", name:"Piazzale Montelungo（集合上车）", latlng:[43.7772,11.2470], info:"montelungo" },
-        { id:"montalcino_3", name:"蒙塔奇诺 Montalcino",           latlng:[43.0576,11.4894], info:"montalcino" },
-        { id:"brunello_3",   name:"Brunello 圣殿（品酒午餐）",      latlng:[43.0560,11.4890], info:"brunello_temple" },
-        { id:"santantimo_3", name:"圣安蒂莫修道院",                 latlng:[43.0131,11.5330], info:"santantimo" },
-        { id:"pienza_3",     name:"皮恩扎 Pienza",                 latlng:[43.0785,11.6786], info:"pienza" }
+        { id:"florence_dep", name:"佛罗伦萨中央火车站（集合）", latlng:[43.7759,11.2482], info:"firenze_smn" },
+        { id:"ss_curve",     name:"小S弯丝柏树机位",           latlng:[43.0580,11.6460], info:"valdorcia_ss" },
+        { id:"pienza_3",     name:"皮恩扎 Pienza",             latlng:[43.0785,11.6786], info:"pienza" },
+        { id:"vitaleta",     name:"小耳朵教堂",                latlng:[43.0593,11.6476], info:"vitaleta" },
+        { id:"cypress_row",  name:"双排丝柏树",                latlng:[43.0556,11.6423], info:"cypress_row" },
+        { id:"big_s",        name:"大S弯",                     latlng:[43.0570,11.6440], info:"big_s" },
+        { id:"siena",        name:"锡耶纳 Siena",              latlng:[43.3188,11.3308], info:"siena" }
       ],
       legs: [
-        { from:"florence_dep", to:"montalcino_3", type:"bus", desc:"旅游大巴南下 · 约2小时" },
-        { from:"montalcino_3", to:"brunello_3",   type:"bus", desc:"车程约15分 · Brunello 品酒午餐" },
-        { from:"brunello_3",   to:"santantimo_3", type:"bus", desc:"车程约20–40分 · 柏树山丘" },
-        { from:"santantimo_3", to:"pienza_3",     type:"bus", desc:"车程约40分" },
-        { from:"pienza_3",     to:"florence_dep", type:"bus", desc:"大巴返回佛罗伦萨 · 约2小时" }
+        { from:"florence_dep", to:"ss_curve",    type:"car", desc:"8人小团包车 · 约3小时" },
+        { from:"ss_curve",     to:"pienza_3",    type:"car", desc:"车程约10分钟" },
+        { from:"pienza_3",     to:"vitaleta",    type:"car", desc:"车程约15分钟" },
+        { from:"vitaleta",     to:"cypress_row", type:"car", desc:"车程约10分钟" },
+        { from:"cypress_row",  to:"big_s",       type:"car", desc:"车程约10分钟" },
+        { from:"big_s",        to:"siena",       type:"car", desc:"车程约50分钟" },
+        { from:"siena",        to:"florence_dep",type:"car", desc:"返程 · 约1小时" }
       ]
     },
     "4": {
       fitBounds: [[43.758,11.240],[43.782,11.268]],
       waypoints: [
         { id:"hotel_fi4", name:"Residenza Marchesi Pontenani", latlng:[43.7671,11.2651], info:"hotel_opera" },
+        { id:"duomo4",  name:"圣母百花大教堂",            latlng:[43.7730,11.2560], img:"images/florence.jpg" },
         { id:"uffizi",  name:"乌菲兹美术馆",              latlng:[43.7682,11.2553], img:"images/uffizi.jpg" },
-        { id:"pitti",   name:"皮蒂宫",                   latlng:[43.7655,11.2502], img:"images/pitti.jpg" },
-        { id:"boboli",  name:"波波里花园",                latlng:[43.7633,11.2497], img:"images/boboli.jpg" },
-        { id:"spirito", name:"圣神大殿区",                latlng:[43.7667,11.2493], img:"images/santospirito.jpg" },
+        { id:"ponte_vecchio", name:"老桥（Humilis / Bottega del Giglio）", latlng:[43.7681,11.2531], info:"pontevecchio" },
+        { id:"via_maggio", name:"Via Maggio 古董街",      latlng:[43.7668,11.2489], info:"via_maggio" },
         { id:"piazzale4",name:"米开朗基罗广场（机动日落）", latlng:[43.7629,11.2646], img:"images/piazzale.jpg" }
       ],
       legs: [
-        { from:"hotel_fi4", to:"uffizi", type:"walk", desc:"早上从酒店出发 · 步行约10分钟" },
-        { from:"uffizi",  to:"pitti",   type:"walk", desc:"过老桥到奥尔特拉诺 · 步行约12分钟" },
-        { from:"pitti",   to:"boboli",  type:"walk", desc:"步行2分钟（同一建筑群）" },
-        { from:"boboli",  to:"spirito", type:"walk", desc:"步行约5分钟（含就近午餐）" },
-        { from:"spirito", to:"piazzale4",type:"walk", desc:"（机动·天气好）上山看日落 · 步行约15分钟" },
-        { from:"piazzale4",to:"hotel_fi4",type:"walk", desc:"看完日落返回酒店 · 步行约18分钟" }
+        { from:"hotel_fi4", to:"duomo4", type:"walk", desc:"去大教堂讲解团 · 步行约12分钟" },
+        { from:"duomo4",  to:"uffizi", type:"walk", desc:"经 Via de' Calzaiuoli · 步行约10分钟（含午餐）" },
+        { from:"uffizi",  to:"ponte_vecchio", type:"walk", desc:"Via Por Santa Maria → 老桥 · 步行约5分钟" },
+        { from:"ponte_vecchio", to:"via_maggio", type:"walk", desc:"过老桥到南岸 · 步行约5分钟" },
+        { from:"via_maggio", to:"piazzale4", type:"walk", desc:"上山看日落 · 步行约15分钟" },
+        { from:"piazzale4", to:"hotel_fi4", type:"walk", desc:"看完日落返回酒店/晚餐 · 步行约18分钟" }
       ]
     },
     "5": {
@@ -443,7 +472,7 @@ window.TRIP_DATA = {
         { id:"museggmauer",     name:"城墙 Museggmauer",     latlng:[47.0578,8.3087], img:"images/musegg.jpg" }
       ],
       legs: [
-        { from:"pier_lz",     to:"alpnachstad", type:"boat",      desc:"游船 · 约1小时 · STP免费" },
+        { from:"pier_lz",     to:"alpnachstad", type:"boat",      desc:"游船 9:38 · 约1小时 · STP免费" },
         { from:"alpnachstad", to:"pilatus",     type:"funicular", desc:"世界最陡齿轨火车 · STP 5折" },
         { from:"pilatus",     to:"kriens",      type:"cable_car", desc:"龙脊缆车下山" },
         { from:"kriens",      to:"lion",        type:"bus",       desc:"巴士回市区" },
@@ -530,28 +559,28 @@ window.TRIP_DATA = {
       theme:"抵达米兰 · 感受时尚古城",
       weekday:"周二",
       dayWeather:{ icon:"partlyCloudy", high:22, low:14 },
-      note:"⚠️ 长途红眼刚落地，别排太满；地铁单程€2.2",
+      note:"⚠️ 长途红眼刚落地，别排太满 | 大教堂屋顶票面时段为 16:00，下午再去 | 地铁单程€2.2",
       schedule:[
         { time:"08:00", text:"抵达 MXP T1 · 入境取行李", latlng:[45.6306,8.7231], pdf:[{ name:"✈️ 机票出行单", url:"pdfs/flight-tickets.pdf" },{ name:"🛂 过关行程单", url:"pdfs/border-itinerary.pdf" }], next:{ type:"train", desc:"Malpensa Express · 约52分 · €13/人" } },
         { time:"09:10", text:"乘 Malpensa Express → 米兰中央站", latlng:[45.4854,9.2045], next:{ type:"walk", desc:"步行约5分钟" } },
         { time:"10:15", text:"寄存行李 Hotel Charly", latlng:[45.4810,9.2072], next:{ type:"metro", desc:"地铁M3 Centrale→Duomo · €2.2" } },
-        { time:"10:30", text:"登米兰大教堂 + 屋顶露台", latlng:[45.4641,9.1919], pdf:[{ name:"🎫 大教堂门票", url:"pdfs/ticket-duomo-milano.pdf" }], next:{ type:"walk", desc:"步行1分钟" } },
-        { time:"12:30", text:"埃马努埃莱二世长廊午餐 · 斯卡拉广场", latlng:[45.4654,9.1897], next:{ type:"walk", desc:"步行约12分钟" } },
-        { time:"14:00", text:"斯福尔扎城堡 · 森皮奥内公园", latlng:[45.4706,9.1796], next:{ type:"walk", desc:"步行约25分钟" } },
-        { time:"15:00", text:"Hotel Charly 正式入住", latlng:[45.4810,9.2072], pdf:[{ name:"🏨 酒店确认单", url:"pdfs/hotel-milan.pdf" }] },
-        { time:"16:00", text:"（可选）Navigli 运河区散步", latlng:[45.4495,9.1776], next:{ type:"metro", desc:"地铁回中央站" } },
-        { time:"晚上",  text:"老城晚餐（意面/烩饭/炖牛膝）", latlng:[45.4641,9.1919] }
+        { time:"10:45", text:"埃马努埃莱二世长廊 · 斯卡拉广场", latlng:[45.4654,9.1897], next:{ type:"walk", desc:"步行约12分钟去 Brera 午餐" } },
+        { time:"12:30", text:"午餐 · Brera 布雷拉区（本地 trattoria）", latlng:[45.4715,9.1880], next:{ type:"walk", desc:"步行约5分钟到斯福尔扎城堡" } },
+        { time:"14:00", text:"斯福尔扎城堡 · 森皮奥内公园", latlng:[45.4706,9.1796], next:{ type:"walk", desc:"步行约25分钟回大教堂" } },
+        { time:"16:00", text:"登米兰大教堂 + 屋顶露台（票面 16:00）", latlng:[45.4641,9.1919], pdf:[{ name:"🎫 大教堂门票", url:"pdfs/ticket-duomo-milano.pdf" }], next:{ type:"metro", desc:"地铁M1/M3 回中央站" } },
+        { time:"18:00", text:"Hotel Charly 正式入住", latlng:[45.4810,9.2072], pdf:[{ name:"🏨 酒店确认单", url:"pdfs/hotel-milan.pdf" }] },
+        { time:"晚上",  text:"老城晚餐（意面/烩饭/炖牛膝）· Navigli 可选", latlng:[45.4641,9.1919] }
       ],
       activities:[
         { time:"08:00", name:"抵达 MXP T1 · 入境取行李", latlng:[45.6306,8.7231], note:"国泰 CX233（香港00:50起飞）直飞落地约08:00 | 深圳需前一晚经跨境巴士/口岸大巴过境至香港机场，预留充足过关时间 | 入境申根盖章，备好酒店单/回程票以备询问", transport:"落地", pdf:[{ name:"✈️ 机票出行单", url:"pdfs/flight-tickets.pdf" },{ name:"🛂 过关行程单", url:"pdfs/border-itinerary.pdf" }] },
         { time:"09:10", name:"乘 Malpensa Express → 米兰中央站", latlng:[45.4854,9.2045], duration:"52分钟", cost:208, transport:"机场快线", note:"€13/人，车站直连机场T1，每30分钟一班", booking:[{ name:"官网购票", url:"https://www.malpensaexpress.it/en/" }] },
         { time:"10:15", name:"寄存行李 · Hotel Charly", latlng:[45.481,9.2072], note:"步行5分钟，14:00起正式入住", transport:"步行5分钟" },
-        { time:"10:30", name:"登米兰大教堂 + 屋顶露台", latlng:[45.4641,9.1919], img:"images/milan.jpg", duration:"2小时", cost:240, note:"屋顶可眺望阿尔卑斯山脉，已购票凭 PDF 直接入场，9:00开门前15分钟到场", pdf:[{ name:"🎫 大教堂门票", url:"pdfs/ticket-duomo-milano.pdf" }] },
-        { time:"12:30", name:"午餐", latlng:[45.4654,9.1897], meal:{ name:"埃马努埃莱二世长廊周边", cuisine:"意大利菜", perPerson:50, recommended:"意面、披萨", location:"长廊内" } },
-        { time:"13:30", name:"斯卡拉广场 · 斯福尔扎城堡 · 森皮奥内公园", latlng:[45.4706,9.1796], img:"images/castello.jpg", duration:"1.5小时", cost:0, transport:"步行" },
-        { time:"15:00", name:"Hotel Charly 正式入住", latlng:[45.481,9.2072], note:"中央站步行5分钟", pdf:[{ name:"🏨 酒店确认单", url:"pdfs/hotel-milan.pdf" }] },
-        { time:"16:00", name:"（可选）Navigli 运河区漫步", latlng:[45.4495,9.1776], img:"images/navigli.jpg", cost:0, transport:"地铁M1", note:"运河两岸酒吧林立，傍晚最有氛围" },
-        { time:"19:30", name:"晚餐", latlng:[45.4641,9.1919], meal:{ name:"老城区意大利餐厅", cuisine:"正宗意大利菜", perPerson:60, recommended:"米兰炖牛膝、意式烩饭", location:"老城" } }
+        { time:"10:45", name:"埃马努埃莱二世长廊 · 斯卡拉广场", latlng:[45.4654,9.1897], img:"images/galleria.jpg", duration:"1.5小时", cost:0, transport:"地铁M3", note:"玻璃穹顶拱廊 + 达芬奇雕像广场，就在大教堂旁" },
+        { time:"12:30", name:"午餐 · Brera 布雷拉区", latlng:[45.4715,9.188], meal:{ name:"Trattoria Torre di Pisa", cuisine:"米兰传统菜", perPerson:45, recommended:"米兰炖牛膝、藏红花烩饭、意面", location:"Via Fiori Chiari 11（Brera）" }, note:"Brera 就在斯福尔扎城堡旁，吃完直接去城堡 | 备选 Osteria dell'Acquabella（藏红花烩饭）/ Duomo 旁 Luini panzerotti 炸饺（快）" },
+        { time:"14:00", name:"斯福尔扎城堡 · 森皮奥内公园", latlng:[45.4706,9.1796], img:"images/castello.jpg", duration:"1.5小时", cost:0, transport:"步行", note:"红砖城堡 + 森皮奥内公园，午后散步" },
+        { time:"16:00", name:"登米兰大教堂 + 屋顶露台（票面 16:00）", latlng:[45.4641,9.1919], img:"images/milan.jpg", duration:"2小时", cost:240, note:"已购 Duomo Pass Lift（电梯登顶），屋顶时段 16:00 准时到场、17:50 截止入场", pdf:[{ name:"🎫 大教堂门票", url:"pdfs/ticket-duomo-milano.pdf" }] },
+        { time:"18:00", name:"Hotel Charly 正式入住", latlng:[45.481,9.2072], note:"中央站步行5分钟", pdf:[{ name:"🏨 酒店确认单", url:"pdfs/hotel-milan.pdf" }] },
+        { time:"19:30", name:"晚餐（可选 Navigli 运河区）", latlng:[45.4495,9.1776], meal:{ name:"老城区意大利餐厅", cuisine:"正宗意大利菜", perPerson:60, recommended:"米兰炖牛膝、意式烩饭；或去 Navigli 运河区开胃酒", location:"老城 / Navigli" } }
       ]
     },
     {
@@ -559,74 +588,83 @@ window.TRIP_DATA = {
       theme:"米兰 → 佛罗伦萨 · 学院美术馆大卫",
       weekday:"周三",
       dayWeather:{ icon:"sunny", high:23, low:15 },
-      note:"务必提前订时段票、坐早班高铁提前到佛城留缓冲 | 学院美术馆周一闭馆，本程周三看《大卫》不受影响 | 中央市场顺路可选 | 🌅 米开朗基罗广场日落：D3 去托斯卡纳，改在 D2/D4 两晚挑晴天上（今晚可主排）",
+      note:"务必提前订时段票、坐早班高铁提前到佛城留缓冲 | 学院美术馆周一闭馆，本程周三看《大卫》不受影响 | 午餐已订 Ciro & Sons（Via del Giglio 28/r）12:00 | 购物：Via della Scala / Via dei Fossi（SMN西侧）顺路逛 | 中央市场顺路可选 | 🌅 米开朗基罗广场日落：D3 去托斯卡纳，改在 D2/D4 两晚挑晴天上",
       schedule:[
         { time:"08:00", text:"早餐 · 退房 · 前往米兰中央站", latlng:[45.4854,9.2045], next:{ type:"highspeed", desc:"Italo 9919 · 08:40发 · 10:35到" } },
         { time:"08:40", text:"Italo 9919 米兰中央站 → 佛罗伦萨 SMN（10:35到）", latlng:[43.7759,11.2482], pdf:[{ name:"🚄 高铁票", url:"pdfs/train-0930-milan-florence.pdf" }], next:{ type:"walk", desc:"到酒店寄存行李（15:00后正式入住）" } },
-        { time:"10:35", text:"抵 SMN · 先到酒店放行李 · 午餐", latlng:[43.7671,11.2651], pdf:[{ name:"🏨 酒店确认单", url:"pdfs/hotel-florence.pdf" }], next:{ type:"walk", desc:"步行约18分钟或打车去学院美术馆" } },
-        { time:"14:00", text:"学院美术馆 — 看《大卫》真迹", latlng:[43.7767,11.2589], pdf:[{ name:"🎫 学院美术馆门票", url:"pdfs/ticket-accademia.pdf" }], next:{ type:"walk", desc:"步行约6分钟" } },
+        { time:"10:35", text:"抵 SMN · 先到酒店放行李", latlng:[43.7671,11.2651], pdf:[{ name:"🏨 酒店确认单", url:"pdfs/hotel-florence.pdf" }], next:{ type:"walk", desc:"午餐 + 逛街（SMN 西侧）" } },
+        { time:"12:00", text:"午餐 · Ciro & Sons（已预约 12:00 · 拿坡里披萨）· 前后顺路逛 Via della Scala / Via dei Fossi", latlng:[43.7750,11.2507], next:{ type:"walk", desc:"步行约15分钟去学院美术馆" } },
+        { time:"14:15", text:"学院美术馆 — 看《大卫》真迹", latlng:[43.7767,11.2589], pdf:[{ name:"🎫 学院美术馆门票", url:"pdfs/ticket-accademia.pdf" }], next:{ type:"walk", desc:"步行约6分钟" } },
         { time:"16:00", text:"（路过·看时间）中央市场美食广场", latlng:[43.7770,11.2531], next:{ type:"walk", desc:"步行约7分钟" } },
-        { time:"17:00", text:"老城漫步 · 圣母百花大教堂广场", latlng:[43.7730,11.2560], next:{ type:"walk", desc:"步行回酒店约12分钟" } },
-        { time:"18:30", text:"晚餐（Duomo 附近）· 🌅天气好可上米开朗基罗广场看日落", latlng:[43.7730,11.2560] }
+        { time:"17:00", text:"老城漫步 · 圣母百花大教堂广场 · Via de' Calzaiuoli 顺路逛", latlng:[43.7730,11.2560], next:{ type:"walk", desc:"步行回酒店约12分钟" } },
+        { time:"18:30", text:"晚餐（Duomo 附近）· 🌅天气好可上米开朗基罗广场看日落", latlng:[43.7730,11.2560] },
+        { time:"20:00", text:"超市补给（Conad/Coop）· 买早餐/零食/水（公寓有厨房）", latlng:[43.7671,11.2651] }
       ],
       activities:[
         { time:"08:00", name:"早餐 · 退房 · 前往米兰中央站", latlng:[45.4854,9.2045], note:"D1已逛过米兰主要景点，今天坐早班高铁提前到佛城，给大卫留足缓冲" },
         { time:"08:40", name:"Italo 9919 → 佛罗伦萨 SMN（10:35到）", latlng:[43.7759,11.2482], duration:"约1h55", cost:560, transport:"高铁", note:"已购票：Italo 9919，PRIMA 2车2-3座，FAST TRACK | 08:40发 10:35到，到佛城时间充裕", pdf:[{ name:"🚄 高铁票", url:"pdfs/train-0930-milan-florence.pdf" }] },
         { time:"10:35", name:"抵 SMN · 先到酒店放行李", latlng:[43.7671,11.2651], note:"倾向先到酒店放行李——⚠️公寓15:00才入住、无24h前台，请提前用Booking联系房东确认能否提前寄放；若不行就用SMN车站KiPoint寄存（约€6），轻装看大卫", pdf:[{ name:"🏨 酒店确认单", url:"pdfs/hotel-florence.pdf" }] },
-        { time:"12:00", name:"午餐（SMN / 老城）", latlng:[43.773,11.256], meal:{ name:"SMN或老城小馆", cuisine:"托斯卡纳菜", perPerson:30, recommended:"帕尼尼、牛肚包", location:"车站/老城" } },
-        { time:"14:00", name:"学院美术馆 — 《大卫》真迹", latlng:[43.7767,11.2589], img:"images/david.jpg", duration:"2小时", cost:240, transport:"步行18分钟", note:"学院美术馆周一闭馆（本程周三看不受影响）| 17:30停止入场 | 已购票凭 PDF 按预约时段入场", pdf:[{ name:"🎫 学院美术馆门票", url:"pdfs/ticket-accademia.pdf" }] },
+        { time:"12:00", name:"午餐 · Ciro & Sons（已预约 12:00）", latlng:[43.775,11.2507], meal:{ name:"Ciro & Sons · Pizzeria Napoletana", cuisine:"拿坡里披萨/意大利菜", perPerson:35, recommended:"那不勒斯披萨、无麸质披萨（招牌）", location:"Via del Giglio 28/r" }, note:"已预约 12:00（电话 +39 055 289694）| 前后顺路逛 Via della Scala / Via dei Fossi（SMN西侧皮革/古董街，就在隔壁街区）" },
+        { time:"14:15", name:"学院美术馆 — 《大卫》真迹", latlng:[43.7767,11.2589], img:"images/david.jpg", duration:"2小时", cost:240, transport:"步行18分钟", note:"学院美术馆周一闭馆（本程周三看不受影响）| 17:30停止入场 | 已购票凭 PDF 按 14:15 时段入场", pdf:[{ name:"🎫 学院美术馆门票", url:"pdfs/ticket-accademia.pdf" }] },
         { time:"16:00", name:"（路过·看时间）中央市场 Mercato Centrale", latlng:[43.777,11.2531], img:"images/mercato.jpg", cost:0, transport:"步行6分钟", note:"距大卫仅6分钟，有时间就进二楼美食广场逛吃/喝咖啡，没时间略过" },
-        { time:"17:00", name:"老城漫步 · 圣母百花大教堂广场", latlng:[43.773,11.256], img:"images/florence.jpg", cost:0, note:"白天先看Duomo外观与广场氛围（穹顶登顶本程已取消，D3改为托斯卡纳一日团）" },
-        { time:"18:30", name:"晚餐 · Duomo 附近", latlng:[43.773,11.256], meal:{ name:"老城区餐厅", cuisine:"托斯卡纳菜", perPerson:55, recommended:"T骨牛排、野猪肉面", location:"大教堂附近" }, note:"🌅 若当晚天气晴好，可饭前/饭后上米开朗基罗广场看日落（三晚机动）" }
+        { time:"17:00", name:"老城漫步 · 圣母百花大教堂广场 · Via de' Calzaiuoli 顺路逛", latlng:[43.773,11.256], img:"images/florence.jpg", cost:0, note:"白天先看Duomo外观与广场氛围 | D4 已订圣母百花讲解+登穹顶，今天可先顺路逛 Duomo→领主广场的 Via de' Calzaiuoli 主购物街" },
+        { time:"18:30", name:"晚餐 · Duomo 附近", latlng:[43.773,11.256], meal:{ name:"老城区餐厅", cuisine:"托斯卡纳菜", perPerson:55, recommended:"T骨牛排、野猪肉面", location:"大教堂附近" }, note:"🌅 若当晚天气晴好，可饭前/饭后上米开朗基罗广场看日落（三晚机动）" },
+        { time:"20:00", name:"超市补给（Conad / Coop）", latlng:[43.7671,11.2651], cost:0, transport:"步行", note:"佛罗伦萨住3晚且公寓有厨房，今晚买好早餐/牛奶/酸奶/零食/水，明后天早餐自理 | 圣十字区周边有 Conad/Coop 超市" }
       ]
     },
     {
       day:3, date:"10/01 周四", city:"florence", title:"托斯卡纳 · 瓦尔多尔恰一日游",
-      theme:"跟团游瓦尔多尔恰 · 蒙塔奇诺 / 皮恩扎 / Brunello 品酒",
+      theme:"瓦尔多尔恰丝柏机位 · 皮恩扎 / 锡耶纳 · 8人小团包车",
       weekday:"周四",
       dayWeather:{ icon:"sunny", high:24, low:15 },
-      note:"⚠️ 今日跟团游托斯卡纳乡村，早出晚归（约7:15出发 / 19:30–20:00回）| 上车点 Piazzale Montelungo（SMN站旁，从酒店步行约20分或打车）| 穿舒适鞋、备防晒 | 佛罗伦萨登顶穹顶/圣十字本日取消，老桥&米开朗基罗广场日落已并入 D2/D4 | 🍷含 Brunello 品酒午餐，回程可小睡",
+      note:"⚠️ 8人小团包车（小红书已订），9:00 佛罗伦萨中央火车站集合出发、19:00 回到同处解散 | 奥尔恰谷丝柏树机位 + 皮恩扎 + 锡耶纳 | 全程拍照为主，穿舒适鞋、备防晒 | 午餐皮恩扎城内自理",
       schedule:[
-        { time:"07:15", text:"Piazzale Montelungo 集合上车", latlng:[43.7772,11.2470], next:{ type:"bus", desc:"旅游大巴南下 · 约2小时" } },
-        { time:"09:30", text:"蒙塔奇诺 Montalcino · Brunello 酒乡山城", latlng:[43.0576,11.4894], next:{ type:"bus", desc:"车程约15分" } },
-        { time:"11:00", text:"Brunello 圣殿 · Brunello 品酒 + 美食午餐", latlng:[43.0560,11.4890], next:{ type:"bus", desc:"车程约20–40分 · 沿途柏树山丘" } },
-        { time:"13:00", text:"圣安蒂莫修道院 Sant'Antimo · 罗马式古修道院", latlng:[43.0131,11.5330], next:{ type:"bus", desc:"车程约40分" } },
-        { time:"14:30", text:"皮恩扎 Pienza · UNESCO 文艺复兴古城 · 佩科里诺羊奶酪", latlng:[43.0785,11.6786], next:{ type:"bus", desc:"大巴返回佛城 · 约2小时" } },
-        { time:"19:45", text:"抵佛罗伦萨（Piazzale Montelungo 附近）", latlng:[43.7772,11.2470], next:{ type:"walk", desc:"步行/打车回酒店" } },
-        { time:"晚上",  text:"老城简单晚餐（白天已吃丰盛品酒午餐）", latlng:[43.7671,11.2651] }
+        { time:"09:00", text:"佛罗伦萨中央火车站集合出发", latlng:[43.7759,11.2482], next:{ type:"car", desc:"8人小团包车南下 · 约3小时" } },
+        { time:"12:00", text:"奥尔恰谷 · 小S弯经典丝柏树机位（约20分钟）", latlng:[43.0580,11.6460], next:{ type:"car", desc:"车程约10分钟" } },
+        { time:"12:10", text:"皮恩扎 Pienza · 文艺复兴小城（逛吃拍照 2小时）", latlng:[43.0785,11.6786], next:{ type:"car", desc:"车程约15分钟" } },
+        { time:"14:25", text:"小耳朵教堂（托斯卡纳明信片取景地 · 约30分钟）", latlng:[43.0593,11.6476], next:{ type:"car", desc:"车程约10分钟" } },
+        { time:"15:10", text:"双排丝柏树（电影同款画面 · 约20分钟）", latlng:[43.0556,11.6423], next:{ type:"car", desc:"车程约10分钟" } },
+        { time:"16:00", text:"大S弯（托斯卡纳最具代表性风景 · 约20分钟）", latlng:[43.0570,11.6440], next:{ type:"car", desc:"车程约50分钟" } },
+        { time:"17:00", text:"锡耶纳 Siena · 中世纪古城（1小时）", latlng:[43.3188,11.3308], next:{ type:"car", desc:"返程 · 约1小时" } },
+        { time:"19:00", text:"回到佛罗伦萨中央火车站解散", latlng:[43.7759,11.2482] }
       ],
       activities:[
-        { time:"07:15", name:"Piazzale Montelungo 集合 · 跟团出发", latlng:[43.7772,11.247], note:"上车点在 SMN 火车站旁 Piazzale Montelungo，从圣十字区酒店步行约20分或打车几分钟；建议提前10分钟到 | 全程约12小时，穿舒适鞋 | 已在小红书预订，微信群联系确认集合/车牌", transport:"旅游大巴" },
-        { time:"09:30", name:"蒙塔奇诺 Montalcino", latlng:[43.0576,11.4894], duration:"约1小时", cost:0, note:"Brunello di Montalcino 名酒发源地，中世纪山城 + 要塞，可俯瞰瓦尔多尔恰葡萄园与柏树山丘" },
-        { time:"11:00", name:"Brunello 圣殿 · 品酒午餐", latlng:[43.056,11.489], duration:"约1.25小时", cost:1640, note:"含托斯卡纳美食午餐 + 3款 Brunello 品鉴（团费已含，约¥820/人，两人合计约¥1640）| 空腹品酒易醉，配餐慢饮", ticketTip:"团费已含此项；整日团已在小红书预订，微信群联系确认集合/车牌" },
-        { time:"13:00", name:"圣安蒂莫修道院 Sant'Antimo", latlng:[43.0131,11.533], duration:"约1.75小时", cost:0, note:"橄榄林中的12世纪罗马式修道院，静谧空灵；周边田园风光是瓦尔多尔恰的经典画面" },
-        { time:"14:30", name:"皮恩扎 Pienza", latlng:[43.0785,11.6786], duration:"约1.75小时", cost:0, note:"UNESCO 世界遗产「理想之城」，文艺复兴规划典范；城边观景步道俯瞰瓦尔多尔恰柏树山丘；名产佩科里诺羊奶酪可尝可买" },
-        { time:"19:45", name:"返回佛罗伦萨", latlng:[43.7772,11.247], note:"约19:30–20:00 抵 Piazzale Montelungo 附近，步行/打车回酒店", transport:"旅游大巴" },
-        { time:"20:30", name:"晚餐（从简）", latlng:[43.7671,11.2651], meal:{ name:"老城小馆", cuisine:"托斯卡纳菜", perPerson:35, recommended:"白天已丰盛，晚上轻食即可", location:"圣十字区/老城" } }
+        { time:"09:00", name:"佛罗伦萨中央火车站集合出发", latlng:[43.7759,11.2482], note:"8人小团包车，已在小红书预订，微信群联系确认集合/车牌 | SMN 站集合，从圣十字区酒店步行约18-20分钟或打车", transport:"包车" },
+        { time:"12:00", name:"奥尔恰谷 · 小S弯经典丝柏树机位", latlng:[43.058,11.646], duration:"约20分钟", cost:0, note:"经典丝柏树 S 弯机位，托斯卡纳明信片同款 | 车程约3小时，途中可小睡" },
+        { time:"12:10", name:"皮恩扎 Pienza（文艺复兴小城）", latlng:[43.0785,11.6786], duration:"2小时", cost:0, note:"UNESCO「理想之城」，逛吃拍照 | 名产佩科里诺羊奶酪、意式冰淇淋 | 午餐城内自理" },
+        { time:"14:25", name:"小耳朵教堂", latlng:[43.0593,11.6476], duration:"约30分钟", cost:0, note:"Cappella della Madonna di Vitaleta，托斯卡纳明信片取景地，孤立于丝柏与麦田之间" },
+        { time:"15:10", name:"双排丝柏树", latlng:[43.0556,11.6423], duration:"约20分钟", cost:0, note:"电影同款画面，两排丝柏夹道的乡间小路" },
+        { time:"16:00", name:"大S弯", latlng:[43.057,11.644], duration:"约20分钟", cost:0, note:"托斯卡纳最具代表性的丘陵公路风景" },
+        { time:"17:00", name:"锡耶纳 Siena（中世纪古城）", latlng:[43.3188,11.3308], duration:"1小时", cost:0, note:"坎波广场（Piazza del Campo）+ 锡耶纳大教堂外观，沉浸式中世纪氛围" },
+        { time:"19:00", name:"回到佛罗伦萨中央火车站解散", latlng:[43.7759,11.2482], note:"返程约1小时，回酒店晚餐休息" }
       ]
     },
     {
-      day:4, date:"10/02 周五", city:"florence", title:"佛罗伦萨 美术馆日",
-      theme:"佛罗伦萨美术馆日 · 乌菲兹 · 皮蒂宫",
+      day:4, date:"10/02 周五", city:"florence", title:"佛罗伦萨 圣母百花 + 乌菲兹",
+      theme:"圣母百花讲解登顶 · 乌菲兹 · 老桥逛街",
       weekday:"周五",
       dayWeather:{ icon:"sunny", high:23, low:14 },
-      note:"⚠️ 乌菲兹安检严，大背包需寄存 | 提前确认明天长途车票 | 🌅 今天在奥尔特拉诺(河南岸)收尾，上米开朗基罗广场最顺——日落机动好备选，若 D2 没看成今晚补 | 午餐已改奥尔特拉诺就近（中央市场移到D2路过），全程河南岸不折返",
+      note:"⚠️ 9:00 圣母百花讲解团（含穹顶票），讲解后自行登穹顶（463级）| 乌菲兹票面 14:15、大背包寄存 | 下午乌菲兹出来顺路逛 Via Por Santa Maria→老桥（Humilis/Bottega del Giglio）→Via Maggio 古董街 | 傍晚上米开朗基罗广场看日落 | 提前确认明天长途车票",
       schedule:[
-        { time:"08:15", text:"乌菲兹美术馆（文艺复兴名画，8:15开门）", latlng:[43.7682,11.2553], pdf:[{ name:"🎫 乌菲兹门票", url:"pdfs/ticket-uffizi.pdf" }], next:{ type:"walk", desc:"过老桥到奥尔特拉诺 · 步行约12分钟" } },
-        { time:"11:30", text:"皮蒂宫", latlng:[43.7655,11.2502], next:{ type:"walk", desc:"步行2分钟（同一建筑群）" } },
-        { time:"12:30", text:"波波里花园", latlng:[43.7633,11.2497], next:{ type:"walk", desc:"步行约5分钟" } },
-        { time:"14:00", text:"午餐 · 奥尔特拉诺就近（替代中央市场）", latlng:[43.7667,11.2493], next:{ type:"walk", desc:"步行约5分钟" } },
-        { time:"15:30", text:"圣神大殿区 · 皮革店 / 纪念品", latlng:[43.7667,11.2493], next:{ type:"walk", desc:"步行约15分钟上山" } },
-        { time:"18:00", text:"（机动·天气好）米开朗基罗广场看日落", latlng:[43.7629,11.2646], next:{ type:"walk", desc:"下山回老城/酒店" } },
+        { time:"09:00", text:"圣母百花大教堂讲解团（约2小时 · 含穹顶票）", latlng:[43.7730,11.2560], next:{ type:"walk", desc:"讲解结束后登穹顶" } },
+        { time:"11:00", text:"登顶穹顶（463级 · 约45分钟）", latlng:[43.7730,11.2560], next:{ type:"walk", desc:"下到广场 · 洗礼堂/钟楼外观" } },
+        { time:"12:00", text:"大教堂广场 · 洗礼堂/钟楼外观", latlng:[43.7730,11.2560], next:{ type:"walk", desc:"Via de' Calzaiuoli 步行街 · 边逛边吃" } },
+        { time:"12:30", text:"午餐 + 顺路逛 Via de' Calzaiuoli", latlng:[43.7715,11.2553], next:{ type:"walk", desc:"步行约5分钟到乌菲兹" } },
+        { time:"14:15", text:"乌菲兹美术馆（票面 14:15 · 文艺复兴名画）", latlng:[43.7682,11.2553], pdf:[{ name:"🎫 乌菲兹门票", url:"pdfs/ticket-uffizi.pdf" }], next:{ type:"walk", desc:"Via Por Santa Maria → 老桥" } },
+        { time:"17:00", text:"逛街 Via Por Santa Maria → 老桥（Humilis / Bottega del Giglio）", latlng:[43.7681,11.2531], next:{ type:"walk", desc:"过老桥 · 约5分钟" } },
+        { time:"17:45", text:"Via Maggio 古董街（Oltrarno）", latlng:[43.7668,11.2489], next:{ type:"walk", desc:"步行约15分钟上山" } },
+        { time:"18:30", text:"（机动·天气好）米开朗基罗广场看日落", latlng:[43.7629,11.2646], next:{ type:"walk", desc:"下山回老城/酒店" } },
         { time:"19:30", text:"告别佛罗伦萨晚餐", latlng:[43.7671,11.2651] }
       ],
       activities:[
-        { time:"08:15", name:"乌菲兹美术馆（文艺复兴名画）", latlng:[43.7682,11.2553], img:"images/uffizi.jpg", duration:"3小时", cost:320, note:"《维纳斯的诞生》| 大背包寄存 | 8:15开门", pdf:[{ name:"🎫 乌菲兹门票", url:"pdfs/ticket-uffizi.pdf" }] },
-        { time:"11:30", name:"皮蒂宫（美第奇家族宫殿）", latlng:[43.7655,11.2502], img:"images/pitti.jpg", duration:"1.5小时", cost:280, transport:"步行12分钟过老桥", ticketTip:"提前1-2周购票即可 | 旺季排队约20-30分钟", booking:[{ name:"乌菲兹网站（含皮蒂）", url:"https://www.uffizi.it/en/pitti-palace/tickets" }] },
-        { time:"12:30", name:"波波里花园", latlng:[43.7633,11.2497], img:"images/boboli.jpg", cost:0, note:"皮蒂宫票含花园" },
-        { time:"14:00", name:"午餐 · 奥尔特拉诺(Oltrarno)就近", latlng:[43.7667,11.2493], meal:{ name:"奥尔特拉诺本地小馆", cuisine:"托斯卡纳菜", perPerson:30, recommended:"松露意面、牛肚包、本地红酒", location:"皮蒂宫/圣神大殿一带" }, note:"替代原中央市场午餐，避免折返过河，就近吃" },
-        { time:"15:30", name:"圣神大殿区 · 皮革工坊购物", latlng:[43.7667,11.2493], img:"images/santospirito.jpg", cost:0, note:"Oltrarno 区本地工匠，比市区便宜30-40%" },
-        { time:"18:00", name:"（机动·看天气）米开朗基罗广场看日落", latlng:[43.7629,11.2646], img:"images/piazzale.jpg", cost:0, transport:"步行约15分钟", note:"🌅三晚机动备选：你们今天本就在河南岸，上广场最顺；若D3没看成今晚补 | 日落约19:10-19:20，提前30-40分到 | 更高更静可上圣米尼亚托大殿" },
+        { time:"09:00", name:"圣母百花大教堂讲解团（约2小时）", latlng:[43.773,11.256], img:"images/florence.jpg", duration:"2小时", cost:1262, note:"已订讲解团（含穹顶票）| 讲解大教堂立面、洗礼堂与博物馆精华", ticketTip:"已订·含穹顶票（¥1262/2人）" },
+        { time:"11:00", name:"登顶穹顶（463级）", latlng:[43.773,11.256], duration:"约45分钟", cost:0, note:"讲解结束后自行登顶（含在讲解团票内）| 463级陡窄旋梯无电梯，近看《最后的审判》壁画 + 俯瞰红顶城" },
+        { time:"12:00", name:"大教堂广场 · 洗礼堂/钟楼外观", latlng:[43.773,11.256], cost:0, note:"天堂之门、乔托钟楼外观打卡" },
+        { time:"12:30", name:"午餐 + 顺路逛 Via de' Calzaiuoli", latlng:[43.7715,11.2553], meal:{ name:"Calzaiuoli / 领主广场周边", cuisine:"托斯卡纳菜", perPerson:30, recommended:"帕尼尼、牛肚包、意式冰淇淋", location:"Calzaiuoli 步行街" }, note:"Duomo 到领主广场的主购物街，品牌+本地店都有，边吃边逛" },
+        { time:"14:15", name:"乌菲兹美术馆（票面 14:15 · 文艺复兴名画）", latlng:[43.7682,11.2553], img:"images/uffizi.jpg", duration:"2.5小时", cost:320, note:"《维纳斯的诞生》《春》| 大背包寄存 | 14:15 时段入场", pdf:[{ name:"🎫 乌菲兹门票", url:"pdfs/ticket-uffizi.pdf" }] },
+        { time:"17:00", name:"逛街 Via Por Santa Maria → 老桥（Humilis / Bottega del Giglio）", latlng:[43.7681,11.2531], duration:"45分钟", cost:0, note:"老桥珠宝老店 Humilis（Ponte Vecchio 51/R）| 桥旁皮具 Bottega del Giglio（Lungarno degli Acciaiuoli 42/R）" },
+        { time:"17:45", name:"Via Maggio 古董街（过河 Oltrarno）", latlng:[43.7668,11.2489], duration:"45分钟", cost:0, note:"南岸文艺复兴宫殿间的古董/画廊/手工作坊街，与圣神大殿连成一片" },
+        { time:"18:30", name:"（机动·看天气）米开朗基罗广场看日落", latlng:[43.7629,11.2646], img:"images/piazzale.jpg", cost:0, transport:"步行约15分钟", note:"🌅 日落约19:10，提前30-40分到占机位 | 更高更静可上圣米尼亚托大殿" },
         { time:"19:30", name:"告别佛罗伦萨晚餐", latlng:[43.7671,11.2651], meal:{ name:"精选餐厅", cuisine:"托斯卡纳菜", perPerson:70, recommended:"T骨牛排（最后一顿！）、基安蒂红酒", location:"老城" } }
       ]
     },
@@ -635,13 +673,13 @@ window.TRIP_DATA = {
       theme:"跨国长途 · 佛罗伦萨→卢塞恩（今日入瑞士）",
       weekday:"周六",
       dayWeather:{ icon:"cloudy", high:18, low:10 },
-      note:"⚠️ 最长交通日：07:25 发 / 13:41 到卢塞恩（约6h16）| 公寓无24h前台，提前联系房东约早退还钥匙（+39 380 124 1597）| 拖箱打车去SMN（约8分）| 米兰换乘约50分钟（09:20到 / 10:10发），较从容 | 入瑞士无须过关（同申根）| STP 今日激活",
+      note:"⚠️ 最长交通日：07:25 发 / 13:41 到卢塞恩（约6h16）| 公寓无24h前台，提前联系房东约早退还钥匙（+39 380 124 1597）| 拖箱打车去SMN（约8分）| 米兰换乘约50分钟（09:20到 / 10:10发 EC178），较从容 | 入瑞士无须过关（同申根）| STP 今日激活",
       schedule:[
         { time:"06:50", text:"早餐从简 · 退房 · 打车前往 SMN 站", latlng:[43.7759,11.2482], next:{ type:"walk", desc:"打车约8分钟（拖箱别走路）· 钥匙按房东指引归还" } },
         { time:"07:10", text:"抵 SMN 站 · 检票找站台（binario）", latlng:[43.7759,11.2482], next:null },
         { time:"07:25", text:"Italo 9904 → 米兰中央站（09:20到）", latlng:[45.4854,9.2045], pdf:[{ name:"🚄 高铁票", url:"pdfs/train-1003-florence-milan.pdf" }], next:{ type:"highspeed", desc:"约1h55 · 09:20 到米兰" } },
         { time:"09:20", text:"米兰中央站换乘（约50分钟，较从容）· 找站台", latlng:[45.4854,9.2045], next:{ type:"international", desc:"EuroCity 10:10 发 · 过圣哥达隧道" } },
-        { time:"10:10", text:"EuroCity 出发 米兰 → 卢塞恩", latlng:[47.0505,8.3101], ticket:true, pdf:[{ name:"🎫 Swiss 通票", url:"pdfs/swiss-travel-pass.pdf" },{ name:"🎫 车票二维码", url:"pdfs/swiss-pass-qr.pdf" },{ name:"📄 通票说明", url:"pdfs/swiss-pass-guide.pdf" }], next:{ type:"international", desc:"约3h30 · 方向 Basel SBB · 到达 Pl.7" } },
+        { time:"10:10", text:"EuroCity（EC178）出发 米兰 → 卢塞恩", latlng:[47.0505,8.3101], ticket:true, pdf:[{ name:"🎫 Swiss 通票", url:"pdfs/swiss-travel-pass.pdf" },{ name:"🎫 车票二维码", url:"pdfs/swiss-pass-qr.pdf" },{ name:"📄 通票说明", url:"pdfs/swiss-pass-guide.pdf" }], next:{ type:"international", desc:"约3h30 · 方向 Basel SBB · 到达 Pl.7" } },
         { time:"13:41", text:"抵卢塞恩站 Luzern", latlng:[47.0505,8.3101], next:{ type:"walk", desc:"步行约8分钟到酒店" } },
         { time:"14:00", text:"Hotel Hofgarten 存行李（正式入住 15:00 起）", latlng:[47.0538,8.3122], pdf:[{ name:"🏨 酒店确认单", url:"pdfs/hotel-lucerne.pdf" }], next:{ type:"walk", desc:"步行约8分钟到廊桥" } },
         { time:"14:30", text:"卡佩尔廊桥 · 八角水塔 · 老城广场", latlng:[47.0516,8.3074] },
@@ -650,7 +688,7 @@ window.TRIP_DATA = {
       activities:[
         { time:"06:50", name:"早餐 · 退房", latlng:[43.7671,11.2651], note:"公寓有厨房可自理早餐；到SMN站约18-20分钟，拖箱建议打车，今天最长交通日" },
         { time:"07:25", name:"Italo 9904 → 米兰中央站（09:20到）", latlng:[45.4854,9.2045], duration:"约1h55", cost:560, transport:"高铁", note:"已购票：Italo 9904，SMART 9车15-16座 | 07:25发 09:20到", pdf:[{ name:"🚄 高铁票", url:"pdfs/train-1003-florence-milan.pdf" }] },
-        { time:"10:10", name:"EuroCity 国际列车 米兰 → 卢塞恩", latlng:[47.0505,8.3101], duration:"约3h31", cost:560, transport:"国际列车", note:"过圣哥达隧道风景壮观 | STP 覆盖瑞士段，米兰→意瑞边境段需另购票", ticketTip:"STP 需在 SBB 预约瑞士段座位（约€5/人）", booking:[{ name:"SBB 瑞士铁路", url:"https://www.sbb.ch/en" },{ name:"Rail Europe", url:"https://www.raileurope.com/" }], pdf:[{ name:"🎫 Swiss 通票", url:"pdfs/swiss-travel-pass.pdf" },{ name:"🎫 车票二维码", url:"pdfs/swiss-pass-qr.pdf" },{ name:"📄 通票说明", url:"pdfs/swiss-pass-guide.pdf" }] },
+        { time:"10:10", name:"EuroCity（EC178）国际列车 米兰 → 卢塞恩", latlng:[47.0505,8.3101], duration:"约3h31", cost:410, transport:"国际列车", note:"过圣哥达隧道风景壮观 | 车次 EC178 · 9车33/35座 · 已购：米兰→瑞境意段 CHF24/人，瑞士境内 STP 免费（全程已购）", ticketTip:"已购票（意段 CHF24/人 · 瑞士段 STP 免费）· 凭证见「车票二维码」", pdf:[{ name:"🎫 Swiss 通票", url:"pdfs/swiss-travel-pass.pdf" },{ name:"🎫 车票二维码", url:"pdfs/swiss-pass-qr.pdf" },{ name:"📄 通票说明", url:"pdfs/swiss-pass-guide.pdf" }] },
         { time:"13:41", name:"抵卢塞恩站 · 酒店入住", latlng:[47.0538,8.3122], note:"Hotel Hofgarten，步行10分钟", pdf:[{ name:"🏨 酒店确认单", url:"pdfs/hotel-lucerne.pdf" }] },
         { time:"15:30", name:"卡佩尔廊桥 · 八角水塔 · 老城广场漫步", latlng:[47.0516,8.3074], img:"images/lucerne.jpg", duration:"2小时", cost:0, note:"1333年建欧洲最古老有顶木桥" },
         { time:"19:00", name:"老城晚餐", latlng:[47.0503,8.3054], meal:{ name:"卢塞恩老城餐厅", cuisine:"瑞士菜", perPerson:90, recommended:"奶酪火锅 Fondue、Rösti", location:"老城区" } }
@@ -663,22 +701,22 @@ window.TRIP_DATA = {
       dayWeather:{ icon:"partlyCloudy", high:16, low:8 },
       note:"⚠️ 山顶冷风大，带厚外套 | 10月齿轨火车仍运营",
       schedule:[
-        { time:"08:45", text:"提前到达卢塞恩码头", latlng:[47.0496,8.3011], next:{ type:"boat", desc:"游船 · 约1小时 · STP免费" } },
-        { time:"09:00", text:"游船 → Alpnachstad", latlng:[46.9411,8.2841], next:{ type:"funicular", desc:"世界最陡齿轨火车 · STP 5折" } },
-        { time:"10:15", text:"齿轨火车上皮拉图斯", latlng:[46.9790,8.2525], next:null },
-        { time:"11:00", text:"皮拉图斯峰顶 2132m · 观景徒步 · 午餐", latlng:[46.9790,8.2525] },
-        { time:"13:30", text:"龙脊缆车下山 → Kriens", latlng:[47.0338,8.2827], next:{ type:"bus", desc:"巴士回市区" } },
+        { time:"08:45", text:"提前到达卢塞恩码头", latlng:[47.0496,8.3011], next:{ type:"boat", desc:"游船 9:38 · 约1小时 · STP免费" } },
+        { time:"09:38", text:"游船 9:38 → Alpnachstad（STP免费·持通票直接上船）", latlng:[46.9411,8.2841], next:{ type:"funicular", desc:"世界最陡齿轨火车 · 已购票" } },
+        { time:"10:45", text:"齿轨火车上皮拉图斯（已购票）", latlng:[46.9790,8.2525], pdf:[{ name:"🎫 齿轨火车票", url:"pdfs/1004皮拉图斯山齿轨火车.pdf" }], next:null },
+        { time:"11:30", text:"皮拉图斯峰顶 2132m · 观景徒步 · 午餐", latlng:[46.9790,8.2525] },
+        { time:"13:30", text:"龙脊缆车下山 → Kriens", latlng:[47.0338,8.2827], pdf:[{ name:"🎫 缆车票", url:"pdfs/1004皮拉图斯缆车.pdf" }], next:{ type:"bus", desc:"巴士回市区" } },
         { time:"15:00", text:"狮子纪念碑 · 冰川公园", latlng:[47.0584,8.3143], ticket:true },
         { time:"16:30", text:"城墙 Museggmauer（俯瞰全城）", latlng:[47.0578,8.3087] },
         { time:"晚上",  text:"老城晚餐", latlng:[47.0503,8.3054] }
       ],
       activities:[
         { time:"08:45", name:"提前到达卢塞恩码头", latlng:[47.0496,8.3011], note:"十一期间中国游客增多，提前15分钟占好座位" },
-        { time:"09:00", name:"卢塞恩码头游船 → Alpnachstad", latlng:[46.9411,8.2841], duration:"约1小时", cost:0, transport:"游船", note:"STP免费 | 四森林湖湖光山色", ticketTip:"STP直接上船，十一期间码头提前15分钟到" },
-        { time:"10:15", name:"世界最陡齿轨火车上皮拉图斯", latlng:[46.979,8.2525], duration:"30分钟", cost:800, transport:"齿轨火车", note:"STP5折约CHF44/人 | 坡度48度全球最陡", ticketTip:"STP持有者凭票享5折，到站现场购票 | 旺季排队约20-30分钟" },
+        { time:"09:38", name:"游船 9:38 卢塞恩码头 → Alpnachstad", latlng:[46.9411,8.2841], duration:"约1小时", cost:0, transport:"游船", note:"STP免费，持通票直接上船、无需购票（SBB app 没买到也没关系）| 四森林湖湖光山色", ticketTip:"STP直接上船，十一期间码头提前15分钟到" },
+        { time:"10:45", name:"世界最陡齿轨火车上皮拉图斯（已购票）", latlng:[46.979,8.2525], duration:"30分钟", cost:800, transport:"齿轨火车", note:"已购齿轨票 | 坡度48度全球最陡 | Alpnachstad→Pilatus Kulm 单程", ticketTip:"已购票（STP 5折 CHF21）· 凭证见下", pdf:[{ name:"🎫 齿轨火车票", url:"pdfs/1004皮拉图斯山齿轨火车.pdf" }] },
         { time:"11:00", name:"皮拉图斯峰顶 2132m · 观景徒步", latlng:[46.979,8.2525], img:"images/pilatus.jpg", duration:"2.5小时", note:"Tomlishorn短程环线约45分钟 | 山顶冷风大，带厚外套" },
         { time:"12:30", name:"峰顶午餐", latlng:[46.979,8.2525], meal:{ name:"皮拉图斯山顶餐厅", cuisine:"瑞士菜", perPerson:70, recommended:"自带零食或山顶汤品", location:"山顶" } },
-        { time:"13:30", name:"龙脊缆车下山 → Kriens", latlng:[47.0338,8.2827], cost:0, transport:"缆车", note:"STP包含" },
+        { time:"13:30", name:"龙脊缆车下山 → Kriens", latlng:[47.0338,8.2827], cost:0, transport:"缆车", note:"Pilatus Kulm→Kriens 单程 | 已购缆车票", ticketTip:"已购票（STP 5折 CHF21）· 凭证见下", pdf:[{ name:"🎫 缆车票", url:"pdfs/1004皮拉图斯缆车.pdf" }] },
         { time:"14:30", name:"公交回卢塞恩市区", latlng:[47.0584,8.3143], cost:0, transport:"公交", note:"STP包含，约15分钟" },
         { time:"15:00", name:"狮子纪念碑 · 冰川公园", latlng:[47.0584,8.3143], img:"images/lion.jpg", duration:"1.5小时", cost:160, transport:"步行10分钟", ticketTip:"现场购票，旺季排队约10-15分钟" },
         { time:"16:30", name:"城墙 Museggmauer（俯瞰全城）", latlng:[47.0578,8.3087], img:"images/musegg.jpg", cost:0 },
@@ -687,27 +725,30 @@ window.TRIP_DATA = {
     },
     {
       day:7, date:"10/05 周一", city:"interlaken", title:"金色山口 → 因特拉肯",
-      theme:"金色山口观景列车 · 抵因特拉肯 · 两湖漫步",
+      theme:"金色山口观景列车 · 抵因特拉肯 · 滑翔伞 · 两湖漫步",
       weekday:"周一",
       dayWeather:{ icon:"partlyCloudy", high:15, low:7 },
-      note:"⚠️ GoldenPass 建议提前订座 | 住 Essential by Dorint（西站旁·已订）| ⚠️金色山口列车到东站(Ost)，酒店在西站(West)，两站相隔一站约3分钟(STP免费) | 下午两湖漫步",
+      note:"⚠️ GoldenPass（PE 2916）08:06发 / 09:54到（STP免费·已购订座CHF16/人）| 住 Essential by Dorint（西站旁·已订）| ⚠️金色山口列车到东站(Ost)，酒店在西站(West)，两站相隔一站约3分钟(STP免费) | 早到约10:00，滑翔伞前自由时间充足 | 下午滑翔伞（已订）| 两湖漫步机动",
       schedule:[
-        { time:"08:30", text:"含早早餐 · 退房", latlng:[47.0505,8.3101], next:{ type:"scenic_train", desc:"GoldenPass 金色山口观景列车 · 约1h50" } },
-        { time:"11:00", text:"GoldenPass 卢塞恩 → 因特拉肯东站", latlng:[46.6912,7.8691], ticket:true, next:{ type:"walk", desc:"到东站后坐1站至西站约3分钟" } },
-        { time:"13:00", text:"Essential by Dorint 入住", latlng:[46.6831,7.8503], pdf:[{ name:"🏨 酒店确认单", url:"pdfs/hotel-interlaken.pdf" }], next:null },
-        { time:"13:30", text:"午餐", latlng:[46.6831,7.8503] },
-        { time:"14:30", text:"何维克街 · 荷黑马特草坪看少女峰三姐妹", latlng:[46.6851,7.8576] },
-        { time:"16:00", text:"布里恩茨湖畔 / 图恩湖畔漫步", latlng:[46.6980,7.9020] },
+        { time:"07:30", text:"早餐 · 退房 · 前往卢塞恩站", latlng:[47.0505,8.3101], next:{ type:"scenic_train", desc:"GoldenPass 08:06发 · 约1h48" } },
+        { time:"08:06", text:"GoldenPass（PE 2916）卢塞恩 → 因特拉肯东站（09:54到）", latlng:[46.6912,7.8691], ticket:true, pdf:[{ name:"🎫 卢塞恩→因特拉肯车票（STP）", url:"pdfs/swiss-travel-pass.pdf" },{ name:"🎫 车票二维码（含座位预订）", url:"pdfs/swiss-pass-qr.pdf" }], next:{ type:"walk", desc:"到东站后坐1站至西站约3分钟" } },
+        { time:"10:00", text:"Essential by Dorint 放行李/入住（15:00正式）", latlng:[46.6831,7.8503], pdf:[{ name:"🏨 酒店确认单", url:"pdfs/hotel-interlaken.pdf" }], next:null },
+        { time:"11:30", text:"午餐 + 超市补给（Coop/Migros 买早餐/零食/水）", latlng:[46.6831,7.8503] },
+        { time:"13:00", text:"何维克街 · 荷黑马特草坪 · 湖边自由漫步（早到机动）", latlng:[46.6851,7.8576] },
+        { time:"15:30", text:"滑翔伞（双人 tandem · 已订 15:30）", latlng:[46.6863,7.8548], ticket:true, pdf:[{ name:"🎫 滑翔伞凭证", url:"pdfs/1005滑翔伞.pdf" }] },
+        { time:"17:00", text:"荷黑马特草坪 · 何维克街看少女峰三姐妹（降落点顺逛）", latlng:[46.6851,7.8576] },
+        { time:"17:30", text:"布里恩茨湖畔 / 图恩湖畔漫步（机动）", latlng:[46.6980,7.9020] },
         { time:"晚上",  text:"镇上晚餐，早点休息", latlng:[46.6912,7.8691] }
       ],
       activities:[
-        { time:"08:30", name:"含早早餐 · 退房", latlng:[47.0505,8.3101], note:"步行至卢塞恩站约5分钟" },
-        { time:"09:00", name:"补逛卢塞恩湖边老城", latlng:[47.0503,8.3054], duration:"2小时", cost:0 },
-        { time:"11:00", name:"GoldenPass 金色山口观景列车 → 因特拉肯东站", latlng:[46.6912,7.8691], duration:"约1小时50分", cost:0, transport:"观景列车", note:"STP乘车免费，座位需单独预约 | 沿途湖景+农舍+雪山，极度出片", ticketTip:"STP免费乘车，但必须提前2-3周在GoldenPass官网预约座位（约€5/人）| 十一期间热门，尽早预约", booking:[{ name:"GoldenPass 预约座位", url:"https://www.goldenpass.ch/en/goldenpass/book-tickets" },{ name:"SBB", url:"https://www.sbb.ch/en" }] },
-        { time:"13:00", name:"Essential by Dorint 入住", latlng:[46.6831,7.8503], note:"从东站坐1站到西站(约3分钟)，酒店在西站旁，行李放下休息片刻", pdf:[{ name:"🏨 酒店确认单", url:"pdfs/hotel-interlaken.pdf" }] },
-        { time:"13:30", name:"午餐", latlng:[46.6831,7.8503], meal:{ name:"因特拉肯镇餐厅或超市", cuisine:"简餐/瑞士菜", perPerson:50, recommended:"Coop超市买三明治 | 省钱留给晚餐", location:"镇上" } },
-        { time:"14:30", name:"何维克街 · 荷黑马特草坪看少女峰三姐妹", latlng:[46.6851,7.8576], img:"images/jungfrau.jpg", duration:"1.5小时", cost:0, note:"天气好时少女峰直接入镜，黄金拍照点" },
-        { time:"16:00", name:"布里恩茨湖畔 / 图恩湖畔漫步", latlng:[46.698,7.902], img:"images/thun.jpg", duration:"1.5小时", cost:0, note:"布里恩茨湖从东站步行5分钟 | 图恩湖从西站方向步行15分 | 两湖湖水颜色不同，布里恩茨更翠绿" },
+        { time:"07:30", name:"早餐 · 退房 · 前往卢塞恩站", latlng:[47.0505,8.3101], note:"步行至卢塞恩站约5分钟，赶 08:06 列车" },
+        { time:"08:06", name:"GoldenPass（PE 2916）金色山口观景列车 → 因特拉肯东站（09:54到）", latlng:[46.6912,7.8691], duration:"约1小时48分", cost:272, transport:"观景列车", note:"STP免费乘车（Luzern-Interlaken Express）+ 已购座位预订 CHF16/人（7车315/316座）| 沿途湖景+农舍+雪山，极度出片", ticketTip:"STP 通票覆盖 · 已购座位预订 CHF16/人（凭证见二维码）| 08:06发 / 09:54到", pdf:[{ name:"🎫 卢塞恩→因特拉肯车票（STP）", url:"pdfs/swiss-travel-pass.pdf" },{ name:"🎫 车票二维码（含座位预订）", url:"pdfs/swiss-pass-qr.pdf" }] },
+        { time:"10:00", name:"Essential by Dorint 放行李/入住", latlng:[46.6831,7.8503], note:"从东站坐1站到西站(约3分钟)，酒店在西站旁；15:00前可寄存行李 | 早到自由时间充足", pdf:[{ name:"🏨 酒店确认单", url:"pdfs/hotel-interlaken.pdf" }] },
+        { time:"11:30", name:"午餐 + 超市补给（Coop / Migros）", latlng:[46.6831,7.8503], meal:{ name:"因特拉肯镇餐厅或超市", cuisine:"简餐/瑞士菜", perPerson:50, recommended:"Coop超市买三明治 | 省钱留给晚餐", location:"镇上" }, note:"🛒 顺便超市补给：因特拉肯住2晚 + 明日 First 山，买早餐/水/零食/午餐三明治 | 西站旁有 Coop/Migros（周一正常营业）" },
+        { time:"13:00", name:"何维克街 · 荷黑马特草坪 · 湖边自由漫步", latlng:[46.6851,7.8576], duration:"2小时", cost:0, note:"早到机动 | 何维克街精品店与少女峰观景，滑翔伞集合前自由安排" },
+        { time:"15:30", name:"滑翔伞（双人 tandem）", latlng:[46.6863,7.8548], duration:"约2小时", cost:3040, transport:"集合+飞行", note:"从 Beatenberg 起飞、荷黑马特草坪降落，俯瞰两湖与少女峰 | 已订 15:30 场（¥1520/人）", ticketTip:"已订 15:30 · 凭证 1005滑翔伞", pdf:[{ name:"🎫 滑翔伞凭证", url:"pdfs/1005滑翔伞.pdf" }] },
+        { time:"17:00", name:"荷黑马特草坪 · 何维克街看少女峰三姐妹", latlng:[46.6851,7.8576], img:"images/jungfrau.jpg", duration:"1小时", cost:0, note:"滑翔伞就在荷黑马特草坪降落，顺路看少女峰，黄金拍照点" },
+        { time:"17:30", name:"布里恩茨湖畔 / 图恩湖畔漫步（机动）", latlng:[46.698,7.902], img:"images/thun.jpg", duration:"1小时", cost:0, note:"时间机动 | 布里恩茨湖从东站步行5分钟 | 图恩湖从西站方向步行15分 | 两湖湖水颜色不同" },
         { time:"19:00", name:"镇上晚餐 · 早点休息", latlng:[46.6912,7.8691], meal:{ name:"因特拉肯镇餐厅", cuisine:"瑞士/简餐", perPerson:60, recommended:"明日First山，养精蓄锐", location:"镇上" } }
       ]
     },
@@ -716,11 +757,11 @@ window.TRIP_DATA = {
       theme:"格林德瓦 First山 · 悬崖步道 · 高山湖徒步",
       weekday:"周二",
       dayWeather:{ icon:"sunny", high:14, low:5 },
-      note:"⚠️ 行李留酒店轻装出发 | 海拔2168m防晒慢行 | 建议9:00前到格林德瓦缆车站 | 备选：若今日天气晴好且想去，可改登少女峰「欧洲之巅」（Pass5折，看天定）",
+      note:"⚠️ 行李留酒店轻装出发 | 海拔2168m防晒慢行 | 必须8点前到格林德瓦 First 缆车站现场排队买票（无线上票，越早排队越短） | 备选：若今日天气晴好且想去，可改登少女峰「欧洲之巅」（Pass5折，看天定）",
       schedule:[
-        { time:"07:30", text:"早餐（行李留酒店）", latlng:[46.6912,7.8691], next:{ type:"train", desc:"因特拉肯东站→格林德瓦 · 约35分 · STP免费" } },
-        { time:"08:00", text:"因特拉肯东站出发 → 格林德瓦站", latlng:[46.6241,8.0341], next:{ type:"walk", desc:"步行5分钟至缆车站" } },
-        { time:"08:45", text:"First 缆车 → 上山", latlng:[46.6556,8.0461], ticket:true, next:{ type:"cable_car", desc:"约25分钟" } },
+        { time:"07:00", text:"早餐（行李留酒店）· 轻装出发", latlng:[46.6912,7.8691], next:{ type:"train", desc:"因特拉肯东站→格林德瓦 · 约35分 · STP免费 · 赶7:25班次" } },
+        { time:"07:25", text:"因特拉肯东站出发 → 格林德瓦站（08:00到）", latlng:[46.6241,8.0341], next:{ type:"walk", desc:"步行5分钟至缆车站" } },
+        { time:"08:05", text:"First 缆车站 · 现场排队买票（8点前到）· 缆车上山", latlng:[46.6248,8.0413], ticket:true, next:{ type:"cable_car", desc:"约25分钟" } },
         { time:"09:15", text:"First Cliff Walk 悬崖步道（玻璃平台）", latlng:[46.6556,8.0461] },
         { time:"10:00", text:"First Flyer 高空飞索（强烈推荐）", latlng:[46.6556,8.0461], ticket:true },
         { time:"11:00", text:"Bachalpsee 高山湖徒步（往返约1.5h）", latlng:[46.6648,8.0622] },
@@ -731,9 +772,9 @@ window.TRIP_DATA = {
         { time:"晚上",  text:"庆功晚餐", latlng:[46.6912,7.8691] }
       ],
       activities:[
-        { time:"07:30", name:"早餐 · 行李留酒店", latlng:[46.6912,7.8691], note:"轻装出发，行李放 Essential by Dorint，今晚仍住这里，回来直接进房" },
-        { time:"08:00", name:"因特拉肯东站 → 格林德瓦站", latlng:[46.6241,8.0341], duration:"约35分钟", cost:0, transport:"火车", note:"STP免费 | 艾格北壁一路出镜", ticketTip:"STP直接上车 | 建议8:00班次，9:00前到缆车站" },
-        { time:"08:45", name:"格林德瓦 First 缆车 → First 2168m", latlng:[46.6556,8.0461], img:"images/grindelwald.jpg", duration:"约25分钟", cost:660, transport:"缆车", note:"STP享50%折扣，约CHF40/人 | 分4节缆车上山", ticketTip:"早上现场排队购票（无线上票，STP折后约CHF40/人）| 建议9:00前到站排队最短" },
+        { time:"07:00", name:"早餐 · 行李留酒店", latlng:[46.6912,7.8691], note:"轻装出发，行李放 Essential by Dorint，今晚仍住这里，回来直接进房 | 早起赶7:25班次" },
+        { time:"07:25", name:"因特拉肯东站 → 格林德瓦站（08:00到）", latlng:[46.6241,8.0341], duration:"约35分钟", cost:0, transport:"火车", note:"STP免费 | 艾格北壁一路出镜", ticketTip:"STP直接上车 | 赶7:25班次，8点前到缆车站" },
+        { time:"08:05", name:"格林德瓦 First 缆车站 · 现场排队买票", latlng:[46.6248,8.0413], duration:"排队+缆车约25分", cost:660, transport:"缆车", note:"⚠️ 必须8点前到现场排队买票（First 缆车无线上票）| STP享50%折扣，约CHF40/人 | 买好票后缆车上山约25分钟", ticketTip:"8点前到现场排队买票，越早排队越短（无线上票，STP折后约CHF40/人）" },
         { time:"09:15", name:"First Cliff Walk 悬崖步道（含玻璃平台）", latlng:[46.6556,8.0461], duration:"30分钟", cost:0, note:"2168m悬崖外挑玻璃走道，俯瞰格林德瓦山谷和少女峰三姐妹 | 含在缆车票内" },
         { time:"10:00", name:"First Flyer 高空飞索（强烈推荐！）", latlng:[46.6556,8.0461], duration:"20分钟", cost:480, note:"800m俯冲飞索，时速约80km | 旺季现场排队约30-45分钟", ticketTip:"现场排队购票（约CHF29/人）| 9:30前玩，排队最短" },
         { time:"11:00", name:"Bachalpsee 高山湖徒步", latlng:[46.6648,8.0622], img:"images/bachalpsee.jpg", duration:"约1.5小时往返", cost:0, note:"平坦山路约45分钟单程，倒映少女峰三姐妹 | 格林德瓦最美徒步线 | 运动鞋即可" },
@@ -758,7 +799,7 @@ window.TRIP_DATA = {
         { time:"12:00", text:"因特拉肯东站 IC → 苏黎世中央站", latlng:[47.3779,8.5400], next:{ type:"train", desc:"IC 城际 · 约2h · STP · 经伯尔尼" } },
         { time:"14:00", text:"到苏黎世 HB", latlng:[47.3779,8.5400], next:{ type:"walk", desc:"步行约7分钟" } },
         { time:"14:15", text:"Hotel St. Josef 入住", latlng:[47.3758,8.5440], pdf:[{ name:"🏨 酒店确认单", url:"pdfs/hotel-zurich.pdf" }] },
-        { time:"15:00", text:"班霍夫大街 · 林登霍夫山丘", latlng:[47.3726,8.5353], next:{ type:"walk", desc:"步行约3分钟" } },
+        { time:"15:00", text:"班霍夫大街 · 伴手礼购物（名表/巧克力/军刀）· 林登霍夫山丘", latlng:[47.3726,8.5353], next:{ type:"walk", desc:"步行约3分钟" } },
         { time:"16:30", text:"老城 Niederdorf · 苏黎世湖畔散步", latlng:[47.3727,8.5434] },
         { time:"晚上",  text:"老城告别晚餐", latlng:[47.3727,8.5434] }
       ],
@@ -770,7 +811,7 @@ window.TRIP_DATA = {
         { time:"12:00", name:"因特拉肯东站 IC 城际 → 苏黎世中央站", latlng:[47.3779,8.54], duration:"约2小时", cost:0, transport:"城际列车", note:"STP包含 | 经伯尔尼", ticketTip:"STP直接上车 | 十一黄金周末日，车厢可能较满" },
         { time:"14:15", name:"Hotel St. Josef 入住", latlng:[47.3758,8.544], note:"老城核心，步行到各景点5-10分钟", pdf:[{ name:"🏨 酒店确认单", url:"pdfs/hotel-zurich.pdf" }] },
         { time:"15:00", name:"午餐", latlng:[47.3727,8.5434], meal:{ name:"苏黎世老城餐厅", cuisine:"瑞士德语区菜", perPerson:80, recommended:"Zürcher Geschnetzeltes（酱汁牛肉丝）", location:"老城" } },
-        { time:"16:00", name:"班霍夫大街 · 林登霍夫山丘", latlng:[47.3726,8.5353], img:"images/bahnhofstrasse.jpg", duration:"2小时", cost:0, note:"周三商店正常营业，名表/百货可入店选购" },
+        { time:"16:00", name:"班霍夫大街 · 伴手礼购物 · 林登霍夫山丘", latlng:[47.3726,8.5353], img:"images/bahnhofstrasse.jpg", duration:"2.5小时", cost:0, note:"周三商店正常营业，名表/百货可入店选购 | 伴手礼今天买好：莲花巧克力、瑞士军刀、格雷登巧克力、Ricola（明早商店9点后才开，来不及）" },
         { time:"18:00", name:"老城 Niederdorf · 苏黎世湖畔散步", latlng:[47.3727,8.5434], img:"images/niederdorf.jpg", cost:0 },
         { time:"19:30", name:"老城告别晚餐", latlng:[47.3727,8.5434], meal:{ name:"苏黎世老城餐厅", cuisine:"瑞士/欧陆菜", perPerson:100, recommended:"最后一顿，好好吃！", location:"老城" } }
       ]
@@ -783,15 +824,15 @@ window.TRIP_DATA = {
       note:"⚠️ 退税（Global Blue）需离境前盖章 | 液体100ml限制，纪念品酒放托运",
       schedule:[
         { time:"07:30", text:"含早早餐 · 退房", latlng:[47.3758,8.5440], next:{ type:"walk", desc:"步行苏黎世湖老城" } },
-        { time:"08:00", text:"苏黎世湖老城最后漫步 · 伴手礼购买（周四·商店营业）", latlng:[47.3554,8.5490] },
+        { time:"08:00", text:"苏黎世湖老城最后漫步（商店9点后开，伴手礼昨日已买）", latlng:[47.3554,8.5490] },
         { time:"10:15", text:"苏黎世中央站 HB 出发", latlng:[47.3779,8.5400], next:{ type:"train", desc:"火车直达苏黎世机场 · 约10-13分 · STP" } },
         { time:"10:45", text:"苏黎世机场 ZRH · 退税/值机/安检", latlng:[47.4508,8.5617], warn:true, warnText:"国际航班建议起飞前2.5小时到" },
         { time:"13:30", text:"✈️ CX382 起飞 → 香港", latlng:[47.4508,8.5617], pdf:[{ name:"✈️ 机票出行单", url:"pdfs/flight-tickets.pdf" }] },
         { time:"次日",  text:"06:55 抵达香港 🏠" }
       ],
       activities:[
-        { time:"07:30", name:"含早早餐 · 退房", latlng:[47.3758,8.544], note:"周四商店营业，最后购物机会" },
-        { time:"08:00", name:"苏黎世湖老城最后漫步 · 伴手礼购买", latlng:[47.3554,8.549], img:"images/zurich.jpg", duration:"2小时", cost:0, note:"推荐：莲花巧克力、瑞士军刀、格雷登巧克力、Ricola" },
+        { time:"07:30", name:"含早早餐 · 退房", latlng:[47.3758,8.544], note:"周四清晨商店9点后才开，伴手礼昨日已买好" },
+        { time:"08:00", name:"苏黎世湖老城最后漫步", latlng:[47.3554,8.549], img:"images/zurich.jpg", duration:"1.5小时", cost:0, note:"沿湖畔看天鹅、晨光里告别瑞士（商店9点后才开门，伴手礼昨日已买）" },
         { time:"10:15", name:"苏黎世中央站 HB → 苏黎世机场 ZRH", latlng:[47.4508,8.5617], duration:"约10-13分钟", cost:0, transport:"直达火车", note:"STP包含 | 国际航班建议起飞前2.5小时到" },
         { time:"10:45", name:"苏黎世机场 ZRH · 退税/值机/安检", latlng:[47.4508,8.5617], note:"退税（Global Blue）需离境前海关盖章 | 液体100ml托运", ticketTip:"退税须在离开申根区前完成：先在Global Blue自助机扫描，再找海关盖章 | 预留30分钟" },
         { time:"13:30", name:"✈️ CX382 起飞 → 香港", latlng:[47.4508,8.5617], transport:"国际航班", note:"国泰 CX382 苏黎世 ZRH 13:30 → 香港 HKG 次日06:55，直飞约12小时 | 抵港后再经口岸返回深圳", pdf:[{ name:"✈️ 机票出行单", url:"pdfs/flight-tickets.pdf" }] },
