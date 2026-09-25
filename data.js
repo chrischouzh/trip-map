@@ -480,19 +480,21 @@ window.TRIP_DATA = {
       ]
     },
     "7": {
-      fitBounds: [[46.60,7.78],[47.10,8.36]],
+      fitBounds: [[46.57,7.76],[47.10,8.36]],
       waypoints: [
         { id:"luzern_st7",   name:"卢塞恩站",            latlng:[47.0505,8.3101], img:"images/luzern_bahnhof.jpg" },
         { id:"interlaken_7", name:"因特拉肯东站",         latlng:[46.6912,7.8691], img:"images/interlaken.jpg" },
         { id:"hotel_ber",    name:"Essential by Dorint",     latlng:[46.6831,7.8503], info:"hotel_bernerhof" },
+        { id:"lauterbrunnen",name:"劳特布伦嫩 Lauterbrunnen",latlng:[46.5943,7.9075], img:"images/jungfraujoch.jpg" },
         { id:"hoeheweg_7",   name:"何维克街 · 荷黑马特草坪",latlng:[46.6851,7.8576], img:"images/jungfrau.jpg" },
         { id:"brienzersee_7",name:"布里恩茨湖畔",        latlng:[46.6980,7.9020], img:"images/brienzersee.jpg" }
       ],
       legs: [
-        { from:"luzern_st7",  to:"interlaken_7",  type:"scenic_train", desc:"GoldenPass 金色山口观景列车 · 约1h50 · STP 免费" },
-        { from:"interlaken_7",to:"hotel_ber",      type:"walk",         desc:"步行约5分钟" },
-        { from:"hotel_ber",   to:"hoeheweg_7",     type:"walk",         desc:"步行约8分钟" },
-        { from:"hoeheweg_7",  to:"brienzersee_7",  type:"walk",         desc:"步行约10分钟至湖边" }
+        { from:"luzern_st7",   to:"interlaken_7", type:"scenic_train", desc:"GoldenPass 金色山口观景列车 · 约1h50 · STP 免费" },
+        { from:"interlaken_7", to:"hotel_ber",     type:"walk",         desc:"步行约5分钟" },
+        { from:"hotel_ber",    to:"lauterbrunnen", type:"train",        desc:"回东站乘火车 · 约20分 · STP免费" },
+        { from:"lauterbrunnen",to:"hoeheweg_7",    type:"train",        desc:"火车返回因特拉肯 · 约20分 · STP免费" },
+        { from:"hoeheweg_7",   to:"brienzersee_7", type:"walk",         desc:"步行约10分钟至湖边" }
       ]
     },
     "8": {
@@ -516,10 +518,11 @@ window.TRIP_DATA = {
       ]
     },
     "9": {
-      fitBounds: [[46.62,7.80],[47.43,8.61]],
+      fitBounds: [[46.62,7.66],[47.43,8.61]],
       waypoints: [
         { id:"interlaken_9",  name:"因特拉肯东站（游船出发）", latlng:[46.6912,7.8691], img:"images/interlaken_ost.jpg" },
         { id:"brienz",        name:"布里恩茨（游湖终点）",     latlng:[46.7577,8.0331], img:"images/brienzersee.jpg" },
+        { id:"spiez",         name:"施皮茨 Spiez（可选）",     latlng:[46.6860,7.6800], img:"images/thun.jpg" },
         { id:"zurich_hb",     name:"苏黎世中央站 HB",         latlng:[47.3779,8.5400], img:"images/zurich_hb.jpg" },
         { id:"wellenberg",    name:"Hotel St. Josef",latlng:[47.3758,8.5440], info:"hotel_wellenberg" },
         { id:"bahnhofstr",    name:"班霍夫大街",      latlng:[47.3726,8.5353], img:"images/bahnhofstrasse.jpg" },
@@ -529,7 +532,8 @@ window.TRIP_DATA = {
       legs: [
         { from:"interlaken_9",to:"brienz",      type:"boat",  desc:"布里恩茨湖游船 · 约1h · STP免费 · 翡翠绿湖水" },
         { from:"brienz",      to:"interlaken_9",type:"train", desc:"布里恩茨→因特拉肯东站 · 约20分 · STP免费" },
-        { from:"interlaken_9",to:"zurich_hb",   type:"train", desc:"IC 城际 · 约2h · STP · 经伯尔尼" },
+        { from:"interlaken_9",to:"spiez",       type:"train", desc:"IC 城际 · 约20分 · STP · （可选）施皮茨下车" },
+        { from:"spiez",       to:"zurich_hb",   type:"train", desc:"IC 城际继续 · 约1h40 · STP · 经伯尔尼" },
         { from:"zurich_hb",   to:"wellenberg",  type:"walk",  desc:"步行约7分钟" },
         { from:"wellenberg",  to:"bahnhofstr",  type:"walk",  desc:"步行约5分钟" },
         { from:"bahnhofstr",  to:"niederdorf",  type:"walk",  desc:"步行约8分钟" },
@@ -617,7 +621,7 @@ window.TRIP_DATA = {
       theme:"瓦尔多尔恰丝柏机位 · 皮恩扎 / 锡耶纳 · 8人小团包车",
       weekday:"周四",
       dayWeather:{ icon:"sunny", high:24, low:15 },
-      note:"⚠️ 8人小团包车（小红书已订），9:00 佛罗伦萨中央火车站集合出发、19:00 回到同处解散 | 奥尔恰谷丝柏树机位 + 皮恩扎 + 锡耶纳 | 全程拍照为主，穿舒适鞋、备防晒 | 午餐皮恩扎城内自理",
+      note:"⚠️ 8人小团包车（小红书·罗罗旅行·微信群联系），9:00 佛罗伦萨中央火车站集合出发、19:00 回到同处解散 | 奥尔恰谷丝柏树机位 + 皮恩扎 + 锡耶纳 | 全程拍照为主，穿舒适鞋、备防晒 | 午餐皮恩扎城内自理",
       schedule:[
         { time:"09:00", text:"佛罗伦萨中央火车站集合出发", latlng:[43.7759,11.2482], next:{ type:"car", desc:"8人小团包车南下 · 约3小时" } },
         { time:"12:00", text:"奥尔恰谷 · 小S弯经典丝柏树机位（约20分钟）", latlng:[43.0580,11.6460], next:{ type:"car", desc:"车程约10分钟" } },
@@ -629,7 +633,7 @@ window.TRIP_DATA = {
         { time:"19:00", text:"回到佛罗伦萨中央火车站解散", latlng:[43.7759,11.2482] }
       ],
       activities:[
-        { time:"09:00", name:"佛罗伦萨中央火车站集合出发", latlng:[43.7759,11.2482], note:"8人小团包车，已在小红书预订，微信群联系确认集合/车牌 | SMN 站集合，从圣十字区酒店步行约18-20分钟或打车", transport:"包车" },
+        { time:"09:00", name:"佛罗伦萨中央火车站集合出发", latlng:[43.7759,11.2482], note:"8人小团包车，小红书「罗罗旅行」预订，微信群联系确认集合/车牌 | SMN 站集合，从圣十字区酒店步行约18-20分钟或打车", transport:"包车" },
         { time:"12:00", name:"奥尔恰谷 · 小S弯经典丝柏树机位", latlng:[43.058,11.646], duration:"约20分钟", cost:0, note:"经典丝柏树 S 弯机位，托斯卡纳明信片同款 | 车程约3小时，途中可小睡" },
         { time:"12:10", name:"皮恩扎 Pienza（文艺复兴小城）", latlng:[43.0785,11.6786], duration:"2小时", cost:0, note:"UNESCO「理想之城」，逛吃拍照 | 名产佩科里诺羊奶酪、意式冰淇淋 | 午餐城内自理" },
         { time:"14:25", name:"小耳朵教堂", latlng:[43.0593,11.6476], duration:"约30分钟", cost:0, note:"Cappella della Madonna di Vitaleta，托斯卡纳明信片取景地，孤立于丝柏与麦田之间" },
@@ -644,24 +648,24 @@ window.TRIP_DATA = {
       theme:"圣母百花讲解登顶 · 乌菲兹 · 老桥逛街",
       weekday:"周五",
       dayWeather:{ icon:"sunny", high:23, low:14 },
-      note:"⚠️ 9:00 圣母百花讲解团（含穹顶票），讲解后自行登穹顶（463级）| 乌菲兹票面 14:15、大背包寄存 | 下午乌菲兹出来顺路逛 Via Por Santa Maria→老桥（Humilis/Bottega del Giglio）→Via Maggio 古董街 | 傍晚上米开朗基罗广场看日落 | 提前确认明天长途车票",
+      note:"⚠️ 9:00 圣母百花讲解团（Klook 订 · black bar 门口集合，教堂西南侧 · 含穹顶票），讲解后自行登穹顶（463级）| 乌菲兹已请讲解（小红书·罗罗旅行·微信群）、大背包寄存 | 下午乌菲兹出来顺路逛 Via Por Santa Maria→老桥（Humilis/Bottega del Giglio）→Via Maggio 古董街 | 傍晚上米开朗基罗广场看日落 | 提前确认明天长途车票",
       schedule:[
-        { time:"09:00", text:"圣母百花大教堂讲解团（约2小时 · 含穹顶票）", latlng:[43.7730,11.2560], next:{ type:"walk", desc:"讲解结束后登穹顶" } },
+        { time:"09:00", text:"圣母百花大教堂讲解团（约2小时 · Klook · black bar 门口集合）", latlng:[43.7730,11.2560], next:{ type:"walk", desc:"讲解结束后登穹顶" } },
         { time:"11:00", text:"登顶穹顶（463级 · 约45分钟）", latlng:[43.7730,11.2560], next:{ type:"walk", desc:"下到广场 · 洗礼堂/钟楼外观" } },
         { time:"12:00", text:"大教堂广场 · 洗礼堂/钟楼外观", latlng:[43.7730,11.2560], next:{ type:"walk", desc:"Via de' Calzaiuoli 步行街 · 边逛边吃" } },
         { time:"12:30", text:"午餐 + 顺路逛 Via de' Calzaiuoli", latlng:[43.7715,11.2553], next:{ type:"walk", desc:"步行约5分钟到乌菲兹" } },
-        { time:"14:15", text:"乌菲兹美术馆（票面 14:15 · 文艺复兴名画）", latlng:[43.7682,11.2553], pdf:[{ name:"🎫 乌菲兹门票", url:"pdfs/ticket-uffizi.pdf" }], next:{ type:"walk", desc:"Via Por Santa Maria → 老桥" } },
+        { time:"14:15", text:"乌菲兹美术馆（已请讲解 · 罗罗旅行 · 文艺复兴名画）", latlng:[43.7682,11.2553], pdf:[{ name:"🎫 乌菲兹门票", url:"pdfs/ticket-uffizi.pdf" }], next:{ type:"walk", desc:"Via Por Santa Maria → 老桥" } },
         { time:"17:00", text:"逛街 Via Por Santa Maria → 老桥（Humilis / Bottega del Giglio）", latlng:[43.7681,11.2531], next:{ type:"walk", desc:"过老桥 · 约5分钟" } },
         { time:"17:45", text:"Via Maggio 古董街（Oltrarno）", latlng:[43.7668,11.2489], next:{ type:"walk", desc:"步行约15分钟上山" } },
         { time:"18:30", text:"（机动·天气好）米开朗基罗广场看日落", latlng:[43.7629,11.2646], next:{ type:"walk", desc:"下山回老城/酒店" } },
         { time:"19:30", text:"告别佛罗伦萨晚餐", latlng:[43.7671,11.2651] }
       ],
       activities:[
-        { time:"09:00", name:"圣母百花大教堂讲解团（约2小时）", latlng:[43.773,11.256], img:"images/florence.jpg", duration:"2小时", cost:1262, note:"已订讲解团（含穹顶票）| 讲解大教堂立面、洗礼堂与博物馆精华", ticketTip:"已订·含穹顶票（¥1262/2人）" },
+        { time:"09:00", name:"圣母百花大教堂讲解团（约2小时）", latlng:[43.773,11.256], img:"images/florence.jpg", duration:"2小时", cost:1262, note:"Klook 预订（含穹顶票）| 9:00 在 black bar 门口集合（教堂西南侧）| 讲解大教堂立面、洗礼堂与博物馆精华", ticketTip:"已订·含穹顶票（¥1262/2人）· Klook" },
         { time:"11:00", name:"登顶穹顶（463级）", latlng:[43.773,11.256], duration:"约45分钟", cost:0, note:"讲解结束后自行登顶（含在讲解团票内）| 463级陡窄旋梯无电梯，近看《最后的审判》壁画 + 俯瞰红顶城" },
         { time:"12:00", name:"大教堂广场 · 洗礼堂/钟楼外观", latlng:[43.773,11.256], cost:0, note:"天堂之门、乔托钟楼外观打卡" },
         { time:"12:30", name:"午餐 + 顺路逛 Via de' Calzaiuoli", latlng:[43.7715,11.2553], meal:{ name:"Calzaiuoli / 领主广场周边", cuisine:"托斯卡纳菜", perPerson:30, recommended:"帕尼尼、牛肚包、意式冰淇淋", location:"Calzaiuoli 步行街" }, note:"Duomo 到领主广场的主购物街，品牌+本地店都有，边吃边逛" },
-        { time:"14:15", name:"乌菲兹美术馆（票面 14:15 · 文艺复兴名画）", latlng:[43.7682,11.2553], img:"images/uffizi.jpg", duration:"2.5小时", cost:320, note:"《维纳斯的诞生》《春》| 大背包寄存 | 14:15 时段入场", pdf:[{ name:"🎫 乌菲兹门票", url:"pdfs/ticket-uffizi.pdf" }] },
+        { time:"14:15", name:"乌菲兹美术馆（已请讲解 · 文艺复兴名画）", latlng:[43.7682,11.2553], img:"images/uffizi.jpg", duration:"2.5小时", cost:320, note:"《维纳斯的诞生》《春》| 已请讲解（小红书·罗罗旅行·微信群）| 大背包寄存 | 14:15 时段入场", pdf:[{ name:"🎫 乌菲兹门票", url:"pdfs/ticket-uffizi.pdf" }] },
         { time:"17:00", name:"逛街 Via Por Santa Maria → 老桥（Humilis / Bottega del Giglio）", latlng:[43.7681,11.2531], duration:"45分钟", cost:0, note:"老桥珠宝老店 Humilis（Ponte Vecchio 51/R）| 桥旁皮具 Bottega del Giglio（Lungarno degli Acciaiuoli 42/R）" },
         { time:"17:45", name:"Via Maggio 古董街（过河 Oltrarno）", latlng:[43.7668,11.2489], duration:"45分钟", cost:0, note:"南岸文艺复兴宫殿间的古董/画廊/手工作坊街，与圣神大殿连成一片" },
         { time:"18:30", name:"（机动·看天气）米开朗基罗广场看日落", latlng:[43.7629,11.2646], img:"images/piazzale.jpg", cost:0, transport:"步行约15分钟", note:"🌅 日落约19:10，提前30-40分到占机位 | 更高更静可上圣米尼亚托大殿" },
@@ -728,13 +732,16 @@ window.TRIP_DATA = {
       theme:"金色山口观景列车 · 抵因特拉肯 · 滑翔伞 · 两湖漫步",
       weekday:"周一",
       dayWeather:{ icon:"partlyCloudy", high:15, low:7 },
-      note:"⚠️ GoldenPass（PE 2916）08:06发 / 09:54到（STP免费·已购订座CHF16/人）| 住 Essential by Dorint（西站旁·已订）| ⚠️金色山口列车到东站(Ost)，酒店在西站(West)，两站相隔一站约3分钟(STP免费) | 早到约10:00，滑翔伞前自由时间充足 | 下午滑翔伞（已订）| 两湖漫步机动",
+      note:"⚠️ GoldenPass（PE 2916）08:06发 / 09:54到（STP免费·已购订座CHF16/人）| 住 Essential by Dorint（西站旁·已订）| ⚠️金色山口列车到东站(Ost)，酒店在西站(West)，两站相隔一站约3分钟(STP免费) | 午餐后先火车去劳特布伦嫩看施陶河瀑布（约20分·STP免费），14:30前赶回 | 下午滑翔伞（已订15:30）| 两湖漫步机动",
       schedule:[
         { time:"07:30", text:"早餐 · 退房 · 前往卢塞恩站", latlng:[47.0505,8.3101], next:{ type:"scenic_train", desc:"GoldenPass 08:06发 · 约1h48" } },
         { time:"08:06", text:"GoldenPass（PE 2916）卢塞恩 → 因特拉肯东站（09:54到）", latlng:[46.6912,7.8691], ticket:true, pdf:[{ name:"🎫 卢塞恩→因特拉肯车票（STP）", url:"pdfs/swiss-travel-pass.pdf" },{ name:"🎫 车票二维码（含座位预订）", url:"pdfs/swiss-pass-qr.pdf" }], next:{ type:"walk", desc:"到东站后坐1站至西站约3分钟" } },
         { time:"10:00", text:"Essential by Dorint 放行李/入住（15:00正式）", latlng:[46.6831,7.8503], pdf:[{ name:"🏨 酒店确认单", url:"pdfs/hotel-interlaken.pdf" }], next:null },
         { time:"11:30", text:"午餐 + 超市补给（Coop/Migros 买早餐/零食/水）", latlng:[46.6831,7.8503] },
-        { time:"13:00", text:"何维克街 · 荷黑马特草坪 · 湖边自由漫步（早到机动）", latlng:[46.6851,7.8576] },
+        { time:"12:30", text:"因特拉肯东站 → 劳特布伦嫩（火车约20分 · STP免费）", latlng:[46.5943,7.9075], next:{ type:"walk", desc:"步行5分钟到施陶河瀑布" } },
+        { time:"12:50", text:"劳特布伦嫩 Lauterbrunnen · 施陶河瀑布 Staubbach Falls（瀑布谷）", latlng:[46.5897,7.9050], next:{ type:"train", desc:"约1h后火车返回因特拉肯" } },
+        { time:"14:00", text:"火车返回因特拉肯（约20分）", latlng:[46.6912,7.8691], next:{ type:"walk", desc:"准备滑翔伞" } },
+        { time:"14:30", text:"何维克街 · 荷黑马特草坪 · 滑翔伞前自由时间", latlng:[46.6851,7.8576] },
         { time:"15:30", text:"滑翔伞（双人 tandem · 已订 15:30）", latlng:[46.6863,7.8548], ticket:true, pdf:[{ name:"🎫 滑翔伞凭证", url:"pdfs/1005滑翔伞.pdf" }] },
         { time:"17:00", text:"荷黑马特草坪 · 何维克街看少女峰三姐妹（降落点顺逛）", latlng:[46.6851,7.8576] },
         { time:"17:30", text:"布里恩茨湖畔 / 图恩湖畔漫步（机动）", latlng:[46.6980,7.9020] },
@@ -745,7 +752,10 @@ window.TRIP_DATA = {
         { time:"08:06", name:"GoldenPass（PE 2916）金色山口观景列车 → 因特拉肯东站（09:54到）", latlng:[46.6912,7.8691], duration:"约1小时48分", cost:272, transport:"观景列车", note:"STP免费乘车（Luzern-Interlaken Express）+ 已购座位预订 CHF16/人（7车315/316座）| 沿途湖景+农舍+雪山，极度出片", ticketTip:"STP 通票覆盖 · 已购座位预订 CHF16/人（凭证见二维码）| 08:06发 / 09:54到", pdf:[{ name:"🎫 卢塞恩→因特拉肯车票（STP）", url:"pdfs/swiss-travel-pass.pdf" },{ name:"🎫 车票二维码（含座位预订）", url:"pdfs/swiss-pass-qr.pdf" }] },
         { time:"10:00", name:"Essential by Dorint 放行李/入住", latlng:[46.6831,7.8503], note:"从东站坐1站到西站(约3分钟)，酒店在西站旁；15:00前可寄存行李 | 早到自由时间充足", pdf:[{ name:"🏨 酒店确认单", url:"pdfs/hotel-interlaken.pdf" }] },
         { time:"11:30", name:"午餐 + 超市补给（Coop / Migros）", latlng:[46.6831,7.8503], meal:{ name:"因特拉肯镇餐厅或超市", cuisine:"简餐/瑞士菜", perPerson:50, recommended:"Coop超市买三明治 | 省钱留给晚餐", location:"镇上" }, note:"🛒 顺便超市补给：因特拉肯住2晚 + 明日 First 山，买早餐/水/零食/午餐三明治 | 西站旁有 Coop/Migros（周一正常营业）" },
-        { time:"13:00", name:"何维克街 · 荷黑马特草坪 · 湖边自由漫步", latlng:[46.6851,7.8576], duration:"2小时", cost:0, note:"早到机动 | 何维克街精品店与少女峰观景，滑翔伞集合前自由安排" },
+        { time:"12:30", name:"因特拉肯东站 → 劳特布伦嫩 Lauterbrunnen", latlng:[46.5943,7.9075], duration:"约20分钟", cost:0, transport:"火车", note:"STP免费（BOB铁路）| 劳特布伦嫩是少女峰区入口、72瀑布谷", ticketTip:"STP直接上车" },
+        { time:"12:50", name:"施陶河瀑布 Staubbach Falls · 劳特布伦嫩瀑布谷", latlng:[46.5897,7.905], duration:"约1小时", cost:0, note:"车站步行约5分钟即到，瑞士最著名的自由落体瀑布（高约300m）| 时间充裕可乘巴士上到山谷尽头 Trümmelbach 瀑布群（可跳过）", ticketTip:"瀑布免费远观" },
+        { time:"14:00", name:"火车返回因特拉肯", latlng:[46.6912,7.8691], duration:"约20分钟", cost:0, transport:"火车", note:"STP免费 | 赶回镇上准备滑翔伞" },
+        { time:"14:30", name:"何维克街 · 荷黑马特草坪 · 滑翔伞前自由时间", latlng:[46.6851,7.8576], duration:"1小时", cost:0, note:"早到机动 | 何维克街精品店与少女峰观景" },
         { time:"15:30", name:"滑翔伞（双人 tandem）", latlng:[46.6863,7.8548], duration:"约2小时", cost:3040, transport:"集合+飞行", note:"从 Beatenberg 起飞、荷黑马特草坪降落，俯瞰两湖与少女峰 | 已订 15:30 场（¥1520/人）", ticketTip:"已订 15:30 · 凭证 1005滑翔伞", pdf:[{ name:"🎫 滑翔伞凭证", url:"pdfs/1005滑翔伞.pdf" }] },
         { time:"17:00", name:"荷黑马特草坪 · 何维克街看少女峰三姐妹", latlng:[46.6851,7.8576], img:"images/jungfrau.jpg", duration:"1小时", cost:0, note:"滑翔伞就在荷黑马特草坪降落，顺路看少女峰，黄金拍照点" },
         { time:"17:30", name:"布里恩茨湖畔 / 图恩湖畔漫步（机动）", latlng:[46.698,7.902], img:"images/thun.jpg", duration:"1小时", cost:0, note:"时间机动 | 布里恩茨湖从东站步行5分钟 | 图恩湖从西站方向步行15分 | 两湖湖水颜色不同" },
@@ -791,13 +801,14 @@ window.TRIP_DATA = {
       theme:"因特拉肯 → 苏黎世 · 古城漫步",
       weekday:"周三",
       dayWeather:{ icon:"sunny", high:18, low:10 },
-      note:"⚠️ 今天周三商店正常营业，可安排购物 | 苏黎世老城傍晚氛围佳",
+      note:"⚠️ 今天周三商店正常营业，可安排购物 | 苏黎世老城傍晚氛围佳 | 施皮茨（Spiez）：IC 途中顺路可选（城堡+图恩湖约1h），赶时间则直达苏黎世",
       schedule:[
         { time:"07:30", text:"早餐 · 退房寄存行李", latlng:[46.6912,7.8691] },
         { time:"08:15", text:"布里恩茨湖游船 东站出发 → 布里恩茨（STP免费）", latlng:[46.7577,8.0331], next:{ type:"boat", desc:"约1小时单程 · 湖水翡翠绿" } },
         { time:"10:30", text:"返回因特拉肯 · 何维克街 · 纪念品购买", latlng:[46.6851,7.8576] },
         { time:"12:00", text:"因特拉肯东站 IC → 苏黎世中央站", latlng:[47.3779,8.5400], next:{ type:"train", desc:"IC 城际 · 约2h · STP · 经伯尔尼" } },
-        { time:"14:00", text:"到苏黎世 HB", latlng:[47.3779,8.5400], next:{ type:"walk", desc:"步行约7分钟" } },
+        { time:"(可选)", text:"施皮茨 Spiez 下车（约12:20到）· 施皮茨城堡 + 图恩湖畔 · 约1h · 再乘下一班 IC 继续", latlng:[46.6860,7.6800] },
+        { time:"14:00", text:"到苏黎世 HB（施皮茨停留则约15:00）", latlng:[47.3779,8.5400], next:{ type:"walk", desc:"步行约7分钟" } },
         { time:"14:15", text:"Hotel St. Josef 入住", latlng:[47.3758,8.5440], pdf:[{ name:"🏨 酒店确认单", url:"pdfs/hotel-zurich.pdf" }] },
         { time:"15:00", text:"班霍夫大街 · 伴手礼购物（名表/巧克力/军刀）· 林登霍夫山丘", latlng:[47.3726,8.5353], next:{ type:"walk", desc:"步行约3分钟" } },
         { time:"16:30", text:"老城 Niederdorf · 苏黎世湖畔散步", latlng:[47.3727,8.5434] },
@@ -809,6 +820,7 @@ window.TRIP_DATA = {
         { time:"09:30", name:"游船返回因特拉肯 / 布里恩茨小镇短留", latlng:[46.7577,8.0331], cost:0, note:"原路返回（约1小时）或从布里恩茨乘火车回（约20分，STP免费）" },
         { time:"10:30", name:"何维克街最后漫步 · 纪念品购买", latlng:[46.6851,7.8576], duration:"1小时", cost:0, note:"周三商店正常营业，可从容选购纪念品/手表" },
         { time:"12:00", name:"因特拉肯东站 IC 城际 → 苏黎世中央站", latlng:[47.3779,8.54], duration:"约2小时", cost:0, transport:"城际列车", note:"STP包含 | 经伯尔尼", ticketTip:"STP直接上车 | 十一黄金周末日，车厢可能较满" },
+        { time:"(可选)", name:"施皮茨 Spiez 下车 · 施皮茨城堡 + 图恩湖", latlng:[46.686,7.68], duration:"约1小时", cost:0, note:"IC 途中 Spiez 下车（约12:20到），参观施皮茨城堡（Schloss Spiez）+ 图恩湖畔 | STP 免费，之后换乘下一班 IC 继续 | 赶时间则跳过直达苏黎世", ticketTip:"机动 · 赶时间跳过" },
         { time:"14:15", name:"Hotel St. Josef 入住", latlng:[47.3758,8.544], note:"老城核心，步行到各景点5-10分钟", pdf:[{ name:"🏨 酒店确认单", url:"pdfs/hotel-zurich.pdf" }] },
         { time:"15:00", name:"午餐", latlng:[47.3727,8.5434], meal:{ name:"苏黎世老城餐厅", cuisine:"瑞士德语区菜", perPerson:80, recommended:"Zürcher Geschnetzeltes（酱汁牛肉丝）", location:"老城" } },
         { time:"16:00", name:"班霍夫大街 · 伴手礼购物 · 林登霍夫山丘", latlng:[47.3726,8.5353], img:"images/bahnhofstrasse.jpg", duration:"2.5小时", cost:0, note:"周三商店正常营业，名表/百货可入店选购 | 伴手礼今天买好：莲花巧克力、瑞士军刀、格雷登巧克力、Ricola（明早商店9点后才开，来不及）" },
