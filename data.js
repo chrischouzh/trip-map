@@ -247,7 +247,7 @@ window.TRIP_DATA = {
     },
     grindelwald: {
       desc: "艾格北壁脚下的高山度假村，是格林德瓦–First 缆车起点。First 山（2168m）有悬崖玻璃步道、高空飞索与通往 Bachalpsee 的徒步线，性价比高于少女峰。",
-      tips: ["First 缆车 STP 享 50% 折扣（约 CHF40/人），现场购票", "建议 9:00 前到缆车站，排队最短", "住格林德瓦一晚可避开人潮、从缆车站直接出发"]
+      tips: ["First 缆车 STP 享 50% 折扣（约 CHF40/人），官网/Klook 可线上买往返票（不含项目）", "8 点前现场排队买「带项目优惠套票」最划算；人多则线上买缆车票、项目上顶单买", "住格林德瓦一晚可避开人潮、从缆车站直接出发"]
     },
     bachalpsee: {
       desc: "First 山顶徒步约 45 分钟可达的明镜高山湖，晴朗无风时完美倒映施雷克峰与少女峰群，是格林德瓦最美徒步线的终点。",
@@ -345,7 +345,7 @@ window.TRIP_DATA = {
     },
     first_base: {
       desc: "格林德瓦 First 缆车山脚站，从格林德瓦村步行约 5 分钟可达，分段缆车约 25 分钟上 First（2168m）。",
-      tips: ["STP 缆车享 50% 折扣，现场购票", "9:00 前到排队最短", "山顶有悬崖步道与高空飞索，量力选择"]
+      tips: ["STP 缆车享 50% 折扣，官网/Klook 可线上买往返票（不含项目）", "8 点前现场排队买「带项目优惠套票」最划算", "山顶有悬崖步道与高空飞索，量力选择"]
     }
   },
 
@@ -767,11 +767,11 @@ window.TRIP_DATA = {
       theme:"格林德瓦 First山 · 悬崖步道 · 高山湖徒步",
       weekday:"周二",
       dayWeather:{ icon:"sunny", high:14, low:5 },
-      note:"⚠️ 行李留酒店轻装出发 | 海拔2168m防晒慢行 | 必须8点前到格林德瓦 First 缆车站现场排队买票（无线上票，越早排队越短） | 备选：若今日天气晴好且想去，可改登少女峰「欧洲之巅」（Pass5折，看天定）",
+      note:"⚠️ 行李留酒店轻装出发 | 海拔2168m防晒慢行 | First 缆车官网/Klook 可线上买（仅往返缆车，不含项目）；8点前现场排队买的是「带项目的优惠套票」——若去晚/排队长，就线上买缆车票、项目票上顶后单独买 | 备选：若今日天气晴好且想去，可改登少女峰「欧洲之巅」（Pass5折，看天定）",
       schedule:[
         { time:"07:00", text:"早餐（行李留酒店）· 轻装出发", latlng:[46.6912,7.8691], next:{ type:"train", desc:"因特拉肯东站→格林德瓦 · 约35分 · STP免费 · 赶7:25班次" } },
         { time:"07:25", text:"因特拉肯东站出发 → 格林德瓦站（08:00到）", latlng:[46.6241,8.0341], next:{ type:"walk", desc:"步行5分钟至缆车站" } },
-        { time:"08:05", text:"First 缆车站 · 现场排队买票（8点前到）· 缆车上山", latlng:[46.6248,8.0413], ticket:true, next:{ type:"cable_car", desc:"约25分钟" } },
+        { time:"08:05", text:"First 缆车站 · 8点前排「带项目优惠套票」（人多则线上买缆车票）· 缆车上山", latlng:[46.6248,8.0413], ticket:true, next:{ type:"cable_car", desc:"约25分钟" } },
         { time:"09:15", text:"First Cliff Walk 悬崖步道（玻璃平台）", latlng:[46.6556,8.0461] },
         { time:"10:00", text:"First Flyer 高空飞索（强烈推荐）", latlng:[46.6556,8.0461], ticket:true },
         { time:"11:00", text:"Bachalpsee 高山湖徒步（往返约1.5h）", latlng:[46.6648,8.0622] },
@@ -784,9 +784,9 @@ window.TRIP_DATA = {
       activities:[
         { time:"07:00", name:"早餐 · 行李留酒店", latlng:[46.6912,7.8691], note:"轻装出发，行李放 Essential by Dorint，今晚仍住这里，回来直接进房 | 早起赶7:25班次" },
         { time:"07:25", name:"因特拉肯东站 → 格林德瓦站（08:00到）", latlng:[46.6241,8.0341], duration:"约35分钟", cost:0, transport:"火车", note:"STP免费 | 艾格北壁一路出镜", ticketTip:"STP直接上车 | 赶7:25班次，8点前到缆车站" },
-        { time:"08:05", name:"格林德瓦 First 缆车站 · 现场排队买票", latlng:[46.6248,8.0413], duration:"排队+缆车约25分", cost:660, transport:"缆车", note:"⚠️ 必须8点前到现场排队买票（First 缆车无线上票）| STP享50%折扣，约CHF40/人 | 买好票后缆车上山约25分钟", ticketTip:"8点前到现场排队买票，越早排队越短（无线上票，STP折后约CHF40/人）" },
+        { time:"08:05", name:"格林德瓦 First 缆车站 · 买票上山", latlng:[46.6248,8.0413], duration:"排队+缆车约25分", cost:660, transport:"缆车", note:"⚠️ 8点前现场排队买「带项目的优惠套票」（缆车往返+飞索等，最划算）| 官网/Klook 可线上买缆车往返票（STP5折约CHF40/人，仅含往返、不含项目）| 若去晚/排队长：线上买缆车票上山，项目票上顶后单独买 | 缆车上山约25分钟", ticketTip:"8点前排带项目优惠套票最划算；人多/去晚则官网或Klook线上买缆车往返票，项目票上顶后单独买" },
         { time:"09:15", name:"First Cliff Walk 悬崖步道（含玻璃平台）", latlng:[46.6556,8.0461], duration:"30分钟", cost:0, note:"2168m悬崖外挑玻璃走道，俯瞰格林德瓦山谷和少女峰三姐妹 | 含在缆车票内" },
-        { time:"10:00", name:"First Flyer 高空飞索（强烈推荐！）", latlng:[46.6556,8.0461], duration:"20分钟", cost:480, note:"800m俯冲飞索，时速约80km | 旺季现场排队约30-45分钟", ticketTip:"现场排队购票（约CHF29/人）| 9:30前玩，排队最短" },
+        { time:"10:00", name:"First Flyer 高空飞索（强烈推荐！）", latlng:[46.6556,8.0461], duration:"20分钟", cost:480, note:"800m俯冲飞索，时速约80km | 项目票（含在8点前优惠套票内 / 上顶后单独买约CHF29/人）| 旺季排队约30-45分钟", ticketTip:"项目票：优惠套票内含或山顶单独买（约CHF29/人）| 9:30前玩，排队最短" },
         { time:"11:00", name:"Bachalpsee 高山湖徒步", latlng:[46.6648,8.0622], img:"images/bachalpsee.jpg", duration:"约1.5小时往返", cost:0, note:"平坦山路约45分钟单程，倒映少女峰三姐妹 | 格林德瓦最美徒步线 | 运动鞋即可" },
         { time:"12:30", name:"First山顶午餐", latlng:[46.6556,8.0461], meal:{ name:"Bergrestaurant First", cuisine:"瑞士菜", perPerson:70, recommended:"自带三明治更省钱，或山顶汤+面包（约CHF20）", location:"First缆车站旁" } },
         { time:"14:30", name:"缆车下山 → 格林德瓦小镇漫步", latlng:[46.6241,8.0341], duration:"45分钟", cost:0, note:"艾格北壁近在眼前，绝佳拍照点 | Coop超市可买奶酪纪念品" },
@@ -801,7 +801,7 @@ window.TRIP_DATA = {
       theme:"因特拉肯 → 苏黎世 · 古城漫步",
       weekday:"周三",
       dayWeather:{ icon:"sunny", high:18, low:10 },
-      note:"⚠️ 今天周三商店正常营业，可安排购物 | 苏黎世老城傍晚氛围佳 | 施皮茨（Spiez）：IC 途中顺路可选（城堡+图恩湖约1h），赶时间则直达苏黎世",
+      note:"⚠️ 今天周三商店正常营业，可安排购物 | 苏黎世老城傍晚氛围佳 | 施皮茨（Spiez）：IC 途中顺路可选（城堡+图恩湖约1h），赶时间则直达苏黎世 | 已订该车次座位CHF5/人，中途下车则订座失效、下程改坐无预订座（STP乘车仍免费）",
       schedule:[
         { time:"07:30", text:"早餐 · 退房寄存行李", latlng:[46.6912,7.8691] },
         { time:"08:15", text:"布里恩茨湖游船 东站出发 → 布里恩茨（STP免费）", latlng:[46.7577,8.0331], next:{ type:"boat", desc:"约1小时单程 · 湖水翡翠绿" } },
@@ -819,8 +819,8 @@ window.TRIP_DATA = {
         { time:"08:15", name:"布里恩茨湖游船 因特拉肯东站 → 布里恩茨", latlng:[46.7577,8.0331], duration:"约1小时单程", cost:0, transport:"游船", note:"STP全程免费 | 湖水翡翠绿，两岸山峰倒影 | 布里恩茨是产木雕的小镇，可短留后乘回程船或火车返回" },
         { time:"09:30", name:"游船返回因特拉肯 / 布里恩茨小镇短留", latlng:[46.7577,8.0331], cost:0, note:"原路返回（约1小时）或从布里恩茨乘火车回（约20分，STP免费）" },
         { time:"10:30", name:"何维克街最后漫步 · 纪念品购买", latlng:[46.6851,7.8576], duration:"1小时", cost:0, note:"周三商店正常营业，可从容选购纪念品/手表" },
-        { time:"12:00", name:"因特拉肯东站 IC 城际 → 苏黎世中央站", latlng:[47.3779,8.54], duration:"约2小时", cost:0, transport:"城际列车", note:"STP包含 | 经伯尔尼", ticketTip:"STP直接上车 | 十一黄金周末日，车厢可能较满" },
-        { time:"(可选)", name:"施皮茨 Spiez 下车 · 施皮茨城堡 + 图恩湖", latlng:[46.686,7.68], duration:"约1小时", cost:0, note:"IC 途中 Spiez 下车（约12:20到），参观施皮茨城堡（Schloss Spiez）+ 图恩湖畔 | STP 免费，之后换乘下一班 IC 继续 | 赶时间则跳过直达苏黎世", ticketTip:"机动 · 赶时间跳过" },
+        { time:"12:00", name:"因特拉肯东站 IC 城际 → 苏黎世中央站", latlng:[47.3779,8.54], duration:"约2小时", cost:0, transport:"城际列车", note:"STP包含 | 经伯尔尼 | 已订座位 CHF5/人（特定车次座位，中途下车失效）", ticketTip:"STP直接上车 | 已订该车次座位 CHF5/人 | 十一黄金周末日，车厢可能较满" },
+        { time:"(可选)", name:"施皮茨 Spiez 下车 · 施皮茨城堡 + 图恩湖", latlng:[46.686,7.68], duration:"约1小时", cost:0, note:"IC 途中 Spiez 下车（约12:20到），参观施皮茨城堡（Schloss Spiez）+ 图恩湖畔 | STP 免费，之后换乘下一班 IC 继续 | 已订该车次座位CHF5/人，中途下车该订座失效、下程改坐无预订座（STP仍免费）| 赶时间则跳过直达苏黎世", ticketTip:"机动 · 赶时间跳过" },
         { time:"14:15", name:"Hotel St. Josef 入住", latlng:[47.3758,8.544], note:"老城核心，步行到各景点5-10分钟", pdf:[{ name:"🏨 酒店确认单", url:"pdfs/hotel-zurich.pdf" }] },
         { time:"15:00", name:"午餐", latlng:[47.3727,8.5434], meal:{ name:"苏黎世老城餐厅", cuisine:"瑞士德语区菜", perPerson:80, recommended:"Zürcher Geschnetzeltes（酱汁牛肉丝）", location:"老城" } },
         { time:"16:00", name:"班霍夫大街 · 伴手礼购物 · 林登霍夫山丘", latlng:[47.3726,8.5353], img:"images/bahnhofstrasse.jpg", duration:"2.5小时", cost:0, note:"周三商店正常营业，名表/百货可入店选购 | 伴手礼今天买好：莲花巧克力、瑞士军刀、格雷登巧克力、Ricola（明早商店9点后才开，来不及）" },
